@@ -228,8 +228,5 @@ public class LiczbySlownie
 			{" tysiąc" ," tysiące" ," tysięcy"},
 			{" milion" ," miliony" ," milionów"},
 			{" miliard"," miliardy"," miliardów"}
-		};
-	
-	
+		};	
 }
-
