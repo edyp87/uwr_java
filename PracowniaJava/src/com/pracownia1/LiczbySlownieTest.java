@@ -2,7 +2,6 @@ package com.pracownia1;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class LiczbySlownieTest {
