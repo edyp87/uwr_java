@@ -35,3 +35,6 @@ for (( i = 0 ; i < ${#array[@]} ; i++ )) do
 
 done
 
+#Clean up
+rm  src/com/pracownia2/*.class
+

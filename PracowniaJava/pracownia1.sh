@@ -32,3 +32,5 @@ do
     java  -classpath src com/pracownia1/Pracownia1 $i
 done
 
+rm  src/com/pracownia1/*.class
+
