@@ -5,23 +5,23 @@ public class WzorDwumianowy {
 	public static String oblicz(String p_dzialanie, int p_potega) throws IllegalArgumentException
 	{	
 		walidujDaneWejsciowe(p_dzialanie, p_potega);
-		
-		if(p_potega == 0)
-		{
-			return "1";
-		}
-		
 		return wyprowadzPotegeDwumianu(p_dzialanie, p_potega);
 	}
 
 
-	private static String wyprowadzPotegeDwumianu(String p_dzialanie, int p_potega) {
-		
+	private static String wyprowadzPotegeDwumianu(String p_dzialanie, int p_potega)
+	{
+	    if(p_potega == 0)
+	    {
+	        return "1";
+	    }
+	    
 		String potegaDwumianu = "";
 		for(int l_lewaPot = p_potega; l_lewaPot >= 0; --l_lewaPot)
 		{
 			potegaDwumianu +=
-					ustawWyraz(p_dzialanie, l_lewaPot, p_potega-l_lewaPot);
+					ustawWyraz   (p_dzialanie, l_lewaPot, p_potega-l_lewaPot)
+				  + ustawOperator(p_dzialanie, l_lewaPot, p_potega-l_lewaPot);
 		}
 		
 		return potegaDwumianu;
@@ -41,8 +41,14 @@ public class WzorDwumianowy {
 			   l_mnozeniePoWspol  + 
 			   l_lewyId           + 
 			   l_mnozenieMiedzyId + 
-			   l_prawyId          + 
-			   (p_lewaPotega > 0 ? wezOperator(usunBialeZnaki(p_dzialanie), p_prawaPotega) : "");
+			   l_prawyId;
+	}
+	
+	private static String ustawOperator(
+            String p_dzialanie,
+            int p_lewaPotega, int p_prawaPotega)
+	{
+	    return p_lewaPotega > 0 ? wezOperator(usunBialeZnaki(p_dzialanie), p_prawaPotega) : "";
 	}
 	
 	private static String ustawLewyId(String p_dzialanie, int p_potega)
@@ -148,7 +154,7 @@ public class WzorDwumianowy {
 		    || pierwszyIdJestUjemny(p_dzialanie)
 		    || wezLewyId (p_dzialanie).isEmpty()
 		    || wezPrawyId(p_dzialanie).isEmpty()
-		    || potega >= TrojkatPascala.c_max
+		    || potega > TrojkatPascala.c_max
 		    || potega < 0)
 		{
 			throw new IllegalArgumentException();

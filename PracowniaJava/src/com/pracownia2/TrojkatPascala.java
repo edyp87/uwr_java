@@ -23,7 +23,7 @@ public class TrojkatPascala {
 	
 	private static void wypelnijTrojkatPascala()
 	{
-		for (int l_numerWiersza = 0; l_numerWiersza < c_max; ++l_numerWiersza)
+		for (int l_numerWiersza = 0; l_numerWiersza <= c_max; ++l_numerWiersza)
 		{
 		    stworzNowyWiersz(l_numerWiersza);
 			wypelnijNowyWiersz(l_numerWiersza);
@@ -69,14 +69,14 @@ public class TrojkatPascala {
 	
 	private static boolean wartosciWychodzaPozaZakres(int p_numerWiersza, int p_numerKolumny)
 	{
-		return     p_numerKolumny >= c_max 
-				|| p_numerWiersza  >= c_max 
+		return     p_numerKolumny > c_max 
+				|| p_numerWiersza  > c_max 
 				|| p_numerKolumny < 0 
 				|| p_numerWiersza  < 0;
 	}
 	
-	public final static int c_max   = 31;
-	private static long[][]  tablica = new long[c_max][];
+	public final static int c_max   = 66;
+	private static long[][]  tablica = new long[c_max+1][];
 	
 	static {
 		wypelnijTrojkatPascala();

@@ -2,17 +2,29 @@ package com.pracownia2;
 
 public class Pracownia2 {
 
-	public static void main(String [] p_liczby)
-		{
-			Integer i = new Integer(1);
-			System.out.println(i);
-			bleble(i);
-			System.out.println(i);
-			
-		}
-
-	public static void bleble(Integer ii)
+	public static void main(String [] p_dane)
 	{
-		ii++;
+	    if(p_dane.length != 2)
+	    {
+	        System.err.println("Podano błędną ilość argumentów! (" + p_dane.length  + ")" );
+	        return;
+	    }
+	    
+	    try
+	    {
+	        String l_odpowiedz = WzorDwumianowy.oblicz(p_dane[0], Integer.parseInt(p_dane[1]));
+	        System.out.println(l_odpowiedz);
+	    }
+	    catch(NumberFormatException p_numberFormatExc)
+        {
+            System.err.println("Podano błędną potęgę.");
+        }
+        catch(IllegalArgumentException p_illArgExc)
+        {
+            System.err.print("Podano błędne działanie.");
+            System.err.println("Poprawna forma: arg1_OP_arg2, gdzie argumenty to dowolne ciągi znaków z wyjątkiem {+,-} a \"_OP_\" należy do {+,-}.");
+        }
 	}
+	
+
 }

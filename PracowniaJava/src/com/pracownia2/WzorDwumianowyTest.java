@@ -70,7 +70,7 @@ public class WzorDwumianowyTest {
 	public void wyrzucaWyjatekGdyPotegaJestWiekszaOdMaxa()
 	{
 		exception.expect(IllegalArgumentException.class);
-		WzorDwumianowy.oblicz("a+b", 31);
+		WzorDwumianowy.oblicz("a+b", 67);
 	}
 	
 	@Test
