@@ -12,6 +12,6 @@
 hs_err_pid*
 
 #Eclipse metadata
-.metadata
-.recommenders
-.project
+#.metadata
+#.recommenders
+#.project
