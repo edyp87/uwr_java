@@ -1,0 +1,22 @@
+package com.pracownia2;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class WzorDwumianowyTest {
+
+	@Test
+	public void zwracaSumeDlaJednostkowejPotegi()
+	{
+		assertEquals("a + b", WzorDwumianowy.oblicz("a+b", 1));
+		assertEquals("pierwszy + drugi", WzorDwumianowy.oblicz("pierwszy+drugi", 1));
+	}
+	
+	@Test
+	public void zwracaRozniceGdyDrugiIdentyfikatorJestUjemny()
+	{
+		assertEquals("a - b", WzorDwumianowy.oblicz("a-b", 1));
+		
+	}
+}

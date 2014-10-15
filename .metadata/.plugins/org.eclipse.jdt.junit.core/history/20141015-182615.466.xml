@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="WzorDwumianowyTest" project="PracowniaJava" tests="14" started="14" failures="0" errors="0" ignored="0">
+  <testsuite name="com.pracownia2.WzorDwumianowyTest" time="0.013">
+    <testcase name="wyrzucaWyjatekGdyBrakLewegoIdentyfikatora" classname="com.pracownia2.WzorDwumianowyTest" time="0.005"/>
+    <testcase name="zwracaRozwienietaPotegePiatkiZOperatoremOdejmowania" classname="com.pracownia2.WzorDwumianowyTest" time="0.004"/>
+    <testcase name="zwracaRozwienietaPotegePiatki" classname="com.pracownia2.WzorDwumianowyTest" time="0.0"/>
+    <testcase name="wyrzucaWyjatekGdyPotegaJestWiekszaOdMaxa" classname="com.pracownia2.WzorDwumianowyTest" time="0.0"/>
+    <testcase name="zwracaSumeDlaJednostkowejPotegi" classname="com.pracownia2.WzorDwumianowyTest" time="0.001"/>
+    <testcase name="usuwaZbedneBialeZnaki" classname="com.pracownia2.WzorDwumianowyTest" time="0.0"/>
+    <testcase name="wyrzucaWyjatekGdyBrakPrawegoIdentyfikatora" classname="com.pracownia2.WzorDwumianowyTest" time="0.0"/>
+    <testcase name="zwracaRozwienietaPotegeTrzydziestkiZOperatoremOdejmowania" classname="com.pracownia2.WzorDwumianowyTest" time="0.002"/>
+    <testcase name="wyrzucaWyjatekGdyLewyOperatorJestUjemny" classname="com.pracownia2.WzorDwumianowyTest" time="0.0"/>
+    <testcase name="wyrzucaWyjatekGdyBrakDozwolonegoOperatoraAPotegaJestZero" classname="com.pracownia2.WzorDwumianowyTest" time="0.0"/>
+    <testcase name="wyrzucaWyjatekGdyPotegaJestMniejszaOdZera" classname="com.pracownia2.WzorDwumianowyTest" time="0.001"/>
+    <testcase name="zwracaJedenGdyPotegaJestZerowa" classname="com.pracownia2.WzorDwumianowyTest" time="0.0"/>
+    <testcase name="wyrzucaWyjatekGdyBrakDozwolonegoOperatora" classname="com.pracownia2.WzorDwumianowyTest" time="0.0"/>
+    <testcase name="zwracaRozniceGdyDrugiIdentyfikatorJestUjemny" classname="com.pracownia2.WzorDwumianowyTest" time="0.0"/>
+  </testsuite>
+</testrun>

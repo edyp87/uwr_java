@@ -1,0 +1,62 @@
+package com.pracownia2;
+
+public class TrojkatPascala {
+	public static long czytaj(int p_wiersz, int p_kolumna) throws IllegalArgumentException
+	{
+		walidujArgumenty(p_wiersz, p_kolumna);
+		return czyPodstawaRekursji(p_wiersz, p_kolumna) ? 
+				1 : zwrocPascala(p_wiersz, p_kolumna);
+	}
+	
+	private static void walidujArgumenty(int p_wiersz, int p_kolumna)  throws IllegalArgumentException
+	{
+		if(p_kolumna > p_wiersz)
+		{
+			throw new IllegalArgumentException("n powinno być większe od k!");
+		}
+	}
+	
+	private static Boolean czyPodstawaRekursji(int p_wiersz, int p_kolumna)
+	{
+		return p_kolumna == 0 || p_kolumna == p_wiersz;
+	}
+	
+	private static long zwrocPascala(int p_wiersz, int p_kolumna)
+	{
+		return tablica[p_wiersz][p_kolumna];
+	}
+	
+	private static void wypelnijTrojkatPascala()
+	{
+		
+	}
+	
+	private static void utworzSzczytTrojkata()
+	{
+		tablica[0] = new long[1];
+		tablica[1] = new long[2];
+	}
+	
+	private final static int c_max = 31;
+	private static long[][] tablica = new long[c_max][];
+	
+	static {
+		utworzSzczytTrojkata();
+		
+		for(int l_wiersz = 0; l_wiersz < c_max; ++l_wiersz)
+		{
+			tablica[l_wiersz] = new long[l_wiersz+1];
+			for(int l_kolumna = 0; l_kolumna < l_wiersz+1; ++l_kolumna)
+			{
+				if (l_kolumna == 0 || l_kolumna == l_wiersz)
+				{
+					tablica[l_wiersz][l_kolumna] = 1;
+				}
+				else
+				{
+					tablica[l_wiersz][l_kolumna] = tablica[l_wiersz-1][l_kolumna-1] + tablica[l_wiersz-1][l_kolumna];
+				}
+			}
+		}
+	}
+}

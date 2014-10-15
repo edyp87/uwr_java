@@ -1,0 +1,112 @@
+package com.pracownia2;
+
+public class WzorDwumianowy {
+
+	public static String oblicz(String p_dzialanie, int p_potega) throws IllegalArgumentException
+	{	
+		walidujDzialanie(p_dzialanie);
+		
+		if(p_potega == 0)
+		{
+			return "1";
+		}
+		
+		return wyprowadzPotegeDwumianu(p_dzialanie, p_potega);
+	}
+
+
+	private static String wyprowadzPotegeDwumianu(String p_dzialanie, int p_potega) {
+		
+		String potegaDwumianu = "";
+		for(int l_lewaPotega = p_potega, l_prawaPotega = 0; l_lewaPotega >= 0; --l_lewaPotega, ++l_prawaPotega)
+		{
+			potegaDwumianu +=
+				ustawWspolczynnik(p_potega, l_lewaPotega) + 
+				ustawLewyId(p_dzialanie, l_lewaPotega) +
+				ustawPrawyId(p_dzialanie, l_prawaPotega) +
+				wezOperator(usunBialeZnaki(p_dzialanie));
+		}
+		
+		return potegaDwumianu.substring(0, potegaDwumianu.length()-3);
+	}
+	
+	private static String ustawLewyId(String p_dzialanie, int p_potega)
+	{
+		if(p_potega == 0)
+		{
+			return "";
+		}
+		return wezLewyId(usunBialeZnaki(p_dzialanie)) + ustawPotege(p_potega);
+	}
+	
+	private static String ustawPrawyId(String p_dzialanie, int p_potega)
+	{
+		if(p_potega == 0)
+		{
+			return "";
+		}
+		return wezPrawyId(usunBialeZnaki(p_dzialanie)) + ustawPotege(p_potega);
+	}
+	
+	private static int pozycjaOperatora(String p_dzialanie)
+	{
+		if (!znalezionoOperator(p_dzialanie, '+'))
+		{
+			return p_dzialanie.indexOf('-');
+		}
+		return p_dzialanie.indexOf('+');
+	}
+	
+	private static String wezLewyId(String p_dzialanie)
+	{
+		return p_dzialanie.substring(0, pozycjaOperatora(p_dzialanie));
+	}
+
+	private static String wezPrawyId(String p_dzialanie)
+	{
+		return p_dzialanie.substring(pozycjaOperatora(p_dzialanie)+1);
+	}
+	
+	private static String wezOperator(String p_dzialanie)
+	{
+		return " " + p_dzialanie.charAt(pozycjaOperatora(p_dzialanie)) + " ";
+	}
+	
+	private static String usunBialeZnaki(String p_dzialanie)
+	{
+		return p_dzialanie.replaceAll("\\s","");
+	}
+	
+	private static boolean znalezionoOperator(String p_dzialanie, char p_operator) {
+		return p_dzialanie.indexOf(p_operator) != -1;
+	}
+	
+	private static String ustawWspolczynnik(int p_wiersz, int p_kolumna)
+	{
+		if(TrojkatPascala.czytaj(p_wiersz, p_kolumna) == 1)
+		{
+			return "";
+		}
+		return String.valueOf(TrojkatPascala.czytaj(p_wiersz, p_kolumna));
+	}
+	
+	private static String ustawPotege(int p_potega)
+	{
+		if(p_potega == 1)
+		{
+			return "";
+		}
+		return "^" + String.valueOf(p_potega);
+	}
+	
+	private static void walidujDzialanie(String p_dzialanie) throws IllegalArgumentException
+	{
+		if (   !znalezionoOperator(p_dzialanie, '+') 
+		    && !znalezionoOperator(p_dzialanie, '-')
+		    || wezLewyId (p_dzialanie).isEmpty()
+		    || wezPrawyId(p_dzialanie).isEmpty())
+		{
+			throw new IllegalArgumentException();
+		}
+	}
+}

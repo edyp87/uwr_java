@@ -1,0 +1,80 @@
+package com.pracownia2;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+public class WzorDwumianowyTest {
+
+	@Test
+	public void zwracaSumeDlaJednostkowejPotegi()
+	{
+		assertEquals("a + b", WzorDwumianowy.oblicz("a+b", 1));
+		assertEquals("pierwszy + drugi", WzorDwumianowy.oblicz("pierwszy+drugi", 1));
+	}
+	
+	@Test
+	public void zwracaRozniceGdyDrugiIdentyfikatorJestUjemny()
+	{
+		assertEquals("a - b", WzorDwumianowy.oblicz("a-b", 1));
+		
+	}
+	
+	@Test
+	public void zwracaJedenGdyPotegaJestZerowa()
+	{
+		assertEquals("1", WzorDwumianowy.oblicz("a+b", 0));
+		
+	}
+	
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
+	@Test
+	public void wyrzucaWyjatekGdyBrakDozwolonegoOperatora()
+	{
+		exception.expect(IllegalArgumentException.class);
+		WzorDwumianowy.oblicz("a*b", 1);	
+	}
+	
+	@Test
+	public void wyrzucaWyjatekGdyBrakDozwolonegoOperatoraAPotegaJestZero()
+	{
+		exception.expect(IllegalArgumentException.class);
+		WzorDwumianowy.oblicz("a*b", 0);
+	}
+	
+	@Test
+	public void wyrzucaWyjatekGdyBrakLewegoIdentyfikatora()
+	{
+		exception.expect(IllegalArgumentException.class);
+		WzorDwumianowy.oblicz("+b", 0);
+	}
+	
+	@Test
+	public void wyrzucaWyjatekGdyBrakPrawegoIdentyfikatora()
+	{
+		exception.expect(IllegalArgumentException.class);
+		WzorDwumianowy.oblicz("a+", 0);
+	}
+	
+	@Test
+	public void usuwaZbedneBialeZnaki()
+	{
+		assertEquals("a - b", WzorDwumianowy.oblicz("   a   -   	      b", 1));
+	}
+	
+	@Test
+	public void zwracaRozwienietaPotegePiatki()
+	{
+		assertEquals("s^5 + 5*s^4*t + 10*s^3*t^2 + 10*s^2*t^3 + 5*s*t^4 + t^5", WzorDwumianowy.oblicz("s+t", 5));
+	}
+	
+	@Test
+	public void zwracaRozwienietaPotegeDwojkiZOperatoremOdejmowania()
+	{
+		assertEquals("s^5 - 5*s^4*t + 10*s^3*t^2 - 10*s^2*t^3 + 5*s*t^4 - t^5", WzorDwumianowy.oblicz("s-t", 5));
+	}
+	
+}

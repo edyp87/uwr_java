@@ -1,0 +1,15 @@
+package com.pracownia2;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class WzorDwumianowyTest {
+
+	@Test
+	public void zwracaJedenDlaPierwszegoWiersza()
+	{
+		assertEquals("a + b", WzorDwumianowy.oblicz("a","b",1));
+		
+	}
+}

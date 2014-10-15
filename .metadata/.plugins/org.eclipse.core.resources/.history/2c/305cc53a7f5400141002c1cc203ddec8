@@ -1,0 +1,39 @@
+package com.pracownia1;
+
+public class Pracownia1 {
+	public static void main(String [] p_liczby)
+	{
+		for(String l_liczba : p_liczby)
+		{
+			if (!sprawdzCzyPoprawna(l_liczba))
+			{
+				System.err.println("Podano blędną wartość!");
+				continue;
+			}
+			LiczbySlownie liczbaSlownie = new LiczbySlownie(new Integer(l_liczba));
+			System.out.println(liczbaSlownie.napiszLiczbe());
+		}
+		
+	}
+	
+	private static Boolean sprawdzCzyPoprawna(String p_liczba)
+	{
+		try
+		{
+			Integer.parseInt(p_liczba);
+		}
+		catch(NumberFormatException p_numberFormatExc)
+		{
+		    System.out.println("Podano błędną potęgę.");
+			return false;
+		}
+		catch(IllegalArgumentException p_illArgExc)
+		{
+	        System.out.println("Podano błędne działanie.");
+	        System.out.println("Poprawna forma: arg1_OP_arg2,\ngdzie argumenty to dowolne ciągi znaków \"_OP_\" należy do {+,-}.");
+	        return false;
+		}
+		return true;
+	}
+
+}

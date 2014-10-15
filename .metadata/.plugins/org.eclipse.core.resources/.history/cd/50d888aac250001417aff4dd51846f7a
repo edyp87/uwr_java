@@ -1,0 +1,62 @@
+package com.pracownia2;
+
+public class WzorDwumianowy {
+
+	public static String oblicz(String p_dzialanie, int p_potega) throws IllegalArgumentException
+	{	
+		walidujDzialanie(p_dzialanie);
+		
+		if(p_potega == 0)
+		{
+			return "1";
+		}
+		
+		return wezLewyId  (usunBialeZnaki(p_dzialanie)) 
+			 + wezOperator(usunBialeZnaki(p_dzialanie)) 
+			 + wezPrawyId (usunBialeZnaki(p_dzialanie));
+	}
+	
+	private static int pozycjaOperatora(String p_dzialanie)
+	{
+		if (!znalezionoOperator(p_dzialanie, '+'))
+		{
+			return p_dzialanie.indexOf('-');
+		}
+		return p_dzialanie.indexOf('+');
+	}
+	
+	private static String wezLewyId(String p_dzialanie)
+	{
+		return p_dzialanie.substring(0, pozycjaOperatora(p_dzialanie));
+	}
+
+	private static String wezPrawyId(String p_dzialanie)
+	{
+		return p_dzialanie.substring(pozycjaOperatora(p_dzialanie)+1);
+	}
+	
+	private static String wezOperator(String p_dzialanie)
+	{
+		return " " + p_dzialanie.charAt(pozycjaOperatora(p_dzialanie)) + " ";
+	}
+	
+	private static String usunBialeZnaki(String p_dzialanie)
+	{
+		return p_dzialanie.replaceAll("\\s","");
+	}
+	
+	private static boolean znalezionoOperator(String p_dzialanie, char p_operator) {
+		return p_dzialanie.indexOf(p_operator) != -1;
+	}
+	
+	private static void walidujDzialanie(String p_dzialanie) throws IllegalArgumentException
+	{
+		if (   !znalezionoOperator(p_dzialanie, '+') 
+		    && !znalezionoOperator(p_dzialanie, '-')
+		    || wezLewyId (p_dzialanie).isEmpty()
+		    || wezPrawyId(p_dzialanie).isEmpty())
+		{
+			throw new IllegalArgumentException();
+		}
+	}
+}

@@ -1,0 +1,157 @@
+package com.pracownia2;
+
+public class WzorDwumianowy {
+
+	public static String oblicz(String p_dzialanie, int p_potega) throws IllegalArgumentException
+	{	
+		walidujDzialanie(p_dzialanie);
+		
+		if(p_potega == 0)
+		{
+			return "1";
+		}
+		
+		return wyprowadzPotegeDwumianu(p_dzialanie, p_potega);
+	}
+
+
+	private static String wyprowadzPotegeDwumianu(String p_dzialanie, int p_potega) {
+		
+		String potegaDwumianu = "";
+		for(int l_lewaPot = p_potega; l_lewaPot >= 0; --l_lewaPot)
+		{
+			potegaDwumianu +=
+					ustawWyraz(p_dzialanie, l_lewaPot, p_potega-l_lewaPot);
+		}
+		
+		return potegaDwumianu;
+	}
+	
+	private static String ustawWyraz(
+			String p_dzialanie,
+			int p_lewaPotega, int p_prawaPotega)
+	{
+		String l_wspolczynnik     = wezWspolcz(p_lewaPotega+p_prawaPotega, p_lewaPotega);
+		String l_lewyId           = ustawLewyId(p_dzialanie,  p_lewaPotega);
+		String l_prawyId          = ustawPrawyId(p_dzialanie, p_prawaPotega);	
+		String l_mnozeniePoWspol  = ustawMnozeniePoWspol(l_wspolczynnik, l_lewyId, l_prawyId);
+		String l_mnozenieMiedzyId = ustawMnozenieMiedzyId(l_lewyId, l_prawyId);
+		
+		return l_wspolczynnik     + 
+			   l_mnozeniePoWspol  + 
+			   l_lewyId           + 
+			   l_mnozenieMiedzyId + 
+			   l_prawyId          + 
+			   (p_lewaPotega > 0 ? wezOperator(usunBialeZnaki(p_dzialanie), p_prawaPotega) : "");
+	}
+	
+	private static String ustawLewyId(String p_dzialanie, int p_potega)
+	{
+		if(p_potega == 0)
+		{
+			return "";
+		}
+		return wezLewyId(usunBialeZnaki(p_dzialanie)) + ustawPotege(p_potega);
+	}
+	
+	private static String ustawPrawyId(String p_dzialanie, int p_potega)
+	{
+		if(p_potega == 0)
+		{
+			return "";
+		}
+		return wezPrawyId(usunBialeZnaki(p_dzialanie)) + ustawPotege(p_potega);
+	}
+	
+	private static String ustawMnozeniePoWspol(String l_wspolczynnik, String l_lewyId, String l_prawyId)
+	{
+		if(l_wspolczynnik != "" && (l_lewyId != "" || l_prawyId != ""))
+		{
+			return "*";
+		}
+		return "";
+	}
+	
+	private static String ustawMnozenieMiedzyId(String l_lewyId, String l_prawyId)
+	{
+		if(l_lewyId != "" && l_prawyId != "")
+		{
+			return "*";
+		}
+		return "";
+	}
+	
+	private static int pozycjaOperatora(String p_dzialanie)
+	{
+		if (!znalezionoOperator(p_dzialanie, '+'))
+		{
+			return p_dzialanie.indexOf('-');
+		}
+		return p_dzialanie.indexOf('+');
+	}
+	
+	private static String wezLewyId(String p_dzialanie)
+	{
+		return p_dzialanie.substring(0, pozycjaOperatora(p_dzialanie));
+	}
+
+	private static String wezPrawyId(String p_dzialanie)
+	{
+		return p_dzialanie.substring(pozycjaOperatora(p_dzialanie)+1);
+	}
+	
+	private static String wezOperator(String p_dzialanie, int p_prawaPotega)
+	{
+		if(p_prawaPotega % 2 != 0)
+		{
+			return " + ";
+		}
+		return " " + p_dzialanie.charAt(pozycjaOperatora(p_dzialanie)) + " ";
+	}
+	
+	private static String usunBialeZnaki(String p_dzialanie)
+	{
+		return p_dzialanie.replaceAll("\\s","");
+	}
+	
+	private static boolean znalezionoOperator(String p_dzialanie, char p_operator) {
+		return p_dzialanie.indexOf(p_operator) != -1;
+	}
+	
+	private static boolean pierwszyIdJestUjemny(String p_dzialanie)
+	{
+		return usunBialeZnaki(p_dzialanie).indexOf('-') == 0;
+	}
+	
+	private static String wezWspolcz(int p_wiersz, int p_kolumna)
+	{
+		if(TrojkatPascala.czytaj(p_wiersz, p_kolumna) == 1)
+		{
+			return "";
+		}
+		return String.valueOf(TrojkatPascala.czytaj(p_wiersz, p_kolumna));
+	}
+	
+	private static String ustawPotege(int p_potega)
+	{
+		if(p_potega == 1)
+		{
+			return "";
+		}
+		return "^" + String.valueOf(p_potega);
+	}
+	
+	private static void walidujDzialanie(String p_dzialanie, int potega) throws IllegalArgumentException
+	{
+		if (   !znalezionoOperator(p_dzialanie, '+') 
+		    && !znalezionoOperator(p_dzialanie, '-')
+		    || pierwszyIdJestUjemny(p_dzialanie)
+		    || wezLewyId (p_dzialanie).isEmpty()
+		    || wezPrawyId(p_dzialanie).isEmpty()
+		    || potega > 30
+		    || potega < 0)
+		{
+			throw new IllegalArgumentException();
+		}
+	}
+}

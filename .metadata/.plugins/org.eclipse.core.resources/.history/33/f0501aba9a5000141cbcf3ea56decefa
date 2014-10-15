@@ -1,0 +1,34 @@
+package com.pracownia2;
+
+public class TrojkatPascala {
+	public static long czytaj(int p_wiersz, int p_kolumna) throws IllegalArgumentException
+	{
+		return tablica[p_wiersz][p_kolumna];
+	}
+	
+	private final static int c_max = 50;
+	private static long[][] tablica = new long[c_max][];
+	
+	static {
+		
+		tablica[0] = new long[1];
+		tablica[1] = new long[2];
+		tablica[0][0] = tablica[1][0] = tablica[1][1] =  1;
+		
+		for(int l_wiersz = 2; l_wiersz < c_max; ++l_wiersz)
+		{
+			tablica[l_wiersz] = new long[l_wiersz+1];
+			for(int l_kolumna = 0; l_kolumna < l_wiersz+1; ++l_kolumna)
+			{
+				if (l_kolumna == 0 || l_kolumna == l_wiersz)
+				{
+					tablica[l_wiersz][l_kolumna] = 1;
+				}
+				else
+				{
+					tablica[l_wiersz][l_kolumna] = tablica[l_wiersz-1][l_kolumna-1] + tablica[l_wiersz-1][l_kolumna];
+				}
+			}
+		}
+	}
+}
