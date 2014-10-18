@@ -1,0 +1,16 @@
+package com.pracownia3.Tests;
+
+import org.junit.Test;
+
+import com.pracownia3.Stala;
+
+public class WyrazenieTest {
+
+	
+	@Test
+	public void MoznaUtworzycObiektyDziedziczace()
+	{
+		Stala l_stala = new Stala();
+	}
+
+}

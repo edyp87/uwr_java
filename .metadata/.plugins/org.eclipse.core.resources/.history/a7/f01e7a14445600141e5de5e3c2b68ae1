@@ -1,0 +1,9 @@
+package com.pracownia3;
+
+public class Zbior {
+	public Zbior()
+	{
+		m_wielkoscZbioru = 2;
+	}
+	private int m_wielkoscZbioru;
+}

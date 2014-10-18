@@ -1,0 +1,63 @@
+package com.pracownia3.Tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.pracownia3.PrzeciwnyZnak;
+import com.pracownia3.Stala;
+import com.pracownia3.Zmienna;
+
+public class WyrazenieTest {
+
+	
+	@Test
+	public void MoznaUtworzycObiektyDziedziczace()
+	{
+		Stala l_stala = new Stala(1.2);
+		Zmienna l_zmienna1 = new Zmienna("Id");
+		Zmienna l_zmienna2 = new Zmienna("Id", 1.2);
+		PrzeciwnyZnak l_minus = new PrzeciwnyZnak(new Stala(1.2));
+	}
+	
+	@Test
+	public void StalaJestPoprawnieZwracana()
+	{
+		double l_wartosc = 1.2;
+		Stala l_stala = new Stala(l_wartosc);
+		assertEquals(l_wartosc, l_stala.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void ZmiennaJestPoprawnieZwracana()
+	{
+		String  l_idZmiennej1 = "ID1";
+		String  l_idZmiennej2 = "ID2";
+		double l_wartosc1 = 0.0;
+		double l_wartosc2 = 1.2;
+		Zmienna l_zmienna1 = new Zmienna(l_idZmiennej1);
+		Zmienna l_zmienna2 = new Zmienna(l_idZmiennej2, 1.2);
+		assertEquals(l_wartosc1, l_zmienna1.oblicz(), m_deltaDlaAsercji);
+		assertEquals(l_wartosc2, l_zmienna2.oblicz(), m_deltaDlaAsercji);
+		
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestMinusStalej()
+	{
+		double l_wartosc = 1.2;
+		PrzeciwnyZnak l_minus = new PrzeciwnyZnak(new Stala(l_wartosc));
+		assertEquals(-l_wartosc, l_minus.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestMinusZmiennej()
+	{
+		double l_wartosc = 1.2;
+		PrzeciwnyZnak l_minus = new PrzeciwnyZnak(new Stala(l_wartosc));
+		assertEquals(-l_wartosc, l_minus.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	private final double m_deltaDlaAsercji = 0.001;
+
+}

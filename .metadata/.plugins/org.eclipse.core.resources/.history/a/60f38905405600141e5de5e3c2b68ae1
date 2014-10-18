@@ -1,0 +1,14 @@
+package com.pracownia3;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class ParaTest {
+
+	@Test
+	public void tworzyobiekt()
+	{
+		Para l_para = new Para("klucz", 1.2);
+	}
+}

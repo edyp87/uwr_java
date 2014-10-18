@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.junit.Rule"/>
+<fullyQualifiedTypeName name="org.junit.rules.ExpectedException"/>
 <fullyQualifiedTypeName name="org.junit.Test"/>
+<fullyQualifiedTypeName name="com.pracownia3.Stala"/>
+<fullyQualifiedTypeName name="com.pracownia3.Zmienna"/>
+<fullyQualifiedTypeName name="com.pracownia3.PrzeciwnyZnak"/>
+<fullyQualifiedTypeName name="com.pracownia3.WartBezwzgl"/>
+<fullyQualifiedTypeName name="com.pracownia3.Dodaj"/>
+<fullyQualifiedTypeName name="com.pracownia3.Odejmij"/>
+<fullyQualifiedTypeName name="com.pracownia3.Mnoz"/>
+<fullyQualifiedTypeName name="com.pracownia3.Dziel"/>
+<fullyQualifiedTypeName name="com.pracownia3.Sinus"/>
+<fullyQualifiedTypeName name="com.pracownia3.Cosinus"/>
+<fullyQualifiedTypeName name="com.pracownia3.Arctan"/>
+<fullyQualifiedTypeName name="com.pracownia3.Odwrotnosc"/>
+<fullyQualifiedTypeName name="com.pracownia3.Logarytm"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,6 @@
+package com.pracownia3;
+
+public class Para {
+	public final String klucz;
+	private double wartosc;
+}

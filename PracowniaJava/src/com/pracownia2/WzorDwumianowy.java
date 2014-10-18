@@ -1,5 +1,6 @@
 package com.pracownia2;
 
+
 public class WzorDwumianowy {
 
 	public static String oblicz(String p_dzialanie, int p_potega) throws IllegalArgumentException

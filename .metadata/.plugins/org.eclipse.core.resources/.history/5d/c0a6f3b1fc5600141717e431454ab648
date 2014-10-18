@@ -1,0 +1,16 @@
+package com.pracownia3;
+
+public class Zmienna extends Wyrazenie {
+	public Zmienna(String p_idZmiennej)
+	{
+		
+	}
+	
+	public Zmienna(String p_idZmiennej, double p_wartosc)
+	{
+		
+	}
+	
+	private static Zbior m_zbior;
+	private String        m_idZmiennej;
+}

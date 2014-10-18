@@ -1,0 +1,23 @@
+package com.pracownia3.Tests;
+
+import org.junit.Test;
+
+import com.pracownia3.Stala;
+
+public class WyrazenieTest {
+
+	
+	@Test
+	public void MoznaUtworzycObiektyDziedziczace()
+	{
+		Stala l_stala = new Stala(1.2);
+	}
+	
+	@Test
+	public void StalaJestPoprawnieZwracana()
+	{
+		Stala l_stala = new Stala(1.2);
+		AssertEquals(1.2, l_stala.oblicz(), 0.00001)
+	}
+
+}

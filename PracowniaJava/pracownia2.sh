@@ -7,12 +7,12 @@ javac \
     src/com/pracownia2/Pracownia2.java
 
 array=(
-    a+b   1
+    adasasdasda+b   1
     a-b   1
     a+b   0
     s+t   5
     s-t   5
-    s-t   66
+    s-tsd   66
 
     a+b   67
     a*b   1

@@ -1,0 +1,21 @@
+package com.pracownia3;
+
+public class Zmienna extends Wyrazenie {
+	public Zmienna(String p_idZmiennej)
+	{
+		m_zbior.wstaw("p_idZmiennej", 0.0);
+	}
+	
+	public Zmienna(String p_idZmiennej, double p_wartosc)
+	{
+		m_zbior.wstaw("p_idZmiennej", p_wartosc);
+	}
+	
+	public double oblicz()
+	{
+		return m_zbior.czytaj(m_idZmiennej);
+	}
+	
+	private static Zbior m_zbior;
+	private String        m_idZmiennej;
+}

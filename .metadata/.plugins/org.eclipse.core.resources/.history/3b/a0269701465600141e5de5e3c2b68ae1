@@ -1,0 +1,44 @@
+package com.pracownia3;
+
+import static org.junit.Assert.*;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import com.pracownia2.TrojkatPascala;
+
+public class ZbiorTest {
+	@Test
+	public void tworzyObiekt()
+	{
+		Zbior l_zbior = new Zbior();
+	}
+	
+	@Test
+	public void dodajeNowyElement()
+	{
+		Zbior l_zbior = new Zbior();
+		double l_wartosc = 1.2;
+		
+		l_zbior.wstaw("klucz", l_wartosc);
+		assertEquals(l_wartosc, l_zbior.czytaj("klucz"), m_deltaDlaAsercji);
+	}
+	
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
+	
+	@Test
+	public void ZwracaWyjatekGdyKluczNieIstnieje()
+	{
+		Zbior l_zbior = new Zbior();
+		double l_wartosc = 1.2;
+		
+		l_zbior.wstaw("klucz", l_wartosc);
+		exception.expect( IllegalArgumentException.class );
+		l_zbior.czytaj("klucz" + "COS");
+	}
+	
+	
+	private final double m_deltaDlaAsercji = 0.001;
+}

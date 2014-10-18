@@ -1,0 +1,19 @@
+package com.pracownia3;
+
+import org.junit.Test;
+
+public class ZbiorTest {
+	@Test
+	public void tworzyObiekt()
+	{
+		Zbior l_zbior = new Zbior();
+	}
+	
+	@Test
+	public void dodajeNowyElement()
+	{
+		Zbior l_zbior = new Zbior();
+		l_zbior.wstaw("klucz", 1.2);
+	}
+	
+}

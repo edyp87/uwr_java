@@ -1,0 +1,9 @@
+package com.pracownia3;
+
+public class Stala extends Wyrazenie 
+{
+	public double oblicz()
+	{
+		return 1.1;
+	}
+}
