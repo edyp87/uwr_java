@@ -11,7 +11,7 @@ import com.pracownia3.Zbior;
 public class ZbiorTest 
 {
 	@Test
-	public void dodajeNowyElement()
+	public void dodajeNowyElement() throws RuntimeException
 	{
 		Zbior l_zbior = new Zbior();
 		double l_wartosc = 1.2;
@@ -24,7 +24,7 @@ public class ZbiorTest
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void ZwracaWyjatekGdyKluczNieIstnieje()
+	public void ZwracaWyjatekGdyKluczNieIstnieje() throws RuntimeException
 	{
 		Zbior l_zbior = new Zbior();
 		double l_wartosc = 1.2;
@@ -35,7 +35,7 @@ public class ZbiorTest
 	}
 	
 	@Test
-	public void dodajeDwaElementy()
+	public void dodajeDwaElementy() throws RuntimeException
 	{
 		Zbior l_zbior = new Zbior();
 		double l_wartosc1 = 1.1;
@@ -48,7 +48,7 @@ public class ZbiorTest
 	}
 	
 	@Test
-	public void zwracaIloscElementowWZbiorze()
+	public void zwracaIloscElementowWZbiorze() throws RuntimeException
 	{
 		Zbior l_zbior = new Zbior();
 		double l_wartosc1 = 1.1;
@@ -61,7 +61,7 @@ public class ZbiorTest
 	}
 	
 	@Test
-	public void usuwaDwaElementyPozostawiaJeden()
+	public void usuwaDwaElementyPozostawiaJeden() throws RuntimeException
 	{
 		Zbior l_zbior = new Zbior();
 		double l_wartosc1 = 1.1;
@@ -101,7 +101,7 @@ public class ZbiorTest
 	}
 	
 	@Test
-	public void usuwaElementZeSzczytuZbioru()
+	public void usuwaElementZeSzczytuZbioru() throws RuntimeException
 	{
 		Zbior l_zbior = new Zbior();
 		double l_wartosc1 = 1.1;

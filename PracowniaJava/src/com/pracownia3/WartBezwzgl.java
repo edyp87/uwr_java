@@ -12,4 +12,10 @@ public class WartBezwzgl extends Operator1Arg
 	{
 		return Math.abs(m_argumentPrawy.oblicz());
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "|" + m_argumentPrawy.oblicz() + "|";
+	}
 }

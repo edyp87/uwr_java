@@ -12,4 +12,10 @@ public class Cosinus extends Operator1Arg
 	{
 		return Math.cos(m_argumentPrawy.oblicz());
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "cos(" + m_argumentPrawy.oblicz() + ")";
+	}
 }

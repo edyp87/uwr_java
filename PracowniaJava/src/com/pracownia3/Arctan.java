@@ -12,4 +12,10 @@ public class Arctan extends Operator1Arg
 	{
 		return Math.atan(m_argumentPrawy.oblicz());
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "arctan(" + m_argumentPrawy.oblicz() + ")";
+	}
 }

@@ -1,0 +1,15 @@
+package com.pracownia3;
+
+public class Pracownia3 {
+
+	public static void main(String [] p_dane)
+	{
+	   Wyrazenie[] l_przyklady = new Wyrazenie[5];
+	   l_przyklady[0] = new Dodaj(new Stala(3.0), new Stala(5.0));
+	   l_przyklady[1] = new Dodaj(new Stala(2.0), new Mnoz(new Zmienna("x", -1.618), new Stala(7.0)));
+	   
+	   System.out.println(l_przyklady[1].oblicz());
+	}
+	
+
+}

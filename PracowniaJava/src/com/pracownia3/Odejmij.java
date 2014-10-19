@@ -12,5 +12,11 @@ public class Odejmij extends Operator2Arg
 	{
 		return m_argumentLewy.oblicz() - m_argumentPrawy.oblicz();
 	}
+	
+	@Override
+	protected void okreslOperator()
+	{
+		m_operator = "-";
+	}
 
 }

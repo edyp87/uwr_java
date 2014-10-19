@@ -12,4 +12,10 @@ public class Odwrotnosc extends Operator1Arg
 	{
 		return Math.pow(m_argumentPrawy.oblicz(), -1);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return m_argumentPrawy.oblicz() + "^(-1)";
+	}
 }

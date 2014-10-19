@@ -1,0 +1,208 @@
+package com.pracownia3.Tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.pracownia3.*;
+
+public class WyrazenieTest {
+	@Test
+	public void StalaJestPoprawnieZwracana()
+	{
+		double l_wartosc = 1.2;
+		Stala l_stala = new Stala(l_wartosc);
+		assertEquals(l_wartosc, l_stala.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void ZmiennaJestPoprawnieZwracana()
+	{
+		
+		String  l_idZmiennej1 = "ID1";
+		String  l_idZmiennej2 = "ID2";
+		double l_wartosc1 = 0.0;
+		double l_wartosc2 = 1.2;
+		Zmienna l_zmienna1 = new Zmienna(l_idZmiennej1);
+		Zmienna l_zmienna2 = new Zmienna(l_idZmiennej2, 1.2);
+		assertEquals(l_wartosc1, l_zmienna1.oblicz(), m_deltaDlaAsercji);
+		assertEquals(l_wartosc2, l_zmienna2.oblicz(), m_deltaDlaAsercji);
+		
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestMinusStalej()
+	{
+		double l_wartosc = 1.2;
+		PrzeciwnyZnak l_minus = new PrzeciwnyZnak(new Stala(l_wartosc));
+		assertEquals(-l_wartosc, l_minus.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestMinusZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "IDminus";
+		PrzeciwnyZnak l_minus = new PrzeciwnyZnak(new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(-l_wartosc, l_minus.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanaJestWartBezezglStalej()
+	{
+		double l_wartosc1 = -1.2;
+		WartBezwzgl l_abs1 = new WartBezwzgl(new Stala(l_wartosc1));
+		assertEquals(-l_wartosc1, l_abs1.oblicz(), m_deltaDlaAsercji);
+		
+		double l_wartosc2 = 1.2;
+		WartBezwzgl l_abs2 = new WartBezwzgl(new Stala(l_wartosc2));
+		assertEquals(l_wartosc2, l_abs2.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestSinusZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "IDsinus";
+		Sinus l_sinus = new Sinus(new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(Math.sin(l_wartosc), l_sinus.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestCosinusZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "IDcosinus";
+		Cosinus l_cosinus = new Cosinus(new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(Math.cos(l_wartosc), l_cosinus.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestArctanZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "ID";
+		Arctan l_arctan = new Arctan(new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(Math.atan(l_wartosc), l_arctan.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanaJestOdwrotnoscZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "IDodwrotnosc";
+		Odwrotnosc l_odwr = new Odwrotnosc(new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(Math.pow(l_wartosc, -1), l_odwr.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanaJestWartBezwzglDlaZmiennej()
+	{
+		double l_wartosc     = -1.2;
+		String  l_idZmiennej  = "IDabs";
+		WartBezwzgl l_minus = new WartBezwzgl(new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(-l_wartosc, l_minus.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestLogarytmDlaZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "ID";
+		Logarytm l_log = new Logarytm(new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(Math.log(l_wartosc), l_log.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanaJestSumaStalejIZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "IDsuma";
+		Dodaj l_dodaj = new Dodaj(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(l_wartosc + l_wartosc, l_dodaj.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanaJestRoznicaStalejIZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "IDroznica";
+		Odejmij l_odejmij = new Odejmij(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(l_wartosc - l_wartosc, l_odejmij.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestIloczynStalejIZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "ID";
+		Mnoz l_mnoz = new Mnoz(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(l_wartosc * l_wartosc, l_mnoz.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanyJestIlorazStalejIZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "IDiloraz";
+		Dziel l_dziel = new Dziel(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(l_wartosc / l_wartosc, l_dziel.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanaJestFunWykladniczaStalejIZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "IDfunwykl";
+		FunWykladnicza l_funwykl = new FunWykladnicza(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(Math.pow(l_wartosc, l_wartosc), l_funwykl.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieObliczanaJestFunPotegaStalejIZmiennej()
+	{
+		double l_wartosc     = 1.2;
+		String  l_idZmiennej  = "ID";
+		Potega l_potega = new Potega(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
+		assertEquals(Math.pow(l_wartosc, l_wartosc), l_potega.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieWybieraneJestMinimumZeStalejIZmiennej()
+	{
+		double l_wartosc      = 1.2;
+		String  l_idZmiennej  = "IDmin";
+		Minimum l_min = new Minimum(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc+1));
+		assertEquals(l_wartosc, l_min.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieWybieraneJestMaximumZeStalejIZmiennej()
+	{
+		double l_wartosc      = 1.2;
+		String  l_idZmiennej  = "IDmin";
+		Maximum l_max = new Maximum(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc+1));
+		assertEquals(l_wartosc+1, l_max.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieUstalanaJestRelacjaMniejszosciZeStalejIZmiennej()
+	{
+		double l_wartosc      = 1.2;
+		String  l_idZmiennej  = "IDmin";
+		Mniejsze l_mniejsze = new Mniejsze(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc+1));
+		assertEquals(1.0, l_mniejsze.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	@Test
+	public void PoprawnieUstalanaJestRelacjaWiekszosciZeStalejIZmiennej()
+	{
+		double l_wartosc      = 1.2;
+		String  l_idZmiennej  = "IDmin";
+		Wieksze l_wieksze = new Wieksze(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc+1));
+		assertEquals(0.0, l_wieksze.oblicz(), m_deltaDlaAsercji);
+	}
+	
+	private final double m_deltaDlaAsercji = 0.001;
+
+}

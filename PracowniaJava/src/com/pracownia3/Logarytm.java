@@ -12,4 +12,10 @@ public class Logarytm extends Operator1Arg
 	{
 		return Math.log(m_argumentPrawy.oblicz());
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "log(" + m_argumentPrawy.oblicz() + ")";
+	}
 }

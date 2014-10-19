@@ -12,4 +12,10 @@ public class Sinus extends Operator1Arg
 	{
 		return Math.sin(m_argumentPrawy.oblicz());
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "sin(" + m_argumentPrawy.oblicz() + ")";
+	}
 }

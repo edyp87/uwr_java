@@ -11,4 +11,10 @@ public class PrzeciwnyZnak extends Operator1Arg
 	public double oblicz() {
 		return -1 * m_argumentPrawy.oblicz();
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "-(" + m_argumentPrawy.oblicz() + ")";
+	}
 }

@@ -1,0 +1,11 @@
+package com.pracownia3;
+
+public class Pracownia3 {
+
+	public static void main(String [] p_dane)
+	{
+	   
+	}
+	
+
+}

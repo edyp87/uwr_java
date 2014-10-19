@@ -13,5 +13,11 @@ public class Stala extends Wyrazenie
 		return m_wartosc;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return String.valueOf(m_wartosc);
+	}
+	
 	private double m_wartosc;
 }
