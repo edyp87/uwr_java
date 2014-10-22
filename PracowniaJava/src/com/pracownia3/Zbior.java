@@ -17,7 +17,7 @@ public class Zbior
 		}
 	}
 	
-	public double czytaj(String p_klucz)  throws IllegalArgumentException
+	public double czytaj(String p_klucz) throws IllegalArgumentException
 	{
 		if (szukajPary(p_klucz) == null)
 		{
@@ -33,12 +33,12 @@ public class Zbior
 		usunElemZeSzczytu(p_ileElemZostawic);
 	}
 	
-	public void usun()  throws IllegalArgumentException
+	public void usun() throws IllegalArgumentException
 	{	
 		usun(ile()-1);
 	}
 	
-	public int ile()  throws IllegalArgumentException
+	public int ile()
 	{
 		return m_iloscElem;
 	}
@@ -60,7 +60,6 @@ public class Zbior
 	private void podmienWartosc(String  p_klucz, double p_wartosc)
 	{
 		szukajPary(p_klucz).setWartosc(p_wartosc);
-		
 	}
 	
 	private Para szukajPary(String p_klucz)

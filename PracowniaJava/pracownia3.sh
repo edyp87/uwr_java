@@ -7,5 +7,5 @@ javac src/com/pracownia3/*.java
 java -classpath src com/pracownia3/Pracownia3
 
 #Clean up
-rm  src/com/pracownia2/*.class
+rm  src/com/pracownia3/*.class
 

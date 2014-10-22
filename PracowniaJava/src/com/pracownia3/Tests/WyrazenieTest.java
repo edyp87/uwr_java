@@ -13,6 +13,7 @@ public class WyrazenieTest {
 		double l_wartosc = 1.2;
 		Stala l_stala = new Stala(l_wartosc);
 		assertEquals(l_wartosc, l_stala.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_stala.equals(new Stala(l_wartosc)));
 	}
 	
 	@Test
@@ -27,6 +28,8 @@ public class WyrazenieTest {
 		Zmienna l_zmienna2 = new Zmienna(l_idZmiennej2, l_wartosc2);
 		assertEquals(l_wartosc1, l_zmienna1.oblicz(), m_deltaDlaAsercji);
 		assertEquals(l_wartosc2, l_zmienna2.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_zmienna1.equals(new Stala(l_wartosc1)));
+		assertTrue(l_zmienna2.equals(new Stala(l_wartosc2)));
 		
 	}
 	
@@ -36,6 +39,7 @@ public class WyrazenieTest {
 		double l_wartosc = 1.2;
 		PrzeciwnyZnak l_minus = new PrzeciwnyZnak(new Stala(l_wartosc));
 		assertEquals(-l_wartosc, l_minus.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_minus.equals(new Stala(-l_wartosc)));
 	}
 	
 	@Test
@@ -45,6 +49,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDminus";
 		PrzeciwnyZnak l_minus = new PrzeciwnyZnak(new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(-l_wartosc, l_minus.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_minus.equals(new Stala(-l_wartosc)));
 	}
 	
 	@Test
@@ -53,10 +58,12 @@ public class WyrazenieTest {
 		double l_wartosc1 = -1.2;
 		WartBezwzgl l_abs1 = new WartBezwzgl(new Stala(l_wartosc1));
 		assertEquals(-l_wartosc1, l_abs1.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_abs1.equals(new Stala(-l_wartosc1)));
 		
 		double l_wartosc2 = 1.2;
 		WartBezwzgl l_abs2 = new WartBezwzgl(new Stala(l_wartosc2));
 		assertEquals(l_wartosc2, l_abs2.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_abs2.equals(new Stala(l_wartosc2)));
 	}
 	
 	@Test
@@ -66,6 +73,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDsinus";
 		Sinus l_sinus = new Sinus(new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(Math.sin(l_wartosc), l_sinus.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_sinus.equals(new Stala(Math.sin(l_wartosc))));
 	}
 	
 	@Test
@@ -75,6 +83,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDcosinus";
 		Cosinus l_cosinus = new Cosinus(new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(Math.cos(l_wartosc), l_cosinus.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_cosinus.equals(new Stala(Math.cos(l_wartosc))));
 	}
 	
 	@Test
@@ -84,6 +93,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDarctan";
 		Arctan l_arctan = new Arctan(new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(Math.atan(l_wartosc), l_arctan.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_arctan.equals(new Stala(Math.atan(l_wartosc))));
 	}
 	
 	@Test
@@ -93,6 +103,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDodwrotnosc";
 		Odwrotnosc l_odwr = new Odwrotnosc(new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(Math.pow(l_wartosc, -1), l_odwr.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_odwr.equals(new Stala(Math.pow(l_wartosc, -1))));
 	}
 	
 	@Test
@@ -102,6 +113,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDabs";
 		WartBezwzgl l_minus = new WartBezwzgl(new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(-l_wartosc, l_minus.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_minus.equals(new Stala(-l_wartosc)));
 	}
 	
 	@Test
@@ -111,6 +123,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "ID";
 		Logarytm l_log = new Logarytm(new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(Math.log(l_wartosc), l_log.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_log.equals(new Stala(Math.log(l_wartosc))));
 	}
 	
 	@Test
@@ -120,6 +133,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDsuma";
 		Dodaj l_dodaj = new Dodaj(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(l_wartosc + l_wartosc, l_dodaj.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_dodaj.equals(new Stala(l_wartosc + l_wartosc)));
 	}
 	
 	@Test
@@ -129,6 +143,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDroznica";
 		Odejmij l_odejmij = new Odejmij(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(l_wartosc - l_wartosc, l_odejmij.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_odejmij.equals(new Stala(l_wartosc - l_wartosc)));
 	}
 	
 	@Test
@@ -138,6 +153,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDiloczyn";
 		Mnoz l_mnoz = new Mnoz(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(l_wartosc * l_wartosc, l_mnoz.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_mnoz.equals(new Stala(l_wartosc * l_wartosc)));
 	}
 	
 	@Test
@@ -147,6 +163,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDiloraz";
 		Dziel l_dziel = new Dziel(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(l_wartosc / l_wartosc, l_dziel.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_dziel.equals(new Stala(l_wartosc / l_wartosc)));
 	}
 	
 	@Test
@@ -156,6 +173,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDfunwykl";
 		FunWykladnicza l_funwykl = new FunWykladnicza(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(Math.pow(l_wartosc, l_wartosc), l_funwykl.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_funwykl.equals(new Stala(Math.pow(l_wartosc, l_wartosc))));
 	}
 	
 	@Test
@@ -165,6 +183,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDpotega";
 		Potega l_potega = new Potega(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc));
 		assertEquals(Math.pow(l_wartosc, l_wartosc), l_potega.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_potega.equals(new Stala(Math.pow(l_wartosc, l_wartosc))));
 	}
 	
 	@Test
@@ -174,6 +193,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDmin";
 		Minimum l_min = new Minimum(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc+1));
 		assertEquals(l_wartosc, l_min.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_min.equals(new Stala(l_wartosc)));
 	}
 	
 	@Test
@@ -183,6 +203,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDmax";
 		Maximum l_max = new Maximum(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc+1));
 		assertEquals(l_wartosc+1, l_max.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_max.equals(new Stala(l_wartosc+1)));
 	}
 	
 	@Test
@@ -192,6 +213,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDmniejsze";
 		Mniejsze l_mniejsze = new Mniejsze(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc+1));
 		assertEquals(1.0, l_mniejsze.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_mniejsze.equals(new Stala(1.0)));
 	}
 	
 	@Test
@@ -201,6 +223,7 @@ public class WyrazenieTest {
 		String  l_idZmiennej  = "IDwieksze";
 		Wieksze l_wieksze = new Wieksze(new Stala(l_wartosc), new Zmienna(l_idZmiennej, l_wartosc+1));
 		assertEquals(0.0, l_wieksze.oblicz(), m_deltaDlaAsercji);
+		assertTrue(l_wieksze.equals(new Stala(0.0)));
 	}
 	
 	@Test

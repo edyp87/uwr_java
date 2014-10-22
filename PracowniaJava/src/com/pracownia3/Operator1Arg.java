@@ -6,6 +6,6 @@ public abstract class Operator1Arg extends Wyrazenie
 	{
 		m_argumentPrawy = p_argument;
 	}
-
+	
 	protected Wyrazenie m_argumentPrawy;
 }
