@@ -21,7 +21,7 @@ public class Zbior
 	{
 		if (szukajPary(p_klucz) == null)
 		{
-			throw new IllegalArgumentException("Para o kluczu " + p_klucz + " nie istnieje!");
+			throw new IllegalArgumentException("Klucz " + p_klucz + " nie istnieje!");
 		}
 		
 		return szukajPary(p_klucz).getWartosc();

@@ -21,10 +21,16 @@ public class Zbior
 	{
 		if (szukajPary(p_klucz) == null)
 		{
-			throw new IllegalArgumentException("Para o kluczu " + p_klucz + " nie istnieje!");
+			throw new IllegalArgumentException("Klucz " + p_klucz + " nie istnieje!");
 		}
 		
 		return szukajPary(p_klucz).getWartosc();
+	}
+
+	private void podmienWartosc(String  p_klucz, double p_wartosc)
+	{
+		szukajPary(p_klucz).setWartosc(p_wartosc);
+		
 	}
 	
 	public void usun(int p_ileElemZostawic) throws IllegalArgumentException
@@ -43,27 +49,7 @@ public class Zbior
 		return m_iloscElem;
 	}
 	
-	public boolean istniejePara(String  p_klucz)
-	{
-		if (szukajPary(p_klucz) == null)
-		{
-			return false;
-		}
-		return true;
-	}
-	
-	public String toString(String m_idZmiennej)
-	{
-		return szukajPary(m_idZmiennej).toString();
-	}
-	
-	private void podmienWartosc(String  p_klucz, double p_wartosc)
-	{
-		szukajPary(p_klucz).setWartosc(p_wartosc);
-		
-	}
-	
-	private Para szukajPary(String p_klucz)
+	public Para szukajPary(String p_klucz)
 	{
 		for (int l_numerPary = 0; l_numerPary < m_iloscElem; ++l_numerPary)
 		{
@@ -97,6 +83,15 @@ public class Zbior
 	private void usunElemZeSzczytu(int p_ileElemZostawic)
 	{
 		m_iloscElem = p_ileElemZostawic;
+	}
+	
+	private boolean istniejePara(String  p_klucz)
+	{
+		if (szukajPary(p_klucz) == null)
+		{
+			return false;
+		}
+		return true;
 	}
 	
 	private int       m_iloscElem       = 0;

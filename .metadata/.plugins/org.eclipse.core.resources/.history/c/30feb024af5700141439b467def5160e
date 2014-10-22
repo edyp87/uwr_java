@@ -3,7 +3,7 @@ package com.pracownia3;
 public class Zmienna extends Wyrazenie {
 	public Zmienna(String p_idZmiennej) throws RuntimeException
 	{
-		if (! m_zbior.istniejePara(p_idZmiennej))
+		if (m_zbior.istniejePara(p_idZmiennej))
 		{
 			throw new RuntimeException("Zmienna " + p_idZmiennej + " nie istnieje!");
 		}
@@ -25,9 +25,9 @@ public class Zmienna extends Wyrazenie {
 	@Override
 	public String toString()
 	{
-		return m_zbior.toString(m_idZmiennej);
+		return m_zbior.szukajPary(m_idZmiennej).toString();
 	}
 	
-	private static Zbior  m_zbior = new Zbior();
+	private static Zbior m_zbior = new Zbior();
 	private String        m_idZmiennej;
 }

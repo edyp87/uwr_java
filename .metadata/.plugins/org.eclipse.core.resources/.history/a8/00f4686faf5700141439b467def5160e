@@ -21,10 +21,16 @@ public class Zbior
 	{
 		if (szukajPary(p_klucz) == null)
 		{
-			throw new IllegalArgumentException("Para o kluczu " + p_klucz + " nie istnieje!");
+			throw new IllegalArgumentException("Klucz " + p_klucz + " nie istnieje!");
 		}
 		
 		return szukajPary(p_klucz).getWartosc();
+	}
+
+	private void podmienWartosc(String  p_klucz, double p_wartosc)
+	{
+		szukajPary(p_klucz).setWartosc(p_wartosc);
+		
 	}
 	
 	public void usun(int p_ileElemZostawic) throws IllegalArgumentException
@@ -55,12 +61,6 @@ public class Zbior
 	public String toString(String m_idZmiennej)
 	{
 		return szukajPary(m_idZmiennej).toString();
-	}
-	
-	private void podmienWartosc(String  p_klucz, double p_wartosc)
-	{
-		szukajPary(p_klucz).setWartosc(p_wartosc);
-		
 	}
 	
 	private Para szukajPary(String p_klucz)

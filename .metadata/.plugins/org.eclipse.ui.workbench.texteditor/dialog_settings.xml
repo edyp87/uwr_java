@@ -3,24 +3,28 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="269" key="DIALOG_WIDTH"/>
 		<item value="257" key="DIALOG_Y_ORIGIN"/>
-		<item value="411" key="DIALOG_HEIGHT"/>
 		<item value="1327" key="DIALOG_X_ORIGIN"/>
+		<item value="411" key="DIALOG_HEIGHT"/>
 		<item value="1|Sans|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
+		<item value="true" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
-		<item value="false" key="wholeword"/>
-		<item value="p_numerKolumny" key="selection"/>
+		<item value="true" key="wholeword"/>
+		<item value="RuntimeException" key="selection"/>
 		<list key="findhistory">
+			<item value="szukajPary"/>
+			<item value="Exception"/>
+			<item value="pow"/>
 			<item value="p_kolumna"/>
 			<item value="l_kolumna"/>
 			<item value="l_wiersz"/>
 			<item value="p_wiersz"/>
 		</list>
 		<list key="replacehistory">
+			<item value="RuntimeException"/>
 			<item value="p_numerKolumny"/>
 			<item value="l_numerKolumny"/>
 			<item value="l_numerWiersza"/>
