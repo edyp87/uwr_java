@@ -1,6 +1,7 @@
 package com.pracownia3;
 
-public class Para {
+public class Para
+{
 	public Para(String p_klucz, double p_wartosc)
 	{
 		m_klucz   = p_klucz;

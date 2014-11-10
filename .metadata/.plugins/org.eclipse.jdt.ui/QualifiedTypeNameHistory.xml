@@ -18,4 +18,12 @@
 <fullyQualifiedTypeName name="com.pracownia3.Logarytm"/>
 <fullyQualifiedTypeName name="com.pracownia3.FunWykladnicza"/>
 <fullyQualifiedTypeName name="com.pracownia3.Potega"/>
+<fullyQualifiedTypeName name="narzedzia.Wezel"/>
+<fullyQualifiedTypeName name="com.pracownia3.Para"/>
+<fullyQualifiedTypeName name="com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable"/>
+<fullyQualifiedTypeName name="java.util.Hashtable"/>
+<fullyQualifiedTypeName name="narzedzia.DrzewoBST"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="narzedzia.Para"/>
 </qualifiedTypeNameHistroy>

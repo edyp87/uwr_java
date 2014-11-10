@@ -1,0 +1,28 @@
+package tests.com.narzedzia;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import narzedzia.Para;
+import narzedzia.Wezel;
+
+public class WezelTest
+{
+	@Test
+	public void moznaStworzycWezel() throws IllegalArgumentException, CloneNotSupportedException
+	{
+		new Wezel(null, new Para("klucz", 1));
+	}
+	
+	@Test
+	public void wezelPrzechowujeSwojaPare() throws CloneNotSupportedException
+	{
+		Para  l_para  = new Para("klucz", 1);
+		Wezel l_wezel = new Wezel(null, l_para);
+		
+		assertEquals(l_wezel.getWartosc(), l_para.getWartosc(), 0.001);
+	}
+	
+	
+}

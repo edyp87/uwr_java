@@ -1,0 +1,24 @@
+package narzedzia;
+
+import narzedzia.Para;
+
+public class Wezel
+{
+	public Wezel(Para p_para, Wezel p_poprzedni, Wezel p_nastepny) throws CloneNotSupportedException
+	{
+		m_para      = (Para) p_para.clone();
+		m_poprzedni = p_poprzedni;
+		m_nastepny  = p_nastepny;
+	}
+	
+	public double getWartosc()
+	{
+		return m_para.getWartosc();
+	}
+	
+	private Para  m_para;
+	private Wezel m_poprzedni;
+	private Wezel m_nastepny;
+	
+
+}

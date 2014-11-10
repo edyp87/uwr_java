@@ -1,0 +1,52 @@
+package narzedzia;
+
+import narzedzia.Para;
+
+public class Wezel
+{
+	public Wezel(Para p_para, Wezel p_poprzedni, Wezel p_nastepny) throws CloneNotSupportedException
+	{
+		m_para      = (Para) p_para.clone();
+		m_poprzedni = p_poprzedni;
+		m_nastepny  = p_nastepny;
+	}
+	
+	public static Wezel szukaj(Wezel p_korzen, String p_klucz) throws CloneNotSupportedException
+	{
+		
+		if(p_korzen == null || p_korzen.getPara().m_klucz.equals(p_klucz))
+		{
+			return p_korzen;
+		}
+		
+		if(p_korzen.getPara().m_klucz.compareTo(p_klucz) < 0)
+		{
+			return szukaj(p_korzen.getPoprzedni(), p_klucz);
+		}
+		else
+		{
+			return szukaj(p_korzen.getNastepny(), p_klucz);
+		}
+	}
+	
+	public Para getPara()
+	{
+		return m_para;
+	}
+	
+	public Wezel getNastepny()
+	{
+		return m_nastepny;
+	}
+	
+	public Wezel getPoprzedni()
+	{
+		return m_poprzedni;
+	}
+	
+	private Para  m_para;
+	private Wezel m_poprzedni;
+	private Wezel m_nastepny;
+	
+
+}

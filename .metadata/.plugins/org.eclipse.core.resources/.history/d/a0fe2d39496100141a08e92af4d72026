@@ -1,0 +1,29 @@
+package tests.com.narzedzia;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.pracownia3.Para;
+
+import narzedzia.Wezel;
+
+public class WezelTest
+{
+	@Test
+	public void moznaStworzycWezel()
+	{
+		Wezel l_wezel = new Wezel(null, new Para("klucz", 1));
+	}
+	
+	@Test
+	public void wezelPrzechowujeSwojaPare()
+	{
+		Para  l_para  = new Para("klucz", 1);
+		Wezel l_wezel = new Wezel(null, l_para);
+		
+		assertEquals(l_wezel.m_para, l_para, 0.001);
+	}
+	
+	
+}

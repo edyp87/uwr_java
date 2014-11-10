@@ -1,0 +1,68 @@
+package narzedzia;
+
+import narzedzia.Para;
+
+public class Wezel
+{
+	private Wezel(Para p_para, Wezel p_poprzedni, Wezel p_nastepny) throws CloneNotSupportedException
+	{
+		m_para      = (Para) p_para.clone();
+		m_poprzedni = p_poprzedni;
+		m_nastepny  = p_nastepny;
+	}
+	
+	public static Wezel szukaj(Wezel p_korzen, String p_klucz) throws CloneNotSupportedException
+	{
+		
+		if(p_korzen == null)
+		{
+			return null;
+		}
+		
+		if(p_korzen.getPara().m_klucz.compareTo(p_klucz) < 0)
+		{
+			return szukaj(p_korzen.m_poprzedni, p_klucz);
+		}
+		else if(p_korzen.getPara().m_klucz.compareTo(p_klucz) > 0)
+		{
+			return szukaj(p_korzen.m_nastepny, p_klucz);
+		}
+		else
+		{
+			return p_korzen;
+		}
+	}
+	
+	public static Wezel wstaw(Wezel p_korzen, Para p_para) throws CloneNotSupportedException
+	{
+		if(p_korzen == null)
+		{
+			p_korzen = new Wezel(p_para, null, null);
+		}
+		else if(p_para.compareTo(p_korzen.getPara()) < 0)
+		{
+			p_korzen.m_poprzedni = wstaw(p_korzen.m_poprzedni, p_para);
+		}
+		else if(p_para.compareTo(p_korzen.getPara()) < 0)
+		{
+			p_korzen.m_nastepny = wstaw(p_korzen.m_nastepny, p_para);
+		}
+		else
+		{
+			// duplikat
+		}
+		return p_korzen;
+		
+	}
+	
+	public Para getPara()
+	{
+		return m_para;
+	}
+
+	private Para  m_para;
+	private Wezel m_poprzedni;
+	private Wezel m_nastepny;
+	
+
+}

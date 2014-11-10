@@ -1,0 +1,13 @@
+package narzedzia;
+
+import com.pracownia3.Para;
+
+public class Wezel
+{
+
+	public Wezel(Wezel p_wezel, Para p_para)
+	{
+		
+	}
+
+}
