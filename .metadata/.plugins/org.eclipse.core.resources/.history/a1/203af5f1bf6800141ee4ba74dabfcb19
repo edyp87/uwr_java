@@ -1,0 +1,18 @@
+package tests.pracownia5;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import pracownia5.Liczba;
+
+public class LiczbaTest
+{
+
+	@Test
+	public void moznaUtworzycNowyObiekt()
+	{
+		new Liczba(1);
+	}
+
+}

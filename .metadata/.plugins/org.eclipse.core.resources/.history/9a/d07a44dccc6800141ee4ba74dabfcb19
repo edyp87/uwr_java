@@ -1,0 +1,29 @@
+package com.pracownia5;
+
+public class Wezel
+{
+	public Wezel(Wezel p_poprzedni, Wezel p_nastepny, Object p_wartosc)
+	{
+		m_poprzedni = p_poprzedni;
+		m_nastepny  = p_nastepny;
+		m_wartosc   = p_wartosc;
+	}
+	
+	public Wezel nastepny()
+	{
+		return m_nastepny;
+	}
+	
+	public Wezel poprzedni()
+	{
+		return m_poprzedni;
+	}
+	
+	public Object getWartosc()
+	{
+		return m_wartosc;
+	}
+	
+	private Wezel  m_poprzedni, m_nastepny;
+	private Object m_wartosc;
+}

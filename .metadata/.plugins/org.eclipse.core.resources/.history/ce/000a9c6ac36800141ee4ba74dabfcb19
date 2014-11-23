@@ -1,0 +1,47 @@
+package pracownia5;
+
+import java.util.Set;
+
+public class Zmienna
+{
+	public Zmienna(String p_id, double p_wartosc)
+	{
+		m_id      = p_id;
+		m_wartosc = p_wartosc;
+		addToSet();
+	}
+	
+	public String getId()
+	{
+		return m_id;
+	}
+	
+	public double getWartosc()
+	{
+		return m_wartosc;
+	}
+	
+	private void addToSet()
+	{
+		if (m_zbior.contains(this))
+		{
+			m_zbior.remove(this);
+			
+		}
+		m_zbior.add(this);
+	}
+	
+	@Override
+	public boolean equals(Object p_zmienna)
+	{
+		if (p_zmienna == null)               return false;
+		if (p_zmienna == this)               return true;
+		if (!(p_zmienna instanceof Zmienna)) return false;
+		
+		return this.getId() == ((Zmienna)p_zmienna).getId();
+	}
+	
+	private String m_id;
+	private double m_wartosc;
+	private static Set<Zmienna> m_zbior;
+}

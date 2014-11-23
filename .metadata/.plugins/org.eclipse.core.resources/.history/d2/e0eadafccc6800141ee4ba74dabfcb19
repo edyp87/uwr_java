@@ -1,0 +1,13 @@
+package com.pracownia5;
+
+public class Lista
+{
+	boolean isEmpty()
+	{
+		return m_poczatek.nastepny() == null;
+	}
+	
+	
+	
+	Wezel m_poczatek;
+}

@@ -1,0 +1,5 @@
+package com.pracownia5;
+
+public interface Funkcyjny {
+
+}

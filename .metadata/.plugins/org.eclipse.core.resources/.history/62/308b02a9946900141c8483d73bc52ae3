@@ -1,0 +1,35 @@
+package tests.pracownia5;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.pracownia3.Para;
+import com.pracownia5.Kolejka;
+
+public class KolejkaTest {
+
+	@Test
+	public void test()
+	{
+		Kolejka l_kolejka = new Kolejka();
+		
+		l_kolejka.enqueue(new Para("ID1", 5));
+		l_kolejka.enqueue(new Para("ID2", 4));
+		l_kolejka.enqueue(new Para("ID3", 3));
+		l_kolejka.enqueue(new Para("ID4", 2));
+		l_kolejka.enqueue(new Para("ID5", 1));
+		l_kolejka.enqueue(new Para("ID6", 0));
+		
+		Para l_para;
+		int i = 0;
+		while((l_para = (Para) l_kolejka.dequeue()) != null)
+		{
+			assertEquals(i, l_para.getWartosc(), 0.001);
+			++i;
+		}
+	}
+	
+	
+
+}

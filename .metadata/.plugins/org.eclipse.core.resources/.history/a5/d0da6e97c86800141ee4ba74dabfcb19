@@ -1,0 +1,19 @@
+package com.pracownia5;
+
+public class Dodaj extends Funkcja
+{
+
+	public Dodaj(double p_lewyArgument, double p_prawyArgument)
+	{
+		m_wartosc = p_lewyArgument + p_prawyArgument;
+	}
+	
+	@Override
+	public double obliczWartosc()
+	{
+		return m_wartosc;
+	}
+	
+	private double m_wartosc;
+
+}

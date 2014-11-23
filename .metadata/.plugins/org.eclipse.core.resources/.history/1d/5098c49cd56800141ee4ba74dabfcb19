@@ -1,0 +1,91 @@
+package com.pracownia5;
+
+public class Lista
+{
+	public Lista()
+	{
+		m_poczatek = null;
+		m_koniec   = null;
+	}
+	
+	public void wstaw(Object p_wartosc)
+	{
+		Wezel l_wezel = new Wezel(null, null, p_wartosc);
+		if (isEmpty())
+		{
+			m_poczatek = l_wezel;
+			m_koniec   = l_wezel;
+		}
+		else
+		{
+			l_wezel.setPoprzedni(m_koniec);
+			m_koniec.setNastepny(l_wezel);
+			m_koniec = l_wezel;
+		}
+	}
+	
+	public void wstaw(Wezel p_iterator, Object p_wartosc)
+	{
+		Wezel l_wezel = new Wezel(p_iterator, p_iterator.getNastepny(), p_wartosc);
+		p_iterator.getNastepny().setPoprzedni(l_wezel);
+		p_iterator.setNastepny(l_wezel);
+		
+		
+	}
+	
+	public void usun()
+	{
+		if (isEmpty())
+		{
+			return;
+		}
+			
+		m_koniec = m_koniec.getPoprzedni();
+	}
+	
+	public void usun(int p_pozycja)
+	{
+		Wezel l_wezel = wezelNaPozycji(p_pozycja);
+		
+		if (l_wezel == null)
+		{
+			return;
+		}
+		
+		
+		if (l_wezel.getNastepny() != null)
+		{
+			l_wezel.getNastepny().setPoprzedni(l_wezel.getPoprzedni());
+		}
+		if (l_wezel.getPoprzedni() != null)
+		{
+			l_wezel.getPoprzedni().setNastepny(l_wezel.getNastepny());
+		}
+	}
+	
+	public boolean isEmpty()
+	{
+		return m_poczatek == null;
+	}
+	
+	public Object wartoscNaPozycji(int p_pozycja)
+	{
+		return wezelNaPozycji(p_pozycja) == null ? 
+				null : wezelNaPozycji(p_pozycja).getWartosc();
+		
+	}
+	
+	private Wezel wezelNaPozycji(int p_pozycja)
+	{
+		Wezel l_temp = m_poczatek;
+		for(int i = 0; i < p_pozycja; ++i)
+		{
+			if(l_temp == null) break;
+			l_temp = l_temp.getNastepny();
+		}
+		return l_temp;
+	}
+	
+	Wezel m_poczatek;
+	Wezel m_koniec;
+}

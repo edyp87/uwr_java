@@ -1,0 +1,14 @@
+package tests.pracownia5;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class LiczbaTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

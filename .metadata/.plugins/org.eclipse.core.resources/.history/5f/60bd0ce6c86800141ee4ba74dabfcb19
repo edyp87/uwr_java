@@ -1,0 +1,41 @@
+package com.pracownia5;
+
+public class Dodaj extends Funkcja
+{
+
+	public Dodaj()
+	{
+	
+	}
+	
+	@Override
+	public double obliczWartosc()
+	{
+		return m_wartosc;
+	}
+
+	@Override
+	public int arnosc()
+	{
+		return 2;
+	}
+
+	@Override
+	public int brakujaceArgumenty()
+	{
+		return 0;
+	}
+
+	@Override
+	public void dodajArgument(double p_arg)
+	{
+		
+	}
+	
+	int m_arnosc = 2;
+	int aktualnaLiczbaArg = 0;
+	double m_lewyArgument;
+	double m_prawyArgument;
+	
+
+}

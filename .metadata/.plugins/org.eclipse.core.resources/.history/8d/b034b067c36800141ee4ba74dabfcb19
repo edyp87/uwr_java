@@ -1,0 +1,16 @@
+package tests.pracownia5;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class ZmiennaTest
+{
+
+	@Test
+	public void moznaDodacZmienna()
+	{
+		fail("Not yet implemented");
+	}
+
+}
