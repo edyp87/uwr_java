@@ -2,8 +2,8 @@
 <section name="Workbench">
 	<section name="RefactoringStatusDialog">
 		<item value="806" key="DIALOG_WIDTH"/>
-		<item value="479" key="DIALOG_HEIGHT"/>
-		<item value="1|Ubuntu|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="476" key="DIALOG_HEIGHT"/>
+		<item value="1|Oxygen-Sans Sans-Book|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="RefactoringWizard.preview">
 		<item value="400" key="height"/>

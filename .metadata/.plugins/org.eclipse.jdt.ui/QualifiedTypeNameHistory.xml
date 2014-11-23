@@ -4,7 +4,6 @@
 <fullyQualifiedTypeName name="org.junit.rules.ExpectedException"/>
 <fullyQualifiedTypeName name="org.junit.Test"/>
 <fullyQualifiedTypeName name="com.pracownia3.Stala"/>
-<fullyQualifiedTypeName name="com.pracownia3.Zmienna"/>
 <fullyQualifiedTypeName name="com.pracownia3.PrzeciwnyZnak"/>
 <fullyQualifiedTypeName name="com.pracownia3.WartBezwzgl"/>
 <fullyQualifiedTypeName name="com.pracownia3.Dodaj"/>
@@ -19,11 +18,15 @@
 <fullyQualifiedTypeName name="com.pracownia3.FunWykladnicza"/>
 <fullyQualifiedTypeName name="com.pracownia3.Potega"/>
 <fullyQualifiedTypeName name="narzedzia.Wezel"/>
-<fullyQualifiedTypeName name="com.pracownia3.Para"/>
 <fullyQualifiedTypeName name="com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable"/>
 <fullyQualifiedTypeName name="java.util.Hashtable"/>
 <fullyQualifiedTypeName name="narzedzia.DrzewoBST"/>
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 <fullyQualifiedTypeName name="narzedzia.Para"/>
+<fullyQualifiedTypeName name="pracownia5.Liczba"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="com.pracownia3.Zmienna"/>
+<fullyQualifiedTypeName name="com.pracownia3.Para"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
 </qualifiedTypeNameHistroy>

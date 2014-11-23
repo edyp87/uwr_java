@@ -1,9 +1,0 @@
-package narzedzia;
-
-public interface Slownik
-{
-	public Para szukaj();
-	public Para wstaw();
-	public Para usun();
-	public Para ile();
-}

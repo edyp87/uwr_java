@@ -1,9 +1,0 @@
-package narzedzia;
-
-public interface Slownik
-{
-	public double szukaj();
-	public boolean wstaw();
-	public boolean usun();
-	public int ile();
-}

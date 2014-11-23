@@ -37,7 +37,7 @@ public class Pracownia4
 		{
 			DrzewoBST l_drzewo = m_drzewa.get(p_wejscie[1]);
 			l_drzewo.wstaw(new Para(p_wejscie[2], Double.parseDouble(p_wejscie[3])));
-			l_drzewo.
+
 		}
 		return true;
 	}

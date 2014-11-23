@@ -1,9 +1,0 @@
-package narzedzia;
-
-public interface Slownik
-{
-	public double szukaj(String p_klucz);
-	public boolean wstaw(Para p_para);
-	public boolean usun(String p_klucz);
-	public int ile();
-}
