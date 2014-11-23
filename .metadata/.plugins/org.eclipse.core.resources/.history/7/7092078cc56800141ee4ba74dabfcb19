@@ -1,6 +1,0 @@
-package com.pracownia5;
-
-public interface Obliczalny
-{
-	public double obliczWartosc();
-}

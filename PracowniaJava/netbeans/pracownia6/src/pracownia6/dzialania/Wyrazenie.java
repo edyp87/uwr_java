@@ -1,8 +1,10 @@
-package com.pracownia3;
+package pracownia6.dzialania;
+
+import java.math.BigInteger;
 
 public abstract class Wyrazenie
 {
-	public abstract double oblicz();
+	public abstract BigInteger oblicz();
 	public abstract String toString();
 	@Override
 	public boolean equals(Object p_wyrazenie)
@@ -14,6 +16,6 @@ public abstract class Wyrazenie
 		if (!(p_wyrazenie instanceof Wyrazenie))
 			return false;
 		
-		return this.oblicz() == ((Wyrazenie)p_wyrazenie).oblicz();
+		return this.oblicz().equals(((Wyrazenie)p_wyrazenie).oblicz());
 	}
 }
