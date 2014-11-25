@@ -1,10 +1,18 @@
+import pracownia6.wyrazenieZPracowni3.Stala;
+import pracownia6.wyrazenieZPracowni3.SymbolNewtona;
+import pracownia6.wyrazenieZPracowni3.Dziel;
+import pracownia6.wyrazenieZPracowni3.Mnoz;
+import pracownia6.wyrazenieZPracowni3.PrzeciwnyZnak;
+import pracownia6.wyrazenieZPracowni3.Silnia;
+import pracownia6.wyrazenieZPracowni3.Potega;
+import pracownia6.wyrazenieZPracowni3.Dodaj;
+import pracownia6.wyrazenieZPracowni3.Odejmij;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import java.math.BigInteger;
 
-import pracownia6.dzialania.*;
 
 public class WyrazenieTest {
         BigInteger l_wartosc = new BigInteger(String.valueOf(111));

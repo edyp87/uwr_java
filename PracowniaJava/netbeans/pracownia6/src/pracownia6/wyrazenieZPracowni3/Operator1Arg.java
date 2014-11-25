@@ -1,4 +1,4 @@
-package pracownia6.dzialania;
+package pracownia6.wyrazenieZPracowni3;
 
 public abstract class Operator1Arg extends Wyrazenie
 {

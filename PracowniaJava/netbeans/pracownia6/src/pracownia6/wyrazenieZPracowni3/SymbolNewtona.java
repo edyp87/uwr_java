@@ -1,4 +1,4 @@
-package pracownia6.dzialania;
+package pracownia6.wyrazenieZPracowni3;
 
 import java.math.BigInteger;
 import com.google.common.math.BigIntegerMath;
