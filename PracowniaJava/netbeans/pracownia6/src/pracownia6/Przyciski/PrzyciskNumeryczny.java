@@ -9,13 +9,11 @@ public class PrzyciskNumeryczny implements IPrzycisk
     {
         m_wartosc = p_wartosc;
         m_processor = p_processor;
-        System.out.println("Utworzono przycisk numeryczny" + p_wartosc.toString());
     }
     
     @Override
     public void wcisnij()
     {
-        System.out.println("DUPA PrzyciskNumeryczny::wcisnij()");
         m_processor.wcisnietoNumer(m_wartosc);
     }
     

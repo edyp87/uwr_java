@@ -9,8 +9,11 @@ import java.awt.event.WindowEvent;
 import java.math.BigInteger;
 import pracownia6.Processor.Processor;
 import pracownia6.Przyciski.IPrzycisk;
+import pracownia6.Przyciski.PrzyciskCofania;
 import pracownia6.Przyciski.PrzyciskDodawania;
+import pracownia6.Przyciski.PrzyciskMnozenia;
 import pracownia6.Przyciski.PrzyciskNumeryczny;
+import pracownia6.Przyciski.PrzyciskOdejmowania;
 import pracownia6.Przyciski.PrzyciskWyniku;
 
 public class KalkulatorUI implements IKalkulatorUI
@@ -99,7 +102,9 @@ public class KalkulatorUI implements IKalkulatorUI
         m_LogPrzycisk_0 = new PrzyciskNumeryczny(m_kalkulator, BigInteger.valueOf(0));
         m_LogPrzycisk_oblicz    = new PrzyciskWyniku(m_kalkulator);
         m_LogPrzycisk_dodawanie = new PrzyciskDodawania(m_kalkulator);
-        
+        m_LogPrzycisk_odejmowanie = new PrzyciskOdejmowania(m_kalkulator);
+        m_LogPrzycisk_usuwanie  = new PrzyciskCofania(m_kalkulator);
+        m_LogPrzycisk_mnozenie = new PrzyciskMnozenia(m_kalkulator);
         powiazPrzyciskiZListenerami();
     }
     
@@ -117,7 +122,11 @@ public class KalkulatorUI implements IKalkulatorUI
         m_LogPrzycisk_0_Listener = new PrzyciskListener(m_LogPrzycisk_0);
         m_LogPrzycisk_oblicz_Listener = new PrzyciskListener(m_LogPrzycisk_oblicz);
         m_LogPrzycisk_dodawanie_Listener = new PrzyciskListener(m_LogPrzycisk_dodawanie);
+        m_LogPrzycisk_odejmowanie_Listener = new PrzyciskListener(m_LogPrzycisk_odejmowanie);
+        m_LogPrzycisk_mnozenie_Listener = new PrzyciskListener(m_LogPrzycisk_mnozenie);
+        m_LogPrzycisk_usuwanie_Listener = new PrzyciskListener(m_LogPrzycisk_usuwanie);
         
+                
         m_przycisk_1.addActionListener(m_LogPrzycisk_1_Listener);
         m_przycisk_2.addActionListener(m_LogPrzycisk_2_Listener);
         m_przycisk_3.addActionListener(m_LogPrzycisk_3_Listener);
@@ -129,7 +138,10 @@ public class KalkulatorUI implements IKalkulatorUI
         m_przycisk_9.addActionListener(m_LogPrzycisk_9_Listener);
         m_przycisk_0.addActionListener(m_LogPrzycisk_0_Listener);
         m_dodawanie.addActionListener(m_LogPrzycisk_dodawanie_Listener);
+        m_odejmowanie.addActionListener(m_LogPrzycisk_odejmowanie_Listener);
+        m_usunCyfre.addActionListener(m_LogPrzycisk_usuwanie_Listener);
         m_oblicz.addActionListener(m_LogPrzycisk_oblicz_Listener);
+        m_mnozenie.addActionListener(m_LogPrzycisk_mnozenie_Listener);
     }
     
     private void dodajPrzyciskiDoPanelu()
@@ -187,6 +199,9 @@ public class KalkulatorUI implements IKalkulatorUI
     private PrzyciskNumeryczny m_LogPrzycisk_0;
     private PrzyciskWyniku     m_LogPrzycisk_oblicz;
     private PrzyciskDodawania  m_LogPrzycisk_dodawanie;
+    private PrzyciskOdejmowania m_LogPrzycisk_odejmowanie;
+    private PrzyciskMnozenia m_LogPrzycisk_mnozenie;
+    private PrzyciskCofania    m_LogPrzycisk_usuwanie;
     
     private ActionListener m_LogPrzycisk_1_Listener;
     private ActionListener m_LogPrzycisk_2_Listener;
@@ -201,6 +216,9 @@ public class KalkulatorUI implements IKalkulatorUI
     
     private ActionListener m_LogPrzycisk_oblicz_Listener;
     private ActionListener m_LogPrzycisk_dodawanie_Listener;
+    private ActionListener m_LogPrzycisk_odejmowanie_Listener;
+    private ActionListener m_LogPrzycisk_mnozenie_Listener;
+    private ActionListener m_LogPrzycisk_usuwanie_Listener;
     
     class PrzyciskListener implements ActionListener
     {

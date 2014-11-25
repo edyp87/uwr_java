@@ -5,9 +5,8 @@ import pracownia6.Processor.Processor;
 
 public class PrzyciskCofania implements IPrzycisk
 {
-    public PrzyciskCofania(Processor p_processor, BigInteger p_wartosc)
+    public PrzyciskCofania(Processor p_processor)
     {
-        m_wartosc = p_wartosc;
         m_processor = p_processor;
     }
 
@@ -22,6 +21,5 @@ public class PrzyciskCofania implements IPrzycisk
         m_processor.wcisnietoCofnij();
     }
     
-    private BigInteger m_wartosc;
     private Processor m_processor = null;
 }
