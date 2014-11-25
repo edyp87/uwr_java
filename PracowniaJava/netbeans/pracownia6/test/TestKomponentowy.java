@@ -83,17 +83,56 @@ public class TestKomponentowy {
         assertEquals(new BigInteger("3"), m_kalkulator.pobierzWynik()); 
     }
     
-    /*
     @Test
-    public void wielokrotnaRownoscPowtarzaOstatnieDzialanieZPierwszymArgumentem()
+    public void moznaDzielicModuloWartosci()
     {
+        m_numer6.wcisnij();
+        m_mod.wcisnij();
+        m_numer4.wcisnij();
+        m_wynik.wcisnij();
+        assertEquals(new BigInteger("2"), m_kalkulator.pobierzWynik()); 
+    }
+    
+    @Test
+    public void moznaPodnosicDoPotegi()
+    {
+        m_numer6.wcisnij();
+        m_potega.wcisnij();
+        m_numer4.wcisnij();
+        m_wynik.wcisnij();
+        assertEquals(new BigInteger("1296"), m_kalkulator.pobierzWynik()); 
+    }
+    
+    @Test
+    public void moznaLiczycDwumianNewtona()
+    {
+        m_numer8.wcisnij();
         m_numer1.wcisnij();
-        m_dodawanie.wcisnij();
+        m_newton.wcisnij();
         m_numer2.wcisnij();
+        m_numer5.wcisnij();
         m_wynik.wcisnij();
+        assertEquals(new BigInteger("525652003943603702568"), m_kalkulator.pobierzWynik()); 
+    }
+    
+    @Test
+    public void moznaLiczycSilnie()
+    {
+        m_numer6.wcisnij();
+        m_silnia.wcisnij();
         m_wynik.wcisnij();
-        assertEquals(new BigInteger("4"), m_kalkulator.pobierzWynik()); 
-    }*/
+        assertEquals(new BigInteger("720"), m_kalkulator.pobierzWynik()); 
+    }
+        
+    @Test
+    public void moznaZmieniacZnak()
+    {
+        m_numer6.wcisnij();
+        m_numer2.wcisnij();
+        m_zmianaZnaku.wcisnij();
+        m_wynik.wcisnij();
+        assertEquals(new BigInteger("-62"), m_kalkulator.pobierzWynik()); 
+    }
     
     @Test
     public void moznaUsuwacWprowadzoneLiczby()
@@ -137,6 +176,11 @@ public class TestKomponentowy {
         m_odejmowanie = new PrzyciskOdejmowania(m_kalkulator);
         m_mnozenie = new PrzyciskMnozenia(m_kalkulator);
         m_dzielenie = new PrzyciskDzielenia(m_kalkulator);
+        m_mod = new PrzyciskModulo(m_kalkulator);
+        m_potega = new PrzyciskPotegi(m_kalkulator);
+        m_newton = new PrzyciskNewtona(m_kalkulator);
+        m_silnia = new PrzyciskSilnia(m_kalkulator);
+        m_zmianaZnaku = new PrzyciskZmianyZnaku(m_kalkulator);
     }
         
         Processor m_kalkulator = new Processor();
@@ -156,4 +200,9 @@ public class TestKomponentowy {
         PrzyciskOdejmowania m_odejmowanie;
         PrzyciskMnozenia m_mnozenie;
         PrzyciskDzielenia m_dzielenie;
+        PrzyciskModulo m_mod;
+        PrzyciskPotegi m_potega;
+        PrzyciskNewtona m_newton;
+        PrzyciskSilnia m_silnia;
+        PrzyciskZmianyZnaku m_zmianaZnaku;
 }

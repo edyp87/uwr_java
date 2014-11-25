@@ -2,21 +2,22 @@ package pracownia6.Przyciski;
 
 import java.math.BigInteger;
 import pracownia6.Processor.Processor;
+import com.google.common.math.BigIntegerMath;
 
-public class PrzyciskCofania implements IPrzyciskDzialaniaUnarnego
+public class PrzyciskSilnia implements IPrzyciskDzialaniaUnarnego
 {
-    public PrzyciskCofania(Processor p_processor)
+    public PrzyciskSilnia(Processor p_processor)
     {
         m_processor = p_processor;
     }
-    
+        
     @Override
     public BigInteger wykonajDzialanie(BigInteger p_argument)
     {
-        BigInteger l_wartosc = (m_processor.pobierzWynik().divide(new BigInteger("10")));
-        return l_wartosc;
+        //TODO :: get rid of int
+        return BigIntegerMath.factorial(p_argument.intValue());
     }
-    
+
     @Override
     public void wcisnij()
     {

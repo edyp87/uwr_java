@@ -1,7 +1,8 @@
 package pracownia6.Processor;
 
 import java.math.BigInteger;
-import pracownia6.Przyciski.IPrzyciskDzialania;
+import pracownia6.Przyciski.IPrzyciskDzialaniaBinarnego;
+import pracownia6.Przyciski.IPrzyciskDzialaniaUnarnego;
 
 public class Processor
 {
@@ -10,16 +11,17 @@ public class Processor
         m_aktualnyStan.wprowadz(p_wartosc);
     }
     
-    public void wcisnietoDzialanie(IPrzyciskDzialania p_dzialanie)
+    public void wcisnietoDzialanieBinarne(IPrzyciskDzialaniaBinarnego p_dzialanie)
     {
         wykonajDzialanie();
         m_przyciskDzialania = p_dzialanie;
         m_aktualnyStan = new StanDzialanie(m_podstawowyStan, this);
+        zachowajWynik();
     }
     
-    public void wcisnietoCofnij()
+    public void wcisnietoDzialanieUnarne(IPrzyciskDzialaniaUnarnego p_dzialanie)
     {
-        m_aktualnyStan.cofnij();
+        m_wynik = p_dzialanie.wykonajDzialanie(m_wynik);
     }
     
     public void wykonajDzialanie()
@@ -32,6 +34,16 @@ public class Processor
         return m_wynik;
     }
     
+    public BigInteger pobierzZachowanyWynik()
+    {
+        return m_zachowanyWynik;
+    }
+    
+    public String pobierzSymbolDzialaniaBinarnego()
+    {
+        return m_przyciskDzialania.toString();
+    }
+        
     public void aktualizujWynik(BigInteger p_wartosc)
     {
         m_wynik = p_wartosc;
@@ -60,9 +72,9 @@ public class Processor
     private IStan              m_aktualnyStan      = m_podstawowyStan;
     private BigInteger         m_wynik             = BigInteger.ZERO;
     private BigInteger         m_zachowanyWynik    = BigInteger.ZERO;
-    private IPrzyciskDzialania m_przyciskDzialania = new NullOperator();
+    private IPrzyciskDzialaniaBinarnego m_przyciskDzialania = new NullOperator();
     
-    private class NullOperator implements IPrzyciskDzialania
+    private class NullOperator implements IPrzyciskDzialaniaBinarnego
     {
         @Override
         public BigInteger wykonajDzialanie(BigInteger p_lewyArgument, BigInteger p_prawyArgument)
@@ -73,7 +85,12 @@ public class Processor
         @Override
         public void wcisnij()
         {
-            // nothing
+        }
+        
+        @Override
+        public String toString()
+        {
+            return "";
         }
         
     }

@@ -3,9 +3,9 @@ package pracownia6.Przyciski;
 import java.math.BigInteger;
 import pracownia6.Processor.Processor;
 
-public class PrzyciskMnozenia implements IPrzyciskDzialaniaBinarnego
+public class PrzyciskPotegi implements IPrzyciskDzialaniaBinarnego
 {
-    public PrzyciskMnozenia(Processor p_processor)
+    public PrzyciskPotegi(Processor p_processor)
     {
         m_processor = p_processor;
     }
@@ -13,7 +13,8 @@ public class PrzyciskMnozenia implements IPrzyciskDzialaniaBinarnego
     @Override
     public BigInteger wykonajDzialanie(BigInteger p_lewyArgument, BigInteger p_prawyArgument)
     {
-        return p_lewyArgument.multiply(p_prawyArgument);
+        // TODO - za duza potega
+        return p_lewyArgument.pow(p_prawyArgument.intValue());
     }
 
     @Override
@@ -25,7 +26,7 @@ public class PrzyciskMnozenia implements IPrzyciskDzialaniaBinarnego
     @Override
     public String toString()
     {
-        return "*";
+        return "^";
     }
     
     private Processor m_processor = null;

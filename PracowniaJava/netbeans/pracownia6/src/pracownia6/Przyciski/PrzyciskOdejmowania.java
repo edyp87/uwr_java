@@ -3,7 +3,7 @@ package pracownia6.Przyciski;
 import java.math.BigInteger;
 import pracownia6.Processor.Processor;
 
-public class PrzyciskOdejmowania implements IPrzyciskDzialania
+public class PrzyciskOdejmowania implements IPrzyciskDzialaniaBinarnego
 {
     public PrzyciskOdejmowania(Processor p_processor)
     {
@@ -19,7 +19,13 @@ public class PrzyciskOdejmowania implements IPrzyciskDzialania
     @Override
     public void wcisnij()
     {
-        m_processor.wcisnietoDzialanie(this);
+        m_processor.wcisnietoDzialanieBinarne(this);
+    }
+    
+    @Override
+    public String toString()
+    {
+        return "-";
     }
     
     private Processor m_processor = null;

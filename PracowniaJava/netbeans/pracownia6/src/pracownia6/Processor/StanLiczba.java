@@ -16,12 +16,5 @@ public class StanLiczba implements IStan
         m_processor.aktualizujWynik(l_wartosc);
     }
     
-    @Override
-    public void cofnij()
-    {
-        BigInteger l_wartosc = (m_processor.pobierzWynik().divide(new BigInteger("10")));
-        m_processor.aktualizujWynik(l_wartosc);
-    }
-    
     private Processor m_processor = null;
 }

@@ -12,15 +12,9 @@ public class StanDzialanie implements IStan
     @Override
     public void wprowadz(BigInteger p_wartosc)
     {
-        m_processor.zachowajWynik();
+        //m_processor.zachowajWynik();
         m_przetwarzanieLiczb.wprowadz(p_wartosc);
         m_processor.resetujStan();
-    }
-    
-    @Override
-    public void cofnij()
-    {
-        // dummy method
     }
     
     private IStan m_przetwarzanieLiczb = null;
