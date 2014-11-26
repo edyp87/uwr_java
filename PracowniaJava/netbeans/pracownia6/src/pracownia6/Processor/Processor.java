@@ -14,6 +14,7 @@ public class Processor
     public void wcisnietoDzialanieBinarne(IPrzyciskDzialaniaBinarnego p_dzialanie)
     {
         wykonajDzialanie();
+
         m_przyciskDzialania = p_dzialanie;
         m_aktualnyStan = new StanDzialanie(m_podstawowyStan, this);
         zachowajWynik();
@@ -26,7 +27,15 @@ public class Processor
     
     public void wykonajDzialanie()
     {
-        m_wynik = m_przyciskDzialania.wykonajDzialanie(m_zachowanyWynik, m_wynik);
+        try
+        {
+            m_wynik = m_przyciskDzialania.wykonajDzialanie(m_zachowanyWynik, m_wynik);
+        } 
+        catch(Exception e)
+        {
+            wyjatekPojawilSie = true;
+        }
+ 
     }
        
     public BigInteger pobierzWynik()
@@ -41,7 +50,14 @@ public class Processor
     
     public String pobierzSymbolDzialaniaBinarnego()
     {
-        return m_przyciskDzialania.toString();
+        String l_returnValue = m_przyciskDzialania.toString();
+        if (wyjatekPojawilSie)
+        {
+            l_returnValue =  "Wyjatek!";
+            wyjatekPojawilSie = false; 
+            resetujProcessor();
+        }
+        return l_returnValue;
     }
         
     public void aktualizujWynik(BigInteger p_wartosc)
@@ -73,6 +89,7 @@ public class Processor
     private BigInteger         m_wynik             = BigInteger.ZERO;
     private BigInteger         m_zachowanyWynik    = BigInteger.ZERO;
     private IPrzyciskDzialaniaBinarnego m_przyciskDzialania = new NullOperator();
+    private boolean wyjatekPojawilSie = false;
     
     private class NullOperator implements IPrzyciskDzialaniaBinarnego
     {

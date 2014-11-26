@@ -12,7 +12,7 @@ public class PrzyciskNewtona implements IPrzyciskDzialaniaBinarnego
     }
         
     @Override
-    public BigInteger wykonajDzialanie(BigInteger p_lewyArgument, BigInteger p_prawyArgument)
+    public BigInteger wykonajDzialanie(BigInteger p_lewyArgument, BigInteger p_prawyArgument) throws Exception
     {
         return BigIntegerMath.binomial(
                     p_lewyArgument.intValue(), 
