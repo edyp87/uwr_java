@@ -21,7 +21,7 @@ public class PrzyciskZmianyZnaku implements IPrzyciskDzialaniaUnarnego
     @Override
     public void wcisnij()
     {
-        m_processor.wcisnietoDzialanieUnarne(this);
+        m_processor.wybranoDzialanieUnarne(this);
     }
     
     private Processor m_processor = null;

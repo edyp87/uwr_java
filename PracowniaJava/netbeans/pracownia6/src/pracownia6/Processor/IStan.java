@@ -4,5 +4,5 @@ import java.math.BigInteger;
 
 public interface IStan
 {
-    public void wprowadz(BigInteger p_wartosc);
+    public void wybranoNumer(BigInteger p_wartosc);
 }

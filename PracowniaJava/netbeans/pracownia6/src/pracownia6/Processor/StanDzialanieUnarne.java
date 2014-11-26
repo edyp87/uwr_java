@@ -2,9 +2,9 @@ package pracownia6.Processor;
 
 import java.math.BigInteger;
 
-public class StanDzialanie implements IStan
+public class StanDzialanieUnarne implements IStan
 {
-    public StanDzialanie(IStan p_przetwarzanieLiczb, Processor p_processor)
+    public StanDzialanieUnarne(IStan p_przetwarzanieLiczb, Processor p_processor)
     {
         m_przetwarzanieLiczb = p_przetwarzanieLiczb;
         m_processor = p_processor;
@@ -12,8 +12,8 @@ public class StanDzialanie implements IStan
     @Override
     public void wybranoNumer(BigInteger p_wartosc)
     {
+        m_processor.resetujProcessor();
         m_przetwarzanieLiczb.wybranoNumer(p_wartosc);
-        m_processor.resetujStan();
     }
     
     private IStan m_przetwarzanieLiczb = null;

@@ -10,7 +10,7 @@ public class StanLiczba implements IStan
     }
     
     @Override
-    public void wprowadz(BigInteger p_wartosc)
+    public void wybranoNumer(BigInteger p_wartosc)
     {
         BigInteger l_wartosc = (m_processor.pobierzWynik().multiply(new BigInteger("10"))).add(p_wartosc);
         m_processor.aktualizujWynik(l_wartosc);

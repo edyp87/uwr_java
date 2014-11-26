@@ -363,8 +363,8 @@ public class KalkulatorUI implements IKalkulatorUI
         public void actionPerformed(ActionEvent p_event)
         {
             m_przycisk.wcisnij();
-            m_poleTekstoweGlowne.setText("" + konwertuj(m_kalkulator.pobierzWynik())/*.toString(2)*/);
-            m_poleTekstoweZOperatorem.setText("" + m_kalkulator.pobierzSymbolDzialaniaBinarnego());
+            m_poleTekstoweGlowne.setText("" + konwertuj(m_kalkulator.pobierzWynik()));
+            m_poleTekstoweZOperatorem.setText("" + m_kalkulator.pobierzSymbolAktualnegoDzialaniaBinarnego());
             m_poleTekstowePomocnicze.setText("" + konwertuj(m_kalkulator.pobierzZachowanyWynik()));
         }
         IPrzycisk m_przycisk = null;

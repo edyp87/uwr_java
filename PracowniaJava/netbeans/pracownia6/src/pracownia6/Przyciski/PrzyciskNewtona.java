@@ -22,7 +22,7 @@ public class PrzyciskNewtona implements IPrzyciskDzialaniaBinarnego
     @Override
     public void wcisnij()
     {
-        m_processor.wcisnietoDzialanieBinarne(this);
+        m_processor.wybranoDzialanieBinarne(this);
     }
     
     @Override

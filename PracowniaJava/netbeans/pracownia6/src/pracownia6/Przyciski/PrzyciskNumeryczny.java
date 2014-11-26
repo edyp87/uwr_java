@@ -14,7 +14,7 @@ public class PrzyciskNumeryczny implements IPrzycisk
     @Override
     public void wcisnij()
     {
-        m_processor.wcisnietoNumer(m_wartosc);
+        m_processor.wybranoNumer(m_wartosc);
     }
     
     private BigInteger m_wartosc;

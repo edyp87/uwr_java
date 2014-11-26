@@ -6,26 +6,37 @@ import pracownia6.Przyciski.IPrzyciskDzialaniaUnarnego;
 
 public class Processor
 {
-    public void wcisnietoNumer(BigInteger p_wartosc)
+    public void wybranoNumer(BigInteger p_wartosc)
     {
-        m_aktualnyStan.wprowadz(p_wartosc);
+        m_aktualnyStan.wybranoNumer(p_wartosc);
+        m_wprowadzonoWartosc = true;
     }
     
-    public void wcisnietoDzialanieBinarne(IPrzyciskDzialaniaBinarnego p_dzialanie)
+    public void wybranoDzialanieBinarne(IPrzyciskDzialaniaBinarnego p_dzialanie)
     {
-        wykonajDzialanie();
-
+        if(m_wprowadzonoWartosc)
+        {
+            wykonajPoprzednieDzialanieBinarne();
+            zachowajWynik();
+        }
         m_przyciskDzialania = p_dzialanie;
         m_aktualnyStan = new StanDzialanie(m_podstawowyStan, this);
-        zachowajWynik();
     }
     
-    public void wcisnietoDzialanieUnarne(IPrzyciskDzialaniaUnarnego p_dzialanie)
+    public void wybranoDzialanieUnarne(IPrzyciskDzialaniaUnarnego p_dzialanie)
     {
-        m_wynik = p_dzialanie.wykonajDzialanie(m_wynik);
+        try
+        {
+            m_wynik = p_dzialanie.wykonajDzialanie(m_wynik);
+            m_aktualnyStan = new StanDzialanieUnarne(m_podstawowyStan, this);
+        } 
+        catch(Exception e)
+        {
+            m_pojawilSieWyjatek = true;
+        }
     }
     
-    public void wykonajDzialanie()
+    public void wykonajPoprzednieDzialanieBinarne()
     {
         try
         {
@@ -33,7 +44,7 @@ public class Processor
         } 
         catch(Exception e)
         {
-            wyjatekPojawilSie = true;
+            m_pojawilSieWyjatek = true;
         }
  
     }
@@ -48,13 +59,13 @@ public class Processor
         return m_zachowanyWynik;
     }
     
-    public String pobierzSymbolDzialaniaBinarnego()
+    public String pobierzSymbolAktualnegoDzialaniaBinarnego()
     {
         String l_returnValue = m_przyciskDzialania.toString();
-        if (wyjatekPojawilSie)
+        if (m_pojawilSieWyjatek)
         {
             l_returnValue =  "Wyjatek!";
-            wyjatekPojawilSie = false; 
+            m_pojawilSieWyjatek = false; 
             resetujProcessor();
         }
         return l_returnValue;
@@ -69,13 +80,14 @@ public class Processor
     {
         m_zachowanyWynik = m_wynik;
         m_wynik          = BigInteger.ZERO;
+        m_wprowadzonoWartosc = false;
     }
     
     public void resetujProcessor()
     {
         m_wynik             = BigInteger.ZERO;
         m_zachowanyWynik    = BigInteger.ZERO;
-        m_przyciskDzialania = new NullOperator();
+        m_przyciskDzialania = m_pusteDzialanie;
         resetujStan();
     }
     
@@ -88,10 +100,12 @@ public class Processor
     private IStan              m_aktualnyStan      = m_podstawowyStan;
     private BigInteger         m_wynik             = BigInteger.ZERO;
     private BigInteger         m_zachowanyWynik    = BigInteger.ZERO;
-    private IPrzyciskDzialaniaBinarnego m_przyciskDzialania = new NullOperator();
-    private boolean wyjatekPojawilSie = false;
+    private IPrzyciskDzialaniaBinarnego m_pusteDzialanie = new NullOperator();
+    private IPrzyciskDzialaniaBinarnego m_przyciskDzialania = m_pusteDzialanie;
+    private boolean m_pojawilSieWyjatek = false;
+    private boolean m_wprowadzonoWartosc = false;
     
-    private class NullOperator implements IPrzyciskDzialaniaBinarnego
+    public class NullOperator implements IPrzyciskDzialaniaBinarnego
     {
         @Override
         public BigInteger wykonajDzialanie(BigInteger p_lewyArgument, BigInteger p_prawyArgument)
