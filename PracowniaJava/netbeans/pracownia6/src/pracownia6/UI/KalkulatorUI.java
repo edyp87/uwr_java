@@ -4,6 +4,7 @@ package pracownia6.UI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.math.BigInteger;
@@ -15,7 +16,25 @@ public class KalkulatorUI implements IKalkulatorUI
     public KalkulatorUI()
     {
         utworzOknoGlowne();
+        
+        m_panelZRadioButtonami = new Panel();
+        m_panelZRadioButtonami.setLayout(new GridLayout(1,3));
+        Dimension asdas = new Dimension(250, 25);
+        m_panelZRadioButtonami.setMaximumSize(asdas);
+        m_panelZRadioButtonami.add(m_resultDec);
+        m_panelZRadioButtonami.add(m_resultBin);
+        m_panelZRadioButtonami.add(m_resultHex);
+        
+                GridBagConstraints l_constraints = new GridBagConstraints();
+        
+        l_constraints.fill = GridBagConstraints.HORIZONTAL;
+        l_constraints.gridx = 0;
+        l_constraints.gridy = 0;
+        m_panel.add(m_panelZRadioButtonami, l_constraints);
+        
         utworzPoleTekstowe();
+        
+        
         utworzPanelZPrzyciskami();
     }
     
@@ -27,8 +46,14 @@ public class KalkulatorUI implements IKalkulatorUI
     
     private void utworzOknoGlowne()
     {
+        m_layoutGlowny = new GridBagLayout();
+        
         m_panel = new Panel();
-        m_panel.setLayout(new BorderLayout());
+        m_panel.setLayout(new GridBagLayout());
+        //m_panel.setLayout(new GridLayout(3,1));//.setLayout(new BorderLayout());
+        
+
+        
         
         m_ramkaGlowna = new Frame();
         m_ramkaGlowna.add("Center", m_panel);
@@ -53,7 +78,15 @@ public class KalkulatorUI implements IKalkulatorUI
         m_poleTekstowePomocnicze = new TextField("0");
         m_poleTekstowePomocnicze.setEditable(false);
          
-        m_panel.add("North", m_panelZPolamiTekstowymi);
+        GridBagConstraints l_constraints = new GridBagConstraints();
+        
+        l_constraints.fill = GridBagConstraints.BOTH;
+       // l_constraints.weighty = 1.0;
+      //  l_constraints.weightx = 1.0;
+        l_constraints.gridx = 0;
+        l_constraints.gridy = 1;
+        
+        m_panel.add(m_panelZPolamiTekstowymi, l_constraints);
         m_panelZPolamiTekstowymi.add(m_poleTekstowePomocnicze);
         m_panelZPolamiTekstowymi.add(m_poleTekstoweZOperatorem);
         m_panelZPolamiTekstowymi.add(m_poleTekstoweGlowne);
@@ -70,7 +103,15 @@ public class KalkulatorUI implements IKalkulatorUI
         utworzWarstweLogicznaPrzyciskow();
         dodajPrzyciskiDoPanelu();
         
-        m_panel.add("Center", m_panelZPrzyciskami);
+                GridBagConstraints l_constraints = new GridBagConstraints();
+        
+        l_constraints.fill = GridBagConstraints.BOTH;
+                l_constraints.weighty = 1.0;
+        l_constraints.weightx = 1.0;
+        l_constraints.gridx = 0;
+        l_constraints.gridy = 2;
+        
+        m_panel.add(m_panelZPrzyciskami, l_constraints);
     }
     
     private void utworzPrzyciski()
@@ -151,7 +192,9 @@ public class KalkulatorUI implements IKalkulatorUI
         m_LogPrzycisk_zmianaZnaku_Listener = new PrzyciskListener(m_LogPrzycisk_zmianaZnaku);
         m_LogPrzycisk_usuwanie_Listener = new PrzyciskListener(m_LogPrzycisk_usuwanie);
         m_LogPrzycisk_C_Listener = new PrzyciskListener(m_LogPrzycisk_C);
-        
+        m_Dec_Listener = new ListenerZmianaPodstawy(m_resultDec, this);
+        m_Bin_Listener = new ListenerZmianaPodstawy(m_resultBin, this);
+        m_Hex_Listener = new ListenerZmianaPodstawy(m_resultHex, this);
                 
         m_przycisk_1.addActionListener(m_LogPrzycisk_1_Listener);
         m_przycisk_2.addActionListener(m_LogPrzycisk_2_Listener);
@@ -175,6 +218,10 @@ public class KalkulatorUI implements IKalkulatorUI
         m_zmianaZnaku.addActionListener(m_LogPrzycisk_zmianaZnaku_Listener);
         m_oblicz.addActionListener(m_LogPrzycisk_oblicz_Listener);
         m_C.addActionListener(m_LogPrzycisk_C_Listener);
+        m_resultDec.addItemListener(m_Dec_Listener);
+        m_resultBin.addItemListener(m_Bin_Listener);
+        m_resultHex.addItemListener(m_Hex_Listener);
+        
         
     }
     
@@ -212,13 +259,46 @@ public class KalkulatorUI implements IKalkulatorUI
         p_frame.setLocation(x, y);
     }
     
+    public void ustawPodstawe(String p_podstawa)
+    {
+       if(p_podstawa.equals("Bin"))
+       {
+           m_konwersja = new KonwertujNaBin();
+       }
+       else if(p_podstawa.equals("Hex"))
+       {
+           m_konwersja = new KonwertujNaHex();
+       }
+       else
+       {
+           m_konwersja = new KonwertujNaDec();
+       }
+    }
+   
+    public String konwertuj(BigInteger p_wartosc)
+    {
+        return m_konwersja.konwertuj(p_wartosc);
+    }
+    
+    public BigInteger pobierzWynik()
+    {
+        return m_kalkulator.pobierzWynik();
+    }
+    
+    public BigInteger pobierzZachowanyWynik()
+    {
+        return m_kalkulator.pobierzZachowanyWynik();
+    }
+    
     private Panel     m_panel;
+    private GridBagLayout     m_layoutGlowny;
     private Frame     m_ramkaGlowna;
-    private TextField m_poleTekstoweGlowne;
+    TextField m_poleTekstoweGlowne;
     private TextField m_poleTekstoweZOperatorem;
-    private TextField m_poleTekstowePomocnicze;
+    TextField m_poleTekstowePomocnicze;
     private Panel     m_panelZPolamiTekstowymi;
     private Panel     m_panelZPrzyciskami;
+    private Panel     m_panelZRadioButtonami;
     private Button    m_modulo    , m_dzielenie , m_mnozenie  , m_odejmowanie,
                       m_przycisk_7, m_przycisk_8, m_przycisk_9, m_dodawanie  ,
                       m_przycisk_4, m_przycisk_5, m_przycisk_6, m_symbolNewt ,
@@ -274,6 +354,15 @@ public class KalkulatorUI implements IKalkulatorUI
     private ActionListener m_LogPrzycisk_usuwanie_Listener;
     private ActionListener m_LogPrzycisk_C_Listener;
     
+    private ItemListener m_Dec_Listener, m_Bin_Listener, m_Hex_Listener;
+    
+    CheckboxGroup IngGrp = new CheckboxGroup();
+    Checkbox m_resultDec = new Checkbox("Dec", IngGrp, true);
+    Checkbox m_resultBin = new Checkbox("Bin", IngGrp, false);
+    Checkbox m_resultHex = new Checkbox("Hex", IngGrp, false);
+    
+    IKonwertuj m_konwersja = new KonwertujNaDec();
+    
     class PrzyciskListener implements ActionListener
     {
         PrzyciskListener(IPrzycisk p_przycisk)
@@ -285,9 +374,9 @@ public class KalkulatorUI implements IKalkulatorUI
         public void actionPerformed(ActionEvent p_event)
         {
             m_przycisk.wcisnij();
-            m_poleTekstoweGlowne.setText("" + m_kalkulator.pobierzWynik());
+            m_poleTekstoweGlowne.setText("" + konwertuj(m_kalkulator.pobierzWynik())/*.toString(2)*/);
             m_poleTekstoweZOperatorem.setText("" + m_kalkulator.pobierzSymbolDzialaniaBinarnego());
-            m_poleTekstowePomocnicze.setText("" + m_kalkulator.pobierzZachowanyWynik());
+            m_poleTekstowePomocnicze.setText("" + konwertuj(m_kalkulator.pobierzZachowanyWynik()));
         }
         IPrzycisk m_przycisk = null;
     }
