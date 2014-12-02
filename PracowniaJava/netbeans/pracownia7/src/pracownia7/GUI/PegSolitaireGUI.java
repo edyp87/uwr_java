@@ -40,29 +40,28 @@ public class PegSolitaireGUI
     
     private void createBoard()
     {
-        Integer[][] l_boardRepresentation = m_board.getBoard();
         m_boardPanel = new JPanel();
-        m_boardPanel.setLayout(new GridLayout(7, 7));
+        m_boardPanel.setLayout(new GridLayout(m_board.getHeight(), m_board.getWeight()));
         
-        for (int i = 0; i < 7; ++i)
+        for (int l_row = 0; l_row < m_board.getHeight(); ++l_row)
         {
-            for (int j = 0; j < 7; ++j)
+            for (int l_column = 0; l_column < m_board.getWeight(); ++l_column)
             {
-                if(l_boardRepresentation[i][j] == 1)
+                if(m_board.isPegOnThisPosition(l_row, l_column))
                 {
-                    Peg l_peg = new Peg("peg-green.png", i, j);
+                    Peg l_peg = new Peg("peg-green.png", l_row, l_column);
                     m_boardPanel.add(l_peg);
                     l_peg.addActionListener(new PegListener(this));
                     
                 }
-                else if (!m_board.isPegPositionOnBoard(i, j))
+                else if (!m_board.isPegPositionOnBoard(l_row, l_column))
                 {
-                    Peg l_peg = new Peg("peg-disabled.png", i, j);
+                    Peg l_peg = new Peg("peg-disabled.png", l_row, l_column);
                     m_boardPanel.add(l_peg);
                 }
                 else
                 {
-                    Peg l_peg = new Peg("peg-grey.png", i, j);
+                    Peg l_peg = new Peg("peg-grey.png", l_row, l_column);
                     m_boardPanel.add(l_peg);
                     l_peg.addActionListener(new PegListener(this));
                 }
@@ -73,20 +72,28 @@ public class PegSolitaireGUI
     
     public void repaintAll()
     {
-        for (int i = 0; i < 49; ++i)
+        for (int l_peg = 0; l_peg < m_board.getHeight() * m_board.getWeight(); ++l_peg)
         {
-            repaintPeg(i);     
+            repaintPeg(l_peg);     
         } 
     }
     
     private void repaintPeg(int p_componentNumber)
     {
-        Integer[][] l_boardRepresentation = m_board.getBoard();
-        if(l_boardRepresentation[p_componentNumber / 7][p_componentNumber % 7] == 1)
+        if(m_state.isClicked(p_componentNumber / m_board.getHeight(),
+                             p_componentNumber % m_board.getWeight()) 
+           && m_board.isPegOnThisPosition(p_componentNumber / m_board.getHeight(),
+                                          p_componentNumber % m_board.getWeight()))
+        {
+            ((Peg)m_boardPanel.getComponent(p_componentNumber)).changeImage("peg-chosen.png");
+        }
+        else if(m_board.isPegOnThisPosition(p_componentNumber / m_board.getHeight(),
+                                            p_componentNumber % m_board.getWeight()))
         {
             ((Peg)m_boardPanel.getComponent(p_componentNumber)).changeImage("peg-green.png");           
         }
-        else if (!m_board.isPegPositionOnBoard(p_componentNumber / 7, p_componentNumber % 7))
+        else if (!m_board.isPegPositionOnBoard(p_componentNumber / m_board.getHeight(),
+                                               p_componentNumber % m_board.getWeight()))
         {
             ((Peg)m_boardPanel.getComponent(p_componentNumber)).changeImage("peg-disabled.png");
         }
@@ -103,18 +110,18 @@ public class PegSolitaireGUI
         p_menuBar.add(l_menu);
     }
 
-    private void repaintNeigbors(int p_row, int p_column)
+    private void repaintNeighbors(int p_row, int p_column)
     {
         repaintPeg(p_row*7 + p_column);
-        if (p_row-1 > 0) repaintPeg((p_row-1)*7 + p_column);
-        if (p_row-2 > 0) repaintPeg((p_row-2)*7 + p_column);
-        if (p_row+1 < 7) repaintPeg((p_row+1)*7 + p_column);
-        if (p_row+2 < 7) repaintPeg((p_row+2)*7 + p_column);
+        if (p_row-1 >= 0) repaintPeg((p_row-1)*7 + p_column);
+        if (p_row-2 >= 0) repaintPeg((p_row-2)*7 + p_column);
+        if (p_row+1 < 7)  repaintPeg((p_row+1)*7 + p_column);
+        if (p_row+2 < 7)  repaintPeg((p_row+2)*7 + p_column);
         
-        if (p_column-1 > 0) repaintPeg((p_row)*7 + p_column-1);
-        if (p_column-2 > 0) repaintPeg((p_row)*7 + p_column-2);
-        if (p_column+1 < 7) repaintPeg((p_row)*7 + p_column+1);
-        if (p_column+2 < 7) repaintPeg((p_row)*7 + p_column+2);
+        if (p_column-1 >= 0) repaintPeg((p_row)*7 + p_column-1);
+        if (p_column-2 >= 0) repaintPeg((p_row)*7 + p_column-2);
+        if (p_column+1 < 7)  repaintPeg((p_row)*7 + p_column+1);
+        if (p_column+2 < 7)  repaintPeg((p_row)*7 + p_column+2);
     }
     
     private class PegListener implements ActionListener
@@ -127,8 +134,14 @@ public class PegSolitaireGUI
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            
+            int p_clickedRow = m_state.getClickedRow();
+            int p_clickedColumn = m_state.getClickedColumn();
+            
             m_state.click(((Peg)e.getSource()).getRow(), ((Peg)e.getSource()).getColumn());
-            m_gui.repaintNeigbors(((Peg)e.getSource()).getRow(), ((Peg)e.getSource()).getColumn());
+            m_gui.repaintNeighbors(((Peg)e.getSource()).getRow(), ((Peg)e.getSource()).getColumn());
+            
+            m_gui.repaintPeg(p_clickedRow * 7 + p_clickedColumn);
         }
         PegSolitaireGUI m_gui;
     }

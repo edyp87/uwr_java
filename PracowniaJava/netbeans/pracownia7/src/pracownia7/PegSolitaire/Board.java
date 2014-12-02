@@ -101,7 +101,6 @@ public class Board
             m_board[l_row][l_column] = 0;
             m_board[l_row+1][l_column] = 0;
             m_board[l_row+2][l_column] = 1;
-            //printBoard(); System.out.println();
             return true;
         }
         return false;
@@ -178,7 +177,7 @@ public class Board
                canMoveUp   (l_row, l_column);
     }
     
-    private boolean isPegOnThisPosition(int l_row, int l_column)
+    public boolean isPegOnThisPosition(int l_row, int l_column)
     {
          return m_board[l_row][l_column].equals(new Integer(1));
     }
@@ -231,6 +230,17 @@ public class Board
     {
         return m_numberOfPegs;
     }
+    
+    public int getHeight()
+    {
+        return c_rows;
+    }
+    
+    public int getWeight()
+    {
+        return c_columns;
+    }
+            
     
     
     private final int c_rows    = 7;

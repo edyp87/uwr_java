@@ -9,21 +9,31 @@ public class GuiState
         m_board = p_board;
     }
     
-    public void click(int p_row, int p_column)
+    public boolean click(int p_row, int p_column)
     {
         System.out.println("CLICK!" + p_row + " " + p_column + " " + isClicked() + " " + isMoveValid(p_row, p_column));
         if (isClicked() && isMoveValid(p_row, p_column))
         {
-            System.out.println("isClicked() && isMoveValid(p_row, p_column");
-            System.out.println("MOVE " + moveInDirection(p_row, p_column));
-            
             unClick();
+            if(!moveInDirection(p_row, p_column))
+                 setClicked(p_row, p_column);
+            return true;
         }
         else
         {
-            System.out.println("not isClicked() && isMoveValid(p_row, p_column");
             setClicked(p_row, p_column);
+            return false;
         }
+    }
+    
+    public int getClickedRow()
+    {
+        return m_row;
+    }
+    
+    public int getClickedColumn()
+    {
+        return m_column;
     }
     
     private boolean isMoveValid(int p_row, int p_column)
@@ -57,6 +67,12 @@ public class GuiState
     private boolean isClicked()
     {
         return m_clicked;
+    }
+    
+    boolean isClicked(int p_row, int p_column)
+    {
+        System.out.println("IS CLICKED! " + (isClicked() && p_row == m_row && p_column == m_column));
+        return isClicked() && p_row == m_row && p_column == m_column;
     }
     
     private void unClick()
