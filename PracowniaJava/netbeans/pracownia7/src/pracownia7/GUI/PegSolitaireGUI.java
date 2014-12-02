@@ -68,30 +68,32 @@ public class PegSolitaireGUI
                 }
             }
         }
-        //((Peg)l_boardPanel.getComponent(0)).changeImage("peg-green.png");
         m_mainFrame.add(m_boardPanel);
     }
     
-    public void repaint()
+    public void repaintAll()
     {
-        Integer[][] l_boardRepresentation = m_board.getBoard();
         for (int i = 0; i < 49; ++i)
         {
-                if(l_boardRepresentation[i / 7][i % 7] == 1)
-                {
-                    ((Peg)m_boardPanel.getComponent(i)).changeImage("peg-green.png");
-                    
-                }
-                else if (!m_board.isPegPositionOnBoard(i / 7, i % 7))
-                {
-                    ((Peg)m_boardPanel.getComponent(i)).changeImage("peg-disabled.png");
-                }
-                else
-                {
-                    ((Peg)m_boardPanel.getComponent(i)).changeImage("peg-grey.png");
-                }
-            
+            repaintPeg(i);     
         } 
+    }
+    
+    private void repaintPeg(int p_componentNumber)
+    {
+        Integer[][] l_boardRepresentation = m_board.getBoard();
+        if(l_boardRepresentation[p_componentNumber / 7][p_componentNumber % 7] == 1)
+        {
+            ((Peg)m_boardPanel.getComponent(p_componentNumber)).changeImage("peg-green.png");           
+        }
+        else if (!m_board.isPegPositionOnBoard(p_componentNumber / 7, p_componentNumber % 7))
+        {
+            ((Peg)m_boardPanel.getComponent(p_componentNumber)).changeImage("peg-disabled.png");
+        }
+        else
+        {
+            ((Peg)m_boardPanel.getComponent(p_componentNumber)).changeImage("peg-grey.png");
+        }
     }
     
     private void addMenu(JMenuBar p_menuBar, String p_menuName, int p_keyStroke)
@@ -99,6 +101,20 @@ public class PegSolitaireGUI
         JMenu l_menu = new JMenu(p_menuName);
         l_menu.setMnemonic(p_keyStroke);
         p_menuBar.add(l_menu);
+    }
+
+    private void repaintNeigbors(int p_row, int p_column)
+    {
+        repaintPeg(p_row*7 + p_column);
+        if (p_row-1 > 0) repaintPeg((p_row-1)*7 + p_column);
+        if (p_row-2 > 0) repaintPeg((p_row-2)*7 + p_column);
+        if (p_row+1 < 7) repaintPeg((p_row+1)*7 + p_column);
+        if (p_row+2 < 7) repaintPeg((p_row+2)*7 + p_column);
+        
+        if (p_column-1 > 0) repaintPeg((p_row)*7 + p_column-1);
+        if (p_column-2 > 0) repaintPeg((p_row)*7 + p_column-2);
+        if (p_column+1 < 7) repaintPeg((p_row)*7 + p_column+1);
+        if (p_column+2 < 7) repaintPeg((p_row)*7 + p_column+2);
     }
     
     private class PegListener implements ActionListener
@@ -112,12 +128,8 @@ public class PegSolitaireGUI
         public void actionPerformed(ActionEvent e)
         {
             m_state.click(((Peg)e.getSource()).getRow(), ((Peg)e.getSource()).getColumn());
-            //((Peg)e.getSource()).changeImage();
-            m_gui.repaint();
-            
-            
+            m_gui.repaintNeigbors(((Peg)e.getSource()).getRow(), ((Peg)e.getSource()).getColumn());
         }
-        
         PegSolitaireGUI m_gui;
     }
     
