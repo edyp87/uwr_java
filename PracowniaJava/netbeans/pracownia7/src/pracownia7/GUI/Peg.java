@@ -14,13 +14,15 @@ import javax.swing.JPanel;
 
 public class Peg extends JButton
 {
-    public Peg(String p_pegImageFileName)
+    public Peg(String p_pegImageFileName, int p_row, int p_column)
     {
+        m_row = p_row;
+        m_column = p_column;
         m_pegImageFileName = p_pegImageFileName;
-         this.setContentAreaFilled(false);
-            setBorderPainted(false);
-            setFocusPainted(false);
-            setOpaque(false);
+        setContentAreaFilled(false);
+        setBorderPainted(false);
+        setFocusPainted(false);
+        setOpaque(false);
     }
     
     public void changeImage(String p_pegImageFileName)
@@ -29,6 +31,29 @@ public class Peg extends JButton
         repaint();
     }
     
+    public void changeImage()
+    {
+        if("peg-grey.png" == m_pegImageFileName)
+        {
+            m_pegImageFileName = "peg-green.png";
+        }
+        else
+        {
+            m_pegImageFileName = "peg-grey.png";
+        }
+        repaint();
+    }
+    
+    public int getRow()
+    {
+        return m_row;
+    }
+    
+    public int getColumn()
+    {
+        return m_column;
+    }
+        
     @Override
     protected void paintComponent(Graphics p_graphics)
     {
@@ -45,5 +70,6 @@ public class Peg extends JButton
         }
     }
     
+    int m_row, m_column;
     String m_pegImageFileName;
 }

@@ -56,6 +56,7 @@ public class Board
             m_board[l_row][l_column] = 0;
             m_board[l_row][l_column-1] = 0;
             m_board[l_row][l_column-2] = 1;
+            printBoard(); System.out.println();
             return true;
         }
         return false;
@@ -70,6 +71,7 @@ public class Board
             m_board[l_row][l_column] = 0;
             m_board[l_row][l_column+1] = 0;
             m_board[l_row][l_column+2] = 1;
+            printBoard(); System.out.println();
             return true;
         }
         return false;
@@ -84,6 +86,7 @@ public class Board
             m_board[l_row][l_column] = 0;
             m_board[l_row-1][l_column] = 0;
             m_board[l_row-2][l_column] = 1;
+            printBoard(); System.out.println();
             return true;
         }
         return false;
@@ -98,6 +101,7 @@ public class Board
             m_board[l_row][l_column] = 0;
             m_board[l_row+1][l_column] = 0;
             m_board[l_row+2][l_column] = 1;
+            printBoard(); System.out.println();
             return true;
         }
         return false;

@@ -11,13 +11,17 @@ public class GuiState
     
     public void click(int p_row, int p_column)
     {
+        System.out.println("CLICK!" + p_row + " " + p_column + " " + isClicked() + " " + isMoveValid(p_row, p_column));
         if (isClicked() && isMoveValid(p_row, p_column))
         {
-            moveInDirection(p_row, p_column);
+            System.out.println("isClicked() && isMoveValid(p_row, p_column");
+            System.out.println("MOVE " + moveInDirection(p_row, p_column));
+            
             unClick();
         }
         else
         {
+            System.out.println("not isClicked() && isMoveValid(p_row, p_column");
             setClicked(p_row, p_column);
         }
     }
@@ -28,10 +32,11 @@ public class GuiState
         {
             return (p_column == m_column-2 || p_column == m_column+2 );
         }
-        else
+        else if(p_column == m_column)
         {
-            return (p_row > m_row-2 || p_row > m_row+2);
+            return (p_row == m_row-2 || p_row == m_row+2);
         }
+        return false;
     }
     
     private boolean moveInDirection(int p_row, int p_column)
@@ -39,13 +44,14 @@ public class GuiState
         if (p_row == m_row)
         {
             return (p_column > m_column) ? 
-                m_board.moveRight(p_row, p_column) : m_board.moveLeft(p_row, p_column);
+                m_board.moveRight(m_row, m_column) : m_board.moveLeft(m_row, m_column);
         }
-        else
+        else if (p_column == m_column)
         {
             return (p_row > m_row) ? 
-                m_board.moveDown(p_row, p_column) : m_board.moveUp(p_row, p_column);
+                m_board.moveDown(m_row, m_column) : m_board.moveUp(m_row, m_column);
         }
+        return false;
     }
     
     private boolean isClicked()
