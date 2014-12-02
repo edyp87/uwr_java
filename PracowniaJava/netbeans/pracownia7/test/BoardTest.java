@@ -119,11 +119,87 @@ public class BoardTest {
         assertEquals(m_board.moveDown(4, 3), false); 
     }
     
-    Board m_board;
+    @Test
+    public void canRedoLastOperations()
+    {
+        Integer[][] l_board = new Integer[][]
+        {
+            {0, 0, 1, 1, 1, 0, 0}, 
+            {0, 0, 1, 1, 1, 0, 0},
+            {1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 0, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1},
+            {0, 0, 1, 1, 1, 0, 0},
+            {0, 0, 1, 1, 1, 0, 0} 
+        };
+        Assert.assertArrayEquals(m_board.getBoard(), l_board);
+        assertEquals(m_board.moveDown(1, 3), true);
+        l_board = new Integer[][]
+        {
+            {0, 0, 1, 1, 1, 0, 0}, 
+            {0, 0, 1, 0, 1, 0, 0},
+            {1, 1, 1, 0, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1},
+            {0, 0, 1, 1, 1, 0, 0},
+            {0, 0, 1, 1, 1, 0, 0} 
+        };
+        Assert.assertArrayEquals(m_board.getBoard(), l_board);
+        m_board.revertLastMove();
+        l_board = new Integer[][]
+        {
+            {0, 0, 1, 1, 1, 0, 0}, 
+            {0, 0, 1, 1, 1, 0, 0},
+            {1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 0, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1},
+            {0, 0, 1, 1, 1, 0, 0},
+            {0, 0, 1, 1, 1, 0, 0} 
+        };
+        Assert.assertArrayEquals(m_board.getBoard(), l_board);
+        m_board.revertLastMove();
+        m_board.revertLastMove();
+        m_board.revertLastMove();
+        Assert.assertArrayEquals(m_board.getBoard(), l_board);
+    }
     
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void checkIfIsAnyMovePossible()
+    {
+        Integer[][] l_board = new Integer[][]
+        {
+            {0, 0, 1, 1, 1, 0, 0}, 
+            {0, 0, 1, 1, 1, 0, 0},
+            {1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 0, 1, 1, 1},
+            {1, 1, 1, 1, 1, 1, 1},
+            {0, 0, 1, 1, 1, 0, 0},
+            {0, 0, 1, 1, 1, 0, 0} 
+        };
+        Assert.assertArrayEquals(m_board.getBoard(), l_board);
+        assertEquals(m_board.isAnyMovePossible(), true);
+        assertEquals(m_board.numberfPegs(), 32);
+        
+        assertEquals(m_board.moveUp(5,3), true);    
+            assertEquals(m_board.isAnyMovePossible(), true);
+            assertEquals(m_board.numberfPegs(), 31);
+        assertEquals(m_board.moveDown(2,3), true);  
+            assertEquals(m_board.numberfPegs(), 30);
+            assertEquals(m_board.isAnyMovePossible(), true);
+        assertEquals(m_board.moveRight(3,1), true); 
+            assertEquals(m_board.numberfPegs(), 29);
+            assertEquals(m_board.isAnyMovePossible(), true);
+        assertEquals(m_board.moveLeft(3,4), true);  
+            assertEquals(m_board.numberfPegs(), 28);
+            assertEquals(m_board.isAnyMovePossible(), true);
+        assertEquals(m_board.moveDown(0,3), true);  
+            assertEquals(m_board.numberfPegs(), 27);
+            assertEquals(m_board.isAnyMovePossible(), true);
+        assertEquals(m_board.moveLeft(3,6), true);
+            assertEquals(m_board.numberfPegs(), 26);
+        
+        assertEquals(m_board.isAnyMovePossible(), false);
+    }
+    
+    Board m_board;
 }

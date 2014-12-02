@@ -5,6 +5,7 @@
  */
 package pracownia7;
 
+import pracownia7.GUI.PegSolitaireGUI;
 import pracownia7.PegSolitaire.Board;
 
 /**
@@ -21,6 +22,8 @@ public class Pracownia7 {
         l_board.moveLeft(3, 5);
         l_board.revertLastMove();
         l_board.printBoard();
+        
+        (new PegSolitaireGUI()).initialize();
     }
     
 }

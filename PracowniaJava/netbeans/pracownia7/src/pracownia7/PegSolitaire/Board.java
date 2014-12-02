@@ -49,12 +49,10 @@ public class Board
     
     public boolean moveLeft(int l_row, int l_column)
     {
-        if (isPegPositionOnBoard(l_row, l_column-2)
-         && isPegOnThisPosition(l_row, l_column  )
-         && isPegOnThisPosition(l_row, l_column-1)
-        && !isPegOnThisPosition(l_row, l_column-2))
+        if (canMoveLeft(l_row, l_column))
         {
             rememberMove();
+            m_numberOfPegs--;
             m_board[l_row][l_column] = 0;
             m_board[l_row][l_column-1] = 0;
             m_board[l_row][l_column-2] = 1;
@@ -65,12 +63,10 @@ public class Board
  
     public boolean moveRight(int l_row, int l_column)
     {
-        if (isPegPositionOnBoard(l_row, l_column+2)
-         && isPegOnThisPosition(l_row, l_column  )
-         && isPegOnThisPosition(l_row, l_column+1)
-        && !isPegOnThisPosition(l_row, l_column+2))
+        if (canMoveRight(l_row, l_column))
         {
             rememberMove();
+            m_numberOfPegs--;
             m_board[l_row][l_column] = 0;
             m_board[l_row][l_column+1] = 0;
             m_board[l_row][l_column+2] = 1;
@@ -81,12 +77,10 @@ public class Board
     
     public boolean moveUp(int l_row, int l_column)
     {
-        if (isPegPositionOnBoard(l_row-2, l_column)
-         && isPegOnThisPosition(l_row, l_column  )
-         && isPegOnThisPosition(l_row-1, l_column)
-        && !isPegOnThisPosition(l_row-2, l_column))
+        if (canMoveUp(l_row, l_column))
         {
             rememberMove();
+            m_numberOfPegs--;
             m_board[l_row][l_column] = 0;
             m_board[l_row-1][l_column] = 0;
             m_board[l_row-2][l_column] = 1;
@@ -97,12 +91,10 @@ public class Board
     
     public boolean moveDown(int l_row, int l_column)
     {
-        if (isPegPositionOnBoard(l_row+2, l_column)
-         && isPegOnThisPosition(l_row, l_column  )
-         && isPegOnThisPosition(l_row+1, l_column)
-        && !isPegOnThisPosition(l_row+2, l_column))
+        if (canMoveDown(l_row, l_column))
         {
             rememberMove();
+            m_numberOfPegs--;
             m_board[l_row][l_column] = 0;
             m_board[l_row+1][l_column] = 0;
             m_board[l_row+2][l_column] = 1;
@@ -111,12 +103,83 @@ public class Board
         return false;
     }
     
+    public boolean isAnyMovePossible()
+    {
+        for (int l_row = 0; l_row < c_rows; ++l_row)
+        {
+            for (int l_column = 0; l_column < c_columns; ++l_column)
+            {
+                if (isMoveInAnyDirectionPossible(l_row, l_column))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    private boolean canMoveDown(int l_row, int l_column)
+    {
+        if (isPegPositionOnBoard(l_row+2, l_column)
+            && isPegOnThisPosition(l_row, l_column  )
+            && isPegOnThisPosition(l_row+1, l_column)
+            && !isPegOnThisPosition(l_row+2, l_column))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean canMoveUp(int l_row, int l_column)
+    {
+        if (isPegPositionOnBoard(l_row-2, l_column)
+            && isPegOnThisPosition(l_row, l_column  )
+            && isPegOnThisPosition(l_row-1, l_column)
+            && !isPegOnThisPosition(l_row-2, l_column))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean canMoveLeft(int l_row, int l_column)
+    {
+        if (isPegPositionOnBoard(l_row, l_column-2)
+            && isPegOnThisPosition(l_row, l_column  )
+            && isPegOnThisPosition(l_row, l_column-1)
+            && !isPegOnThisPosition(l_row, l_column-2))
+        {
+            return true;
+        }
+        return false;
+    } 
+    
+    private boolean canMoveRight(int l_row, int l_column)
+    {
+        if (isPegPositionOnBoard(l_row, l_column+2)
+            && isPegOnThisPosition(l_row, l_column  )
+            && isPegOnThisPosition(l_row, l_column+1)
+            && !isPegOnThisPosition(l_row, l_column+2))
+        {
+            return true;
+        }
+        return false;
+    } 
+        
+    private boolean isMoveInAnyDirectionPossible(int l_row, int l_column)
+    {
+        return canMoveRight(l_row, l_column) || 
+               canMoveLeft (l_row, l_column) ||
+               canMoveDown (l_row, l_column) ||
+               canMoveUp   (l_row, l_column);
+    }
+    
     private boolean isPegOnThisPosition(int l_row, int l_column)
     {
          return m_board[l_row][l_column].equals(new Integer(1));
     }
     
-    private boolean isPegPositionOnBoard(int l_row, int l_column)
+    public boolean isPegPositionOnBoard(int l_row, int l_column)
     {
         if (!(l_row < 2 && (l_column < 2 || l_column > 4))
             && !(l_row > 4 && (l_column < 2 || l_column > 4))
@@ -158,12 +221,17 @@ public class Board
             m_history.remove(m_history.get(m_history.size()-1));
             m_board = m_history.get(m_history.size()-1);
         }
-        
+    }
+    
+    public int numberfPegs()
+    {
+        return m_numberOfPegs;
     }
     
     
     private final int c_rows    = 7;
     private final int c_columns = c_rows;
+    private int m_numberOfPegs  = 32;
     private ArrayList<Integer[][]> m_history = new ArrayList<Integer[][]>() ;
     private Integer[][] m_board = new Integer[c_rows][c_columns];
 }
