@@ -2,9 +2,9 @@ package pracownia7.PegSolitaire;
 
 import java.util.ArrayList;
 
-public class Board
+public class BoardBritish implements IBoard
 {
-    public Board()
+    public BoardBritish()
     {
         initBoardWithDefaultSetting();
         rememberMove();
@@ -56,7 +56,6 @@ public class Board
             m_board[l_row][l_column] = 0;
             m_board[l_row][l_column-1] = 0;
             m_board[l_row][l_column-2] = 1;
-            //printBoard(); System.out.println();
             return true;
         }
         return false;
@@ -71,7 +70,6 @@ public class Board
             m_board[l_row][l_column] = 0;
             m_board[l_row][l_column+1] = 0;
             m_board[l_row][l_column+2] = 1;
-            //printBoard(); System.out.println();
             return true;
         }
         return false;
@@ -86,7 +84,6 @@ public class Board
             m_board[l_row][l_column] = 0;
             m_board[l_row-1][l_column] = 0;
             m_board[l_row-2][l_column] = 1;
-           //printBoard(); System.out.println();
             return true;
         }
         return false;
@@ -119,6 +116,14 @@ public class Board
             }
         }
         return false;
+    }
+    
+    public void resetBoard()
+    {
+         m_history = new ArrayList<Integer[][]>() ;
+         m_board = new Integer[c_rows][c_columns];
+         initBoardWithDefaultSetting();
+         rememberMove();
     }
     
     private boolean canMoveDown(int l_row, int l_column)

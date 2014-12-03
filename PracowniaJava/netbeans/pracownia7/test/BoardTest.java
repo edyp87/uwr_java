@@ -24,7 +24,7 @@ public class BoardTest {
     @Before
     public void setUp()
     {
-        m_board = new Board();
+        m_board = new BoardBritish();
     }
     
     @After
@@ -201,5 +201,5 @@ public class BoardTest {
         assertEquals(m_board.isAnyMovePossible(), false);
     }
     
-    Board m_board;
+    IBoard m_board;
 }

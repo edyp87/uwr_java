@@ -1,10 +1,10 @@
 package pracownia7.GUI;
 
-import pracownia7.PegSolitaire.Board;
+import pracownia7.PegSolitaire.IBoard;
 
 public class GuiState
 {
-    public GuiState(Board p_board)
+    public GuiState(IBoard p_board)
     {
         m_board = p_board;
     }
@@ -16,7 +16,14 @@ public class GuiState
         {
             unClick();
             if(!moveInDirection(p_row, p_column))
-                 setClicked(p_row, p_column);
+            {
+                setClicked(p_row, p_column);
+            }
+            else
+            {
+                ++m_moves;
+            }
+            System.out.println("MOVES: " + m_moves);
             return true;
         }
         else
@@ -34,6 +41,50 @@ public class GuiState
     public int getClickedColumn()
     {
         return m_column;
+    }
+    
+    public int getMoves()
+    {
+        return m_moves;
+    }
+    
+    public void resetBoard()
+    {
+        m_board.resetBoard();
+        m_clicked = false;
+        m_gameOver = false;
+        m_row         = 0;
+        m_column      = 0;
+        m_moves       = 0;
+    }
+    
+        public void resetBoard(IBoard p_board)
+    {
+        m_board = p_board;
+        m_clicked = false;
+        m_gameOver = false;
+        m_row         = 0;
+        m_column      = 0;
+        m_moves       = 0;
+    }
+    
+    public boolean isAnyMovePossible()
+    {
+        if(m_board.isAnyMovePossible())
+        {
+            m_gameOver = false;
+            return true;
+        }
+        else
+        {
+            m_gameOver = true;
+            return false;
+        }
+    }
+    
+    public boolean isGameOver()
+    {
+        return m_gameOver;
     }
     
     private boolean isMoveValid(int p_row, int p_column)
@@ -64,14 +115,14 @@ public class GuiState
         return false;
     }
     
-    private boolean isClicked()
+    public boolean isClicked()
     {
         return m_clicked;
     }
     
     boolean isClicked(int p_row, int p_column)
     {
-        System.out.println("IS CLICKED! " + (isClicked() && p_row == m_row && p_column == m_column));
+       // System.out.println("IS CLICKED! " + (isClicked() && p_row == m_row && p_column == m_column));
         return isClicked() && p_row == m_row && p_column == m_column;
     }
     
@@ -87,8 +138,10 @@ public class GuiState
         m_column = p_column;
     }
     
-    private Board m_board;
-    private boolean m_clicked = false;
-    private int m_row         = 0;
-    private int m_column      = 0;
+    private IBoard m_board;
+    private boolean m_clicked  = false;
+    private boolean m_gameOver = false;
+    private int m_row          = 0;
+    private int m_column       = 0;
+    private int m_moves        = 0;
 }
