@@ -38,6 +38,34 @@ public class PegSolitaireGUI
         initialize();
     }
     
+    public void repaintAll()
+    {
+        for (int l_peg = 0; l_peg < m_board.getHeight() * m_board.getWeight(); ++l_peg)
+        {
+            repaintPeg(l_peg);     
+        } 
+        m_scoreLabel.setText("Wykonano ruchów: " + m_state.getMoves());
+    }
+    
+    public void changeGame(IBoard p_game)
+    {
+        m_board = p_game;
+        repaintAll();
+        m_state.resetBoard(p_game);
+    }
+    
+    private void initialize()
+    {
+        m_board = new BoardBritish();
+        m_state = new GuiState(m_board);
+        createMainFrame();
+        createMenuBar();
+        createSplitPanel();
+        createBoard();
+        createScoreLabel();
+        m_mainFrame.setVisible(true);  
+    }
+    
     private void createMainFrame()
     {
         m_mainFrame = new JFrame("Peg Solitaire");
@@ -120,27 +148,6 @@ public class PegSolitaireGUI
         m_mainFrame.add(m_splitPanel, BoxLayout.X_AXIS);
     }
     
-    public void repaintAll()
-    {
-        for (int l_peg = 0; l_peg < m_board.getHeight() * m_board.getWeight(); ++l_peg)
-        {
-            repaintPeg(l_peg);     
-        } 
-        m_scoreLabel.setText("Wykonano ruchów: " + m_state.getMoves());
-    }
-    
-    private void initialize()
-    {
-        m_board = new BoardBritish();
-        m_state = new GuiState(m_board);
-        createMainFrame();
-        createMenuBar();
-        createSplitPanel();
-        createBoard();
-        createScoreLabel();
-        m_mainFrame.setVisible(true);  
-    }
-    
     public void repaintPeg(int p_componentNumber)
     {
         if(m_state.isClicked(p_componentNumber / m_board.getHeight(),
@@ -164,13 +171,6 @@ public class PegSolitaireGUI
         {
             ((Peg)m_boardPanel.getComponent(p_componentNumber)).changeImage("peg-grey.png");
         }
-    }
-    
-    public void injectGame(IBoard p_game)
-    {
-        m_board = p_game;
-        repaintAll();
-        m_state.resetBoard(p_game);
     }
     
     private JMenu addMenu(JMenuBar p_menuBar, String p_menuName, int p_keyStroke)

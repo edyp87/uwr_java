@@ -11,7 +11,6 @@ public class GuiState
     
     public boolean click(int p_row, int p_column)
     {
-        System.out.println("CLICK!" + p_row + " " + p_column + " " + isClicked() + " " + isMoveValid(p_row, p_column));
         if (isClicked() && isMoveValid(p_row, p_column))
         {
             unClick();
@@ -23,7 +22,6 @@ public class GuiState
             {
                 ++m_moves;
             }
-            System.out.println("MOVES: " + m_moves);
             return true;
         }
         else

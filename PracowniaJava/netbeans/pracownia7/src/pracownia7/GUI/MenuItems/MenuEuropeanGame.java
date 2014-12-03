@@ -16,7 +16,7 @@ public class MenuEuropeanGame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        m_gui.injectGame(new BoardEuropean());
+        m_gui.changeGame(new BoardEuropean());
     }
     
     PegSolitaireGUI m_gui;
