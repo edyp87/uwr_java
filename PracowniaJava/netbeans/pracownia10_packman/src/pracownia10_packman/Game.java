@@ -5,6 +5,8 @@
  */
 package pracownia10_packman;
 
+import Sprites.Sprite;
+import Sprites.Sprites;
 import Sprites.SpriteSheetLoader;
 import java.awt.BorderLayout;
 import java.awt.BufferCapabilities;
@@ -50,20 +52,19 @@ public class Game extends Canvas implements Runnable
     
     public void init()
     {
-        BufferedImage l_sheet = null;
-        try
+        m_loader = new SpriteSheetLoader();
+        m_screen = new Screen(GAME_WIDTH, GAME_HEIGHT);
+        
+        
+        for (int y = 0; y < 14; ++y)
         {
-            System.out.println(Game.class.getResource("/res/terrain.png"));
-            l_sheet = ImageIO.read(Game.class.getResource("/res/terrain.png"));
-        } 
-        catch(IOException e)
-        {
-            e.printStackTrace();
+            for (int x = 0; x < 25; ++x)
+            {
+                Sprite l_sprite = Sprites.m_terrain[4][0];
+                m_screen.renderSprite(x * 16, y * 16, l_sprite);
+            }
+
         }
-        
-        m_loader = new SpriteSheetLoader(l_sheet);
-        m_screen = new Screen(GAME_WIDTH, GAME_HEIGHT, m_loader);
-        
     }
     
     private void start()
@@ -83,10 +84,10 @@ public class Game extends Canvas implements Runnable
     
     public void tick()
     {
-//        ++m_tickCount;
-        int l_xCenter = GAME_WIDTH / 2 - 8;
-        int l_yCenter = GAME_HEIGHT / 2 - 8;
-        m_screen.render(l_xCenter, l_yCenter, 0, 16, 16);
+//        int l_xCenter = GAME_WIDTH / 2 - 8;
+//        int l_yCenter = GAME_HEIGHT / 2 - 8;
+//        Sprite l_sprite = Sprites.m_terrain[0][0];
+//        m_screen.renderSprite(l_xCenter, l_yCenter, l_sprite);
     }
     
     public void render()

@@ -2,5 +2,5 @@ package Sprites;
 
 public class Sprites
 {
-   // public static Sprite[][] m_terrain = SpriteSheetLoader.cutTiles("/res/terrain.png", 16, 16);
+   public static Sprite[][] m_terrain = SpriteSheetLoader.cutTile("/res/terrain2.png", 16, 16);
 }
