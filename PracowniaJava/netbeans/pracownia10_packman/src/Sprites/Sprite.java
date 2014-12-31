@@ -13,12 +13,12 @@ public class Sprite
         m_pixels = new int[m_width * m_height];
     }
     
-    public void color(int p_colour)
-    {
-        for (int i = 0; i < m_pixels.length; ++i)
-        {
-            m_pixels[i] = p_colour;
-        }
-    }
+//    public void color(int p_colour)
+//    {
+//        for (int i = 0; i < m_pixels.length; ++i)
+//        {
+//            m_pixels[i] = p_colour;
+//        }
+//    }
     
 }

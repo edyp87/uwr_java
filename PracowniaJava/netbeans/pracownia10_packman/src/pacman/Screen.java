@@ -1,13 +1,12 @@
-package pracownia10_packman;
+package pacman;
 
 import Sprites.Sprite;
-import Sprites.SpriteSheetLoader;
 
 public class Screen
 {
-    private int m_weight, m_height;
+    final private int m_weight, m_height;
     public int[] m_pixels;
-    private int m_xOffset = 0, m_yOffset =  0;
+    final private int m_xOffset = 0, m_yOffset =  0;
     
     public Screen(int p_weight, int p_height)
     {

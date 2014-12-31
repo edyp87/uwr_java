@@ -1,7 +1,7 @@
 package Tiles;
 
 import Sprites.Sprite;
-import pracownia10_packman.Screen;
+import pacman.Screen;
 
 public class Tile
 {

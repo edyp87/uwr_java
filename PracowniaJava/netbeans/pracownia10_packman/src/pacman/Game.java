@@ -1,5 +1,6 @@
-package pracownia10_packman;
+package pacman;
 
+import Entity.Player;
 import Level.Level;
 import Sprites.SpriteSheetLoader;
 import java.awt.BorderLayout;
@@ -10,13 +11,14 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.Random;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable
 {
     private static final long serialVersionUID = 1;
-    public static final int GAME_WIDTH = 400;
-    public static final int GAME_HEIGHT = 220;
+    public static final int GAME_WIDTH = 256;
+    public static final int GAME_HEIGHT = 256;
     public static final int SCALE = 3;
     public static final String GAME_NAME = "Pacman - v0.1";
     public static final Dimension GAME_DIM = new Dimension(GAME_WIDTH * SCALE, GAME_HEIGHT * SCALE);
@@ -27,9 +29,11 @@ public class Game extends Canvas implements Runnable
     
     public boolean m_gameIsRunning = false;
     
+    InputHandler m_input = new InputHandler(this);
     Screen m_screen;
     SpriteSheetLoader m_loader;
     Level m_level;
+    Player m_player;
     
     public Game()
     {
@@ -39,8 +43,9 @@ public class Game extends Canvas implements Runnable
     {
         m_loader = new SpriteSheetLoader();
         m_screen = new Screen(GAME_WIDTH, GAME_HEIGHT);
-        m_level = new Level(10, 10);
-        
+        m_level = new Level(16, 16);
+        m_level.renderBackground(m_screen);
+        m_player = new Player(this, m_input);
     }
     
     private void start()
@@ -60,7 +65,7 @@ public class Game extends Canvas implements Runnable
     
     public void tick()
     {
-        
+        m_player.tick();
     }
     
     public void render()
@@ -73,12 +78,12 @@ public class Game extends Canvas implements Runnable
             return;
         }
         
-        m_level.renderBackground(m_screen);
-        
         for (int i = 0; i < m_screen.m_pixels.length; ++i)
         {
             m_pixels[i] = m_screen.m_pixels[i];
         }
+        m_level.renderBackground(m_screen);
+        m_player.render(m_screen);
         
         Graphics l_graphics = l_bufferStrategy.getDrawGraphics();
         l_graphics.drawImage(m_bufferedImage, 0, 0, getWidth(), getHeight(), null);
@@ -92,6 +97,11 @@ public class Game extends Canvas implements Runnable
         while(m_gameIsRunning)
         {
             tick();
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
             render();
         }
     }

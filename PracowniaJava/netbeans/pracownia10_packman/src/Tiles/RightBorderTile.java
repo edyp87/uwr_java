@@ -1,7 +1,7 @@
 package Tiles;
 
 import Sprites.Sprites;
-import pracownia10_packman.Screen;
+import pacman.Screen;
 
 public class RightBorderTile extends Tile
 {
