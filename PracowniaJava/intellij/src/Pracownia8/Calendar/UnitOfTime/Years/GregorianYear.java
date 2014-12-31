@@ -6,9 +6,31 @@ import Pracownia8.Calendar.UnitOfTime.IUnitOfTime;
 /**
  * Created by Marek on 2014-12-06.
  */
-public interface GregorianYear extends IUnitOfTime
+public abstract class GregorianYear implements IUnitOfTime
 {
-    public boolean isLeap();
-    public DaysAmount numberOfDaysInFeb();
-    public DaysAmount numberOfDays();
+    public GregorianYear()
+    {
+        m_numOfDaysInFeb = new DaysAmount();
+        m_numOfDaysInFeb.setNumberOf(28);
+        m_numOfDaysInYear = new DaysAmount();
+        m_numOfDaysInYear.setNumberOf(365);
+        m_isLeap = true;
+    }
+
+    public boolean isLeap()
+    {
+        return m_isLeap;
+    }
+    public DaysAmount numberOfDaysInFeb()
+    {
+        return m_numOfDaysInFeb;
+    }
+    public DaysAmount numberOfDays()
+    {
+        return m_numOfDaysInYear;
+    }
+
+    DaysAmount m_numOfDaysInFeb;
+    DaysAmount m_numOfDaysInYear;
+    boolean m_isLeap;
 }

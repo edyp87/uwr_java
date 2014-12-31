@@ -4,8 +4,16 @@ import Pracownia8.Calendar.TimeAmount.DaysAmount;
 import Pracownia8.Calendar.TimeAmount.ITimeAmount;
 import Pracownia8.Calendar.TimeAmount.YearsAmount;
 
-public class GregorianNonLeapYear implements GregorianYear
+public class GregorianNonLeapYear extends GregorianYear
 {
+    public GregorianNonLeapYear()
+    {
+        m_numOfDaysInFeb.setNumberOf(28);
+        m_numOfDaysInYear.setNumberOf(365);
+        m_isLeap = false;
+    }
+
+
     public ITimeAmount previous()
     {
         return new YearsAmount();
@@ -28,20 +36,16 @@ public class GregorianNonLeapYear implements GregorianYear
 
     public boolean isLeap()
     {
-        return true;
+        return m_isLeap;
     }
 
     public DaysAmount numberOfDaysInFeb()
     {
-        DaysAmount l_daysInFeb = new DaysAmount();
-        l_daysInFeb.setNumberOf(29);
-        return l_daysInFeb;
+        return m_numOfDaysInFeb;
     }
 
     public DaysAmount numberOfDays()
     {
-        DaysAmount l_daysInFeb = new DaysAmount();
-        l_daysInFeb.setNumberOf(366);
-        return l_daysInFeb;
+        return m_numOfDaysInYear;
     }
 }
