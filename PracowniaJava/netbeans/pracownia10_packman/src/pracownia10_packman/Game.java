@@ -1,31 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pracownia10_packman;
 
-import Sprites.Sprite;
-import Sprites.Sprites;
+import Level.Level;
 import Sprites.SpriteSheetLoader;
 import java.awt.BorderLayout;
-import java.awt.BufferCapabilities;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.IOException;
 import java.util.Random;
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-/**
- *
- * @author Marek
- */
 public class Game extends Canvas implements Runnable
 {
     private static final long serialVersionUID = 1;
@@ -38,13 +24,12 @@ public class Game extends Canvas implements Runnable
     public BufferedImage m_bufferedImage = new BufferedImage(GAME_WIDTH, GAME_HEIGHT, BufferedImage.TYPE_INT_RGB);
     public int[] m_pixels = ((DataBufferInt)m_bufferedImage.getRaster().getDataBuffer()).getData();
     Random m_random = new Random();
-//    
-//    public int m_tickCount = 0;
     
     public boolean m_gameIsRunning = false;
     
     Screen m_screen;
     SpriteSheetLoader m_loader;
+    Level m_level;
     
     public Game()
     {
@@ -54,17 +39,8 @@ public class Game extends Canvas implements Runnable
     {
         m_loader = new SpriteSheetLoader();
         m_screen = new Screen(GAME_WIDTH, GAME_HEIGHT);
+        m_level = new Level(10, 10);
         
-        
-        for (int y = 0; y < 14; ++y)
-        {
-            for (int x = 0; x < 25; ++x)
-            {
-                Sprite l_sprite = Sprites.m_terrain[4][0];
-                m_screen.renderSprite(x * 16, y * 16, l_sprite);
-            }
-
-        }
     }
     
     private void start()
@@ -84,10 +60,7 @@ public class Game extends Canvas implements Runnable
     
     public void tick()
     {
-//        int l_xCenter = GAME_WIDTH / 2 - 8;
-//        int l_yCenter = GAME_HEIGHT / 2 - 8;
-//        Sprite l_sprite = Sprites.m_terrain[0][0];
-//        m_screen.renderSprite(l_xCenter, l_yCenter, l_sprite);
+        
     }
     
     public void render()
@@ -99,6 +72,8 @@ public class Game extends Canvas implements Runnable
             requestFocus();
             return;
         }
+        
+        m_level.renderBackground(m_screen);
         
         for (int i = 0; i < m_screen.m_pixels.length; ++i)
         {
@@ -140,5 +115,4 @@ public class Game extends Canvas implements Runnable
         
         l_game.start();
     }
-    
 }
