@@ -1,7 +1,7 @@
 package Tiles;
 
 import Sprites.Sprite;
-import pacman.Screen;
+import Santa.Screen;
 
 public class Tile
 {

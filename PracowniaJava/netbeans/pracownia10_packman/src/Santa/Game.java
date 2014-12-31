@@ -1,4 +1,4 @@
-package pacman;
+package Santa;
 
 import Entity.Player;
 import Level.Level;
@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable
     public static final int GAME_WIDTH = 256;
     public static final int GAME_HEIGHT = 256;
     public static final int SCALE = 3;
-    public static final String GAME_NAME = "Pacman - v0.1";
+    public static final String GAME_NAME = "Santa - v0.1";
     public static final Dimension GAME_DIM = new Dimension(GAME_WIDTH * SCALE, GAME_HEIGHT * SCALE);
     
     public BufferedImage m_bufferedImage = new BufferedImage(GAME_WIDTH, GAME_HEIGHT, BufferedImage.TYPE_INT_RGB);

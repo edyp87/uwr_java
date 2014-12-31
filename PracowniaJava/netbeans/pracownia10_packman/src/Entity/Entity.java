@@ -1,6 +1,6 @@
 package Entity;
 
-import pacman.Screen;
+import Santa.Screen;
 
 public class Entity
 {

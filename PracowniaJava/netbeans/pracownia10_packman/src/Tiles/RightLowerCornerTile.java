@@ -1,7 +1,7 @@
 package Tiles;
 
 import Sprites.Sprites;
-import pacman.Screen;
+import Santa.Screen;
 
 public class RightLowerCornerTile extends Tile
 {

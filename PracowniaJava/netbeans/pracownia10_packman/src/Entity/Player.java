@@ -2,9 +2,9 @@ package Entity;
 
 import Sprites.Sprite;
 import Sprites.Sprites;
-import pacman.Game;
-import pacman.InputHandler;
-import pacman.Screen;
+import Santa.Game;
+import Santa.InputHandler;
+import Santa.Screen;
 
 public class Player extends Entity
 {

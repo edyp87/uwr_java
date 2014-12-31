@@ -1,7 +1,7 @@
 package Level;
 
 import Tiles.Tile;
-import pacman.Screen;
+import Santa.Screen;
 
 public class Level
 {

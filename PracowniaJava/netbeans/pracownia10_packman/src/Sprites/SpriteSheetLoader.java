@@ -2,7 +2,7 @@ package Sprites;
 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import pacman.Game;
+import Santa.Game;
 
 public class SpriteSheetLoader
 {

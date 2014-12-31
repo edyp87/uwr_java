@@ -1,4 +1,4 @@
-package pacman;
+package Santa;
 
 import Sprites.Sprite;
 
