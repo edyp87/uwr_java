@@ -1,6 +1,6 @@
 package Tiles;
 
-import Sprites.Sprites;
+import Sprites.SpriteContainer;
 import Santa.Screen;
 
 public class DotTile extends Tile
@@ -8,7 +8,7 @@ public class DotTile extends Tile
     public DotTile(int p_id)
     {
         super(p_id);
-        m_tile = Sprites.m_terrain[1][0];
+        m_tile = SpriteContainer.s_terrain[1][0];
     }
     
     public void render(int p_x, int p_y, Screen p_screen)

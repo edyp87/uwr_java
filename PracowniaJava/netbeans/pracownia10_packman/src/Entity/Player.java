@@ -1,7 +1,7 @@
 package Entity;
 
 import Sprites.Sprite;
-import Sprites.Sprites;
+import Sprites.SpriteContainer;
 import Santa.Game;
 import Santa.InputHandler;
 import Santa.Screen;
@@ -17,14 +17,14 @@ public class Player extends Entity
         m_input = p_input;
         m_game = p_game;
         
-        m_x = Game.GAME_WIDTH / 2 - 8;
-        m_y = Game.GAME_HEIGHT / 2 - 8;
+        m_x = Game.s_gameWidth * SpriteContainer.s_tileSize / 2 - SpriteContainer.s_tileSize / 2;
+        m_y = Game.s_gameHeight * SpriteContainer.s_tileSize / 2 - SpriteContainer.s_tileSize / 2;
     }
     
     @Override
     public void render(Screen p_screen)
     {
-        Sprite l_player = Sprites.m_player;
+        Sprite l_player = SpriteContainer.s_player;
         p_screen.renderSprite(m_x, m_y, l_player);
     }
     
@@ -38,29 +38,35 @@ public class Player extends Entity
         if(m_input.m_left) moveLeft();
         if(m_input.m_right) moveRight();
         
+        m_input.signalReceived();
+        
     }
     
     private void moveUp()
     {
-        if(m_y > 4)
-            --m_y;
+        if(m_y > SpriteContainer.s_tileSize + 4)
+           // --m_y;
+            m_y -= SpriteContainer.s_tileSize;
     }
     
     private void moveDown()
     {
-        if(m_y < m_game.GAME_HEIGHT - 4 - 16)
-            ++m_y;
+        if(m_y < m_game.s_gameHeight * SpriteContainer.s_tileSize - SpriteContainer.s_tileSize -SpriteContainer.s_tileSize /2 )
+           /// ++m_y;
+            m_y += SpriteContainer.s_tileSize;
     }
         
     private void moveLeft()
     {
-        if(m_x > 4)
-            --m_x;
+        if(m_x > SpriteContainer.s_tileSize + 4)
+          //  --m_x;
+            m_x -= SpriteContainer.s_tileSize;
     }
             
     private void moveRight()
     {
-        if(m_x < m_game.GAME_WIDTH - 5 - 16)
-            ++m_x;
+        if(m_x < m_game.s_gameWidth * SpriteContainer.s_tileSize - SpriteContainer.s_tileSize -SpriteContainer.s_tileSize /2 )
+          //  ++m_x;
+            m_x += SpriteContainer.s_tileSize;
     }
 }

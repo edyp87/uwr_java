@@ -1,6 +1,6 @@
 package Tiles;
 
-import Sprites.Sprites;
+import Sprites.SpriteContainer;
 import Santa.Screen;
 
 public class LeftBorderTile extends Tile
@@ -8,7 +8,7 @@ public class LeftBorderTile extends Tile
     public LeftBorderTile(int p_id)
     {
         super(p_id);
-        m_tile = Sprites.m_terrain[0][1];
+        m_tile = SpriteContainer.s_terrain[0][1];
     }
     
     public void render(int p_x, int p_y, Screen p_screen)

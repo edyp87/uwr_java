@@ -35,14 +35,14 @@ public class Level
         
         //Corners
         if(p_x == 0 && p_y == 0) return Tile.m_leftUpperCornerTile;
-        if(p_x == 0 && p_y == 15) return Tile.m_leftLowerCornerTile;
-        if(p_x == 15 && p_y == 0) return Tile.m_rightUpperCornerTile;
-        if(p_x == 15 && p_y == 15) return Tile.m_rightLowerCornerTile;
+        if(p_x == 0 && p_y == m_height-1) return Tile.m_leftLowerCornerTile;
+        if(p_x == m_width-1 && p_y == 0) return Tile.m_rightUpperCornerTile;
+        if(p_x == m_width-1 && p_y == m_height-1) return Tile.m_rightLowerCornerTile;
         //Walls
         if(p_x == 0) return Tile.m_leftBorderTile;
-        if(p_x == 15) return Tile.m_rightBorderTile;
+        if(p_x == m_width-1) return Tile.m_rightBorderTile;
         if(p_y == 0) return Tile.m_upperBorderTile;
-        if(p_y == 15) return Tile.m_lowerBorderTile;
+        if(p_y == m_height-1) return Tile.m_lowerBorderTile;
         
 
         
