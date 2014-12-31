@@ -5,27 +5,22 @@ import Sprites.SpriteContainer;
 import Santa.Game;
 import Santa.InputHandler;
 import Santa.Screen;
+import java.util.Random;
 
 public class Player extends Entity
 {
-    private InputHandler m_input;
-    public Game m_game;
-    public int m_x, m_y;
-    
-    public Player(Game p_game, InputHandler p_input)
+    public Player(Game p_gameInstance, InputHandler p_inputHandler)
     {
-        m_input = p_input;
-        m_game = p_game;
-        
-        m_x = Game.s_gameWidth * SpriteContainer.s_tileSize / 2 - SpriteContainer.s_tileSize / 2;
-        m_y = Game.s_gameHeight * SpriteContainer.s_tileSize / 2 - SpriteContainer.s_tileSize / 2;
+        m_inputHandler = p_inputHandler;
+        m_gameInstance = p_gameInstance;
+        randomlyPutPlayer();
     }
     
     @Override
     public void render(Screen p_screen)
     {
         Sprite l_player = SpriteContainer.s_player;
-        p_screen.renderSprite(m_x, m_y, l_player);
+        p_screen.applySprite(m_playerPosX, m_playerPosY, l_player);
     }
     
     @Override
@@ -33,40 +28,46 @@ public class Player extends Entity
     {
         super.tick();
         
-        if(m_input.m_up) moveUp();
-        if(m_input.m_down) moveDown();
-        if(m_input.m_left) moveLeft();
-        if(m_input.m_right) moveRight();
+        if(m_inputHandler.m_up) moveUp();
+        if(m_inputHandler.m_down) moveDown();
+        if(m_inputHandler.m_left) moveLeft();
+        if(m_inputHandler.m_right) moveRight();
         
-        m_input.signalReceived();
-        
+        m_inputHandler.signalReceived();
     }
     
     private void moveUp()
     {
-        if(m_y > SpriteContainer.s_tileSize + 4)
-           // --m_y;
-            m_y -= SpriteContainer.s_tileSize;
+        if(m_playerPosY > SpriteContainer.s_tileSize + 4)
+            m_playerPosY -= SpriteContainer.s_tileSize;
     }
     
     private void moveDown()
     {
-        if(m_y < m_game.s_gameHeight * SpriteContainer.s_tileSize - SpriteContainer.s_tileSize -SpriteContainer.s_tileSize /2 )
-           /// ++m_y;
-            m_y += SpriteContainer.s_tileSize;
+        if(m_playerPosY < m_gameInstance.s_gameHeight * SpriteContainer.s_tileSize - SpriteContainer.s_tileSize -SpriteContainer.s_tileSize)
+            m_playerPosY += SpriteContainer.s_tileSize;
     }
         
     private void moveLeft()
     {
-        if(m_x > SpriteContainer.s_tileSize + 4)
-          //  --m_x;
-            m_x -= SpriteContainer.s_tileSize;
+        if(m_playerPosX > SpriteContainer.s_tileSize + 4)
+            m_playerPosX -= SpriteContainer.s_tileSize;
     }
             
     private void moveRight()
     {
-        if(m_x < m_game.s_gameWidth * SpriteContainer.s_tileSize - SpriteContainer.s_tileSize -SpriteContainer.s_tileSize /2 )
-          //  ++m_x;
-            m_x += SpriteContainer.s_tileSize;
+        if(m_playerPosX < m_gameInstance.s_gameWidth * SpriteContainer.s_tileSize - SpriteContainer.s_tileSize - SpriteContainer.s_tileSize)
+            m_playerPosX += SpriteContainer.s_tileSize;
     }
+    
+    private void randomlyPutPlayer()
+    {
+        Random l_random = new Random();
+        m_playerPosX = (1 + l_random.nextInt(Game.s_gameWidth-2)) * (SpriteContainer.s_tileSize);
+        m_playerPosY = (1 + l_random.nextInt(Game.s_gameWidth-2)) * (SpriteContainer.s_tileSize);
+    }
+    
+    private InputHandler m_inputHandler;
+    public Game m_gameInstance;
+    public int m_playerPosX, m_playerPosY;
 }

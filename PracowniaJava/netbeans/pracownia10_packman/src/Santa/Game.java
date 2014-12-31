@@ -11,7 +11,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.Random;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
@@ -21,7 +20,7 @@ public class Game extends Canvas implements Runnable
     {
         m_bufferedImage 
             = new BufferedImage(
-                s_gameWidth * SpriteContainer.s_tileSize, 
+                s_gameWidth  * SpriteContainer.s_tileSize, 
                 s_gameHeight * SpriteContainer.s_tileSize,
                 BufferedImage.TYPE_INT_RGB);
         m_bufferedImagePixels = ((DataBufferInt)m_bufferedImage
@@ -71,9 +70,9 @@ public class Game extends Canvas implements Runnable
         m_level.renderBackground(m_screen);
         m_player.render(m_screen);
         
-        for (int i = 0; i < m_screen.m_pixels.length; ++i)
+        for (int i = 0; i < m_screen.getNumberOfPixels(); ++i)
         {
-            m_bufferedImagePixels[i] = m_screen.m_pixels[i];
+            m_bufferedImagePixels[i] = m_screen.getPixel(i);
         }
         
         Graphics l_graphics = l_bufferStrategy.getDrawGraphics();
@@ -88,11 +87,11 @@ public class Game extends Canvas implements Runnable
         while(m_gameIsRunning)
         {
             tick();
-//            try {
-//                Thread.sleep(5);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//            }
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
             render();
         }
     }
@@ -116,9 +115,9 @@ public class Game extends Canvas implements Runnable
         l_game.start();
     }
     
-    public static final int       s_gameWidth        = 40;
-    public static final int       s_gameHeight       = 30;
-    public static final int       s_scale            = 2;
+    public static final int       s_gameWidth        = 25;
+    public static final int       s_gameHeight       = 15;
+    public static final int       s_scale            = 1;
     public static final String    s_gameName         = "Santa - v0.1";
     public static final Dimension s_gameDimension    = new Dimension(s_gameWidth * SpriteContainer.s_tileSize * s_scale, s_gameHeight * SpriteContainer.s_tileSize * s_scale);
     
