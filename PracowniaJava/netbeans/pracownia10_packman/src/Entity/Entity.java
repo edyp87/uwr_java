@@ -72,7 +72,7 @@ public abstract class Entity
     
     public boolean setPosition(int p_x, int p_y)
     {
-        if(m_board.setPosition(p_x / SpriteContainer.s_tileSize, p_y / SpriteContainer.s_tileSize))
+        if(m_board.setPosition(p_x / SpriteContainer.s_tileSize, p_y / SpriteContainer.s_tileSize, this))
         {
             m_board.unsetPosition(m_posX / SpriteContainer.s_tileSize, m_posY / SpriteContainer.s_tileSize);
             m_posX = p_x;

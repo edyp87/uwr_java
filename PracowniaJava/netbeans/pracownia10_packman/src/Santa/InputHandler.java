@@ -13,7 +13,6 @@ public class InputHandler implements KeyListener
     @Override
     public void keyTyped(KeyEvent e)
     {
-        System.out.println("TEST");
         toggleWsad(e, true);
     }
 
@@ -38,11 +37,12 @@ public class InputHandler implements KeyListener
     {
         int l_keyCode = p_event.getKeyChar();
 
-        if(l_keyCode == 'w') m_up = p_pressed;
-        if(l_keyCode == 's') m_down = p_pressed;
-        if(l_keyCode == 'd') m_right = p_pressed;
-        if(l_keyCode == 'a') m_left = p_pressed;
+        if(l_keyCode == 'w') m_up          = p_pressed;
+        if(l_keyCode == 's') m_down        = p_pressed;
+        if(l_keyCode == 'd') m_right       = p_pressed;
+        if(l_keyCode == 'a') m_left        = p_pressed;
+        if(l_keyCode == 'f') m_dropPresent = p_pressed;
     }
     
-    public boolean m_up = false, m_down = false, m_right = false, m_left = false;
+    public boolean m_up = false, m_down = false, m_right = false, m_left = false, m_dropPresent = false;
 }

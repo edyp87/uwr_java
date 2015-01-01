@@ -34,6 +34,7 @@ public class Player extends Entity
         if(m_inputHandler.m_down) moveDown();
         if(m_inputHandler.m_left) moveLeft();
         if(m_inputHandler.m_right) moveRight();
+        if(m_inputHandler.m_dropPresent) dropPresent();
         
         m_inputHandler.signalReceived();
     }
@@ -43,6 +44,16 @@ public class Player extends Entity
         setPosition((1 + l_random.nextInt(Game.s_gameWidth-2))  * (SpriteContainer.s_tileSize),
                     (1 + l_random.nextInt(Game.s_gameHeight-2)) * (SpriteContainer.s_tileSize));
         System.out.println(m_posX / SpriteContainer.s_tileSize + " " + m_posY / SpriteContainer.s_tileSize);
+    }
+    
+    private void dropPresent()
+    {
+        m_board.dropPresent(m_posX / SpriteContainer.s_tileSize,
+                            m_posY / SpriteContainer.s_tileSize,
+                            new Present(m_posX,
+                                        m_posY,
+                                        m_gameInstance, m_board));
+        m_inputHandler.m_dropPresent = false;
     }
     
     private InputHandler m_inputHandler;

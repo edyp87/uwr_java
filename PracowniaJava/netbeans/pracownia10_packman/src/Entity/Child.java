@@ -44,10 +44,10 @@ public class Child extends Entity
         m_childIsSleeping = false;
     }
     
-    public int iSeeSanta()
-    {
-        return m_board.isSantaInRadius(m_posX, m_posX);
-    }
+//    public int iSeeSanta()
+//    {
+//        return m_board.isSantaInRadius(m_posX, m_posX, this);
+//    }
     
     private boolean m_childIsSleeping = false;
 }

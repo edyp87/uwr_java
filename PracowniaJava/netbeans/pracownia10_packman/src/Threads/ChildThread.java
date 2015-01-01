@@ -1,7 +1,9 @@
 package Threads;
 
 import Entity.Child;
+import Santa.Game;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +24,7 @@ public class ChildThread implements Runnable
         while(true)
         {
             m_child.playTime();
+            
             switch(selectBehavior())
             {
                 case 0:
@@ -37,21 +40,12 @@ public class ChildThread implements Runnable
                     m_child.moveLeft();
                     break;
                 case 4:
-            {
-                System.out.println("SLEEP");
-                m_child.napTime();
-                try {
-                    Thread.sleep(m_bedTimeInMs);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(ChildThread.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    System.out.println("SLEEP");
+                    m_child.napTime();
+                    waitInMilisec(m_bedTimeInMs);
             }
-            }
-            try {
-                Thread.sleep(m_waitTimeInMs);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ChildThread.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
+            waitInMilisec(m_waitTimeInMs);
         }
     }
     
@@ -75,6 +69,19 @@ public class ChildThread implements Runnable
             return 3;
         else
             return 4;
+    }
+    
+    private void waitInMilisec(int p_milisec)
+    {
+        try
+        {
+            TimeUnit.MILLISECONDS.sleep(p_milisec);
+        }
+        catch (InterruptedException ex)
+        {
+            Logger.getLogger(Game.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }
     
     private Child m_child;

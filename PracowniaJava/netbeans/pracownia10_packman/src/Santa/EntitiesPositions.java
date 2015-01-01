@@ -1,81 +1,65 @@
 package Santa;
 
+import Entity.Entity;
+import Entity.Present;
+
 public class EntitiesPositions
 {
     public EntitiesPositions(int p_width, int p_height)
     {
         m_width = p_width;
         m_height = p_height;
-        m_board = new int[p_width * p_height];
+        m_board = new Entity[p_width * p_height];
+        m_presents = new Present[p_width * p_height];
     }
     
-    public synchronized boolean setSantaPosition(int p_x, int p_y)
+    public synchronized boolean setPosition(int p_x, int p_y, Entity p_entity)
     {
-        if(m_board[m_width * p_y + p_x] != 1)
+        if(m_board[m_width * p_y + p_x] == null)
         {
-            m_board[m_width * p_y + p_x] = 2;
-            m_santaPosition = m_width * p_y + p_x;
+            m_board[m_width * p_y + p_x] = p_entity;
             return true;
         }
         return false;
     }
     
-    public synchronized boolean setPosition(int p_x, int p_y)
+    public synchronized boolean dropPresent(int p_x, int p_y, Present p_entity)
     {
-        if(m_board[m_width * p_y + p_x] != 1)
+        if(m_presents[m_width * p_y + p_x] == null)
         {
-            m_board[m_width * p_y + p_x] = 1;
+            m_presents[m_width * p_y + p_x] = p_entity;
             return true;
         }
         return false;
     }
     
-    public int isSantaInRadius(int p_x, int p_y)
+    public void renderAll(Screen p_screen)
     {
-        for(int i = 0; i < m_board.length; ++i)
+        for(Present p_entity : m_presents)
         {
-            if(m_board[i] == 2)
+            if(p_entity != null)
             {
-                int l_santaX = i % m_width;
-                int l_santaY = i / m_width;
-                int l_diffX  = Math.abs(l_santaX - p_x);
-                int l_diffY  = Math.abs(l_santaY - p_y);
-                int l_minDiff = Math.min(l_diffX, l_diffY);
-                if (l_diffX < 10)
-                {
-                    if (l_diffY < l_diffX)
-                    {
-                        if(l_santaY - p_y < 0)
-                        {
-                            return 0;
-                        }
-                        else
-                        {
-                            return 2;
-                        }
-                    }
-                    if(l_santaX - p_x < 0)
-                    {
-                        return 3;
-                    }
-                    else
-                    {
-                        return 1;
-                    }
-                }
+                p_entity.render(p_screen);
             }
         }
-        return 4;
+                
+        for(Entity p_entity : m_board)
+        {
+            if(p_entity != null)
+            {
+                p_entity.render(p_screen);
+            }
+        }
     }
     
     public synchronized void unsetPosition(int p_x, int p_y)
     {
-        m_board[m_width * p_y + p_x] = 0;
+        m_board[m_width * p_y + p_x] = null;
     }
     
     
     
     private int m_width, m_height;
-    private int m_santaPosition;
-    private int[] m_board;
+    private Entity[] m_board;
+    private Present[] m_presents;
 }
