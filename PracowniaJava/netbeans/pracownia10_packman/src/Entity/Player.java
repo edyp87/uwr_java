@@ -13,6 +13,7 @@ public class Player extends Entity
     public Player(Game p_gameInstance, EntitiesPositions p_board, InputHandler p_inputHandler)
     {
         m_inputHandler = p_inputHandler;
+        m_board = p_board;
         m_gameInstance = p_gameInstance;
         randomlyPutPlayer();
     }

@@ -44,7 +44,7 @@ public class Game extends Canvas implements Runnable
         m_childList = new ArrayList<Child>();
         for (int i = 0; i < 12; ++i)
         {
-            m_childList.add(new Child(this));
+            m_childList.add(new Child(this, m_board));
         }
     }
     

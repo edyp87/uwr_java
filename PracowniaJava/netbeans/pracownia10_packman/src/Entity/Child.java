@@ -1,5 +1,6 @@
 package Entity;
 
+import Santa.EntitiesPositions;
 import Santa.Game;
 import Santa.Screen;
 import Sprites.Sprite;
@@ -8,9 +9,10 @@ import java.util.Random;
 
 public class Child extends Entity
 {
-    public Child(Game p_gameInstance)
+    public Child(Game p_gameInstance, EntitiesPositions p_board)
     {
         m_gameInstance = p_gameInstance;
+        m_board = p_board;
         randomlyPutChild();
     }
     
