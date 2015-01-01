@@ -4,15 +4,11 @@ import Entity.Child;
 import Entity.Player;
 import Level.Level;
 import Sprites.SpriteContainer;
-import Sprites.SpriteLoader;
 import Threads.ChildThread;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -20,30 +16,14 @@ import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable
 {    
-    public Game()
-    {
-        m_bufferedImage 
-            = new BufferedImage(
-                s_gameWidth  * SpriteContainer.s_tileSize, 
-                s_gameHeight * SpriteContainer.s_tileSize,
-                BufferedImage.TYPE_INT_RGB);
-        m_bufferedImagePixels = ((DataBufferInt)m_bufferedImage
-                                    .getRaster()
-                                    .getDataBuffer())
-                                        .getData();
-    }
+    public Game() {}
     
     public void init()
     {
-        EntitiesPositions l_board = new EntitiesPositions(s_gameWidth, s_gameHeight);;
-        m_screen = new Screen(s_gameWidth * SpriteContainer.s_tileSize, s_gameHeight * SpriteContainer.s_tileSize);
-        m_player = new Player(this, l_board, new InputHandler(this));
-        m_childList = new ArrayList<Child>();
-        for (int i = 0; i < 12; ++i)
-        {
-            m_childList.add(new Child(this, l_board));
-        }
-        m_painter = new Painter(l_board, new Level(s_gameWidth, s_gameHeight));
+        EntitiesPositions l_board 
+            = new EntitiesPositions(s_gameWidth, s_gameHeight);
+        initializeEntities(l_board);
+        initializePainter(l_board);
     }
     
     private void start()
@@ -68,21 +48,19 @@ public class Game extends Canvas implements Runnable
     
     public synchronized void render()
     {
-        
-        BufferStrategy l_bufferStrategy = getBufferStrategy();
-        if(l_bufferStrategy == null)
+        if(getBufferStrategy() == null)
         {
             createTrippleBuffer();
             return;
         }
         
-        drawCanvas(l_bufferStrategy);
+        drawCanvas(getBufferStrategy());
     }
     
     @Override
     public void run()
     {
-        for(Child l_child : m_childList)
+        for (Child l_child : m_childList)
         {
             new Thread(new ChildThread(l_child)).start();
         }
@@ -92,6 +70,50 @@ public class Game extends Canvas implements Runnable
             tick();
             render();
             waitInMilisec(50);
+        }
+    }
+    
+    private void initializeEntities(EntitiesPositions p_board)
+    {
+        m_player    = new Player(this, p_board, new InputHandler(this));
+        m_childList = new ArrayList<Child>();
+        for (int i = 0; i < s_numberOfChildren; ++i)
+        {
+            m_childList.add(new Child(this, p_board));
+        }
+    }
+    
+    private void initializePainter(EntitiesPositions p_board)
+    {
+        m_painter = new Painter(
+        new Screen(s_gameWidth * SpriteContainer.s_tileSize,
+                   s_gameHeight * SpriteContainer.s_tileSize),
+                   p_board,
+                   new Level(s_gameWidth, s_gameHeight));
+    }
+    
+    private void createTrippleBuffer()
+    {
+        int l_trippleBuffer = 3;
+        createBufferStrategy(l_trippleBuffer);
+        requestFocus();
+    }
+    
+    private void drawCanvas(BufferStrategy p_bufferStrategy)
+    {
+        m_painter.render(p_bufferStrategy, getWidth(), getHeight());
+    }
+    
+    private void waitInMilisec(int p_milisec)
+    {
+        try
+        {
+            TimeUnit.MILLISECONDS.sleep(p_milisec);
+        }
+        catch (InterruptedException ex)
+        {
+            Logger.getLogger(Game.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     
@@ -113,53 +135,17 @@ public class Game extends Canvas implements Runnable
         
         l_game.start();
     }
-    
-    private void createTrippleBuffer()
-    {
-        int l_trippleBuffer = 3;
-        createBufferStrategy(l_trippleBuffer);
-        requestFocus();
-    }
-    
-    private void drawCanvas(BufferStrategy p_bufferStrategy)
-    {
-        m_painter.render(m_screen);
-        
-        for (int i = 0; i < m_screen.getNumberOfPixels(); ++i)
-        {
-            m_bufferedImagePixels[i] = m_screen.getPixel(i);
-        }
-        
-        Graphics l_graphics = p_bufferStrategy.getDrawGraphics();
-        l_graphics.drawImage(m_bufferedImage, 0, 0, getWidth(), getHeight(), null);
-        l_graphics.dispose();
-        p_bufferStrategy.show();
-    }
-    
-    private void waitInMilisec(int p_milisec)
-    {
-        try
-        {
-            TimeUnit.MILLISECONDS.sleep(p_milisec);
-        }
-        catch (InterruptedException ex)
-        {
-            Logger.getLogger(Game.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    }
-    
+
     public static final int       s_gameWidth        = 25;
     public static final int       s_gameHeight       = 15;
     public static final int       s_scale            = 1;
+    public static final int       s_numberOfChildren = 12;
     public static final String    s_gameName         = "Santa - v0.1";
     public static final Dimension s_gameDimension    
         = new Dimension(s_gameWidth  * SpriteContainer.s_tileSize * s_scale,
                         s_gameHeight * SpriteContainer.s_tileSize * s_scale);
     
-    public  BufferedImage         m_bufferedImage;
-    private final int[]           m_bufferedImagePixels;
-    private Screen                m_screen;
+    
     private Player                m_player;
     private ArrayList<Child>      m_childList;
     private Painter               m_painter;
