@@ -60,11 +60,11 @@ public class ChildThread implements Runnable
         Random l_random = new Random();
         int l_behavior = l_random.nextInt(50);
         
-        if (l_behavior < 40 && m_child.iSeeSanta() != 4)
-        {
-            return m_child.iSeeSanta();
-        }
-        
+//        if (l_behavior < 40 && m_child.iSeeSanta() != 4)
+//        {
+//            return m_child.iSeeSanta();
+//        }
+//        
         if(l_behavior < 10)
             return 0;
         else if(l_behavior < 20)

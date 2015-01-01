@@ -11,7 +11,7 @@ public class EntitiesPositions
     
     public synchronized boolean setSantaPosition(int p_x, int p_y)
     {
-        if(m_board[m_width * p_y + p_x] != 1 || m_board[m_width * p_y + p_x] != 2)
+        if(m_board[m_width * p_y + p_x] != 1)
         {
             m_board[m_width * p_y + p_x] = 2;
             m_santaPosition = m_width * p_y + p_x;
@@ -22,7 +22,7 @@ public class EntitiesPositions
     
     public synchronized boolean setPosition(int p_x, int p_y)
     {
-        if(m_board[m_width * p_y + p_x] != 1 || m_board[m_width * p_y + p_x] != 2)
+        if(m_board[m_width * p_y + p_x] != 1)
         {
             m_board[m_width * p_y + p_x] = 1;
             return true;
