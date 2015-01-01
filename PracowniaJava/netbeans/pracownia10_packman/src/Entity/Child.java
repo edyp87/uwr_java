@@ -19,7 +19,11 @@ public class Child extends Entity
     @Override
     public void render(Screen p_screen)
     {
-        Sprite l_child = SpriteContainer.s_child;
+        Sprite l_child;
+        if(m_childIsSleeping)
+            l_child = SpriteContainer.s_childSleeping;
+        else
+            l_child = SpriteContainer.s_child;
         p_screen.applySprite(m_posX, m_posY, l_child);
     }
     
@@ -29,4 +33,21 @@ public class Child extends Entity
         setPosition((1 + l_random.nextInt(Game.s_gameWidth-2)) * (SpriteContainer.s_tileSize),
                     (1 + l_random.nextInt(Game.s_gameHeight-2)) * (SpriteContainer.s_tileSize));
     }
+    
+    public void napTime()
+    {
+        m_childIsSleeping = true;
+    }
+    
+    public void playTime()
+    {
+        m_childIsSleeping = false;
+    }
+    
+    public int iSeeSanta()
+    {
+        return m_board.isSantaInRadius(m_posX, m_posX);
+    }
+    
+    private boolean m_childIsSleeping = false;
 }
