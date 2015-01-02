@@ -1,6 +1,7 @@
 package Santa;
 
 import Entity.Entity;
+import Entity.Player;
 import Entity.Present;
 
 public class EntitiesPositions
@@ -55,6 +56,18 @@ public class EntitiesPositions
     public synchronized void unsetPosition(int p_x, int p_y)
     {
         m_board[m_width * p_y + p_x] = null;
+    }
+    
+    public int getSantaPosition()
+    {
+        for (int i = 0; i < m_board.length; ++i)
+        {
+            if(m_board[i] != null && m_board[i] instanceof Player)
+            {
+                return i;
+            }
+        }
+        return -1; //unreachable
     }
     
     private final int       m_height;

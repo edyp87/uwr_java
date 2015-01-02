@@ -18,7 +18,19 @@ public class Game extends Canvas implements Runnable
 {    
     public Game() {}
     
-    public void init()
+    public static void main(String[] args)
+    {
+        Game l_game = new Game();
+        l_game.setPreferredSize(s_gameDimension);
+        l_game.setMaximumSize(s_gameDimension);
+        l_game.setMinimumSize(s_gameDimension);
+        
+        createMainFrame(l_game);
+        
+        l_game.start();
+    }
+    
+    private void init()
     {
         EntitiesPositions l_board 
             = new EntitiesPositions(s_gameWidth, s_gameHeight);
@@ -33,7 +45,7 @@ public class Game extends Canvas implements Runnable
         new Thread(this).start();
     }
     
-    public void stop()
+    private void stop()
     {
         if(m_gameIsRunning)
         {
@@ -41,12 +53,12 @@ public class Game extends Canvas implements Runnable
         }
     }
     
-    public void tick()
+    private void tick()
     {
         m_player.tick();
     }
     
-    public synchronized void render()
+    private synchronized void render()
     {
         if(getBufferStrategy() == null)
         {
@@ -117,29 +129,22 @@ public class Game extends Canvas implements Runnable
         }
     }
     
-    public static void main(String[] args)
+    private static void createMainFrame(Game p_game)
     {
-        Game l_game = new Game();
-        l_game.setPreferredSize(s_gameDimension);
-        l_game.setMaximumSize(s_gameDimension);
-        l_game.setMinimumSize(s_gameDimension);
-        
         JFrame l_frame = new JFrame(s_gameName);
         l_frame.setLayout(new BorderLayout());
-        l_frame.add(l_game, BorderLayout.CENTER);
+        l_frame.add(p_game, BorderLayout.CENTER);
         l_frame.pack();
         l_frame.setVisible(true);
         l_frame.setResizable(true);
         l_frame.setLocationRelativeTo(null);
         l_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        l_game.start();
     }
-
+    
     public static final int       s_gameWidth        = 25;
     public static final int       s_gameHeight       = 15;
     public static final int       s_scale            = 1;
-    public static final int       s_numberOfChildren = 12;
+    public static final int       s_numberOfChildren = 20;
     public static final String    s_gameName         = "Santa - v0.1";
     public static final Dimension s_gameDimension    
         = new Dimension(s_gameWidth  * SpriteContainer.s_tileSize * s_scale,

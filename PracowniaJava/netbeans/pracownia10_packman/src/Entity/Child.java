@@ -44,4 +44,71 @@ public class Child extends Entity
     }
     
     private boolean m_childIsSleeping = false;
+
+    public boolean isSantaInRadius()
+    {
+        int l_santaPosition = m_board.getSantaPosition();
+        int l_santaX = l_santaPosition % Game.s_gameWidth;
+        int l_santaY = l_santaPosition / Game.s_gameWidth;
+        
+        return Math.abs(l_santaX - m_posX) <= 10 && Math.abs(l_santaY - m_posY) <= 10;
+    }
+    
+    public int moveTowardSanta()
+    {
+        int l_santaPosition = m_board.getSantaPosition();
+        int l_santaX = l_santaPosition % Game.s_gameWidth;
+        int l_santaY = l_santaPosition / Game.s_gameWidth;
+        
+        if(l_santaX < m_posX) //TODO: ifology :)
+        {
+            if (l_santaY < m_posY)
+            {
+                if(Math.abs(m_posX - l_santaX) < Math.abs(m_posY - l_santaY))
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 3;
+                }
+            }
+            else
+            {
+                if(Math.abs(m_posX - l_santaX) < Math.abs(m_posY - l_santaY))
+                {
+                    return 2;
+                }
+                else
+                {
+                    return 3;
+                }
+            }
+        }        
+        else
+        {
+            if (l_santaY < m_posY)
+            {
+                if(Math.abs(m_posX - l_santaX) < Math.abs(m_posY - l_santaY))
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                if(Math.abs(m_posX - l_santaX) < Math.abs(m_posY - l_santaY))
+                {
+                    return 2;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }   
+    }
 }

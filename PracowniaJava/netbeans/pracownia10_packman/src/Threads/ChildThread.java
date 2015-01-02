@@ -4,7 +4,6 @@ import Entity.Child;
 import Santa.Game;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ChildThread implements Runnable
@@ -52,12 +51,13 @@ public class ChildThread implements Runnable
     {
         Random l_random = new Random();
         int l_behavior = l_random.nextInt(50);
+
+        if(m_child.isSantaInRadius() && l_behavior < 40)
+        {
+            System.out.println(m_child.moveTowardSanta());
+            return m_child.moveTowardSanta();
+        }
         
-//        if (l_behavior < 40 && m_child.iSeeSanta() != 4)
-//        {
-//            return m_child.iSeeSanta();
-//        }
-//        
         if(l_behavior < 10)
             return 0;
         else if(l_behavior < 20)
@@ -84,6 +84,6 @@ public class ChildThread implements Runnable
     }
     
     private Child m_child;
-    private int m_waitTimeInMs;
-    private int m_bedTimeInMs;
+    private final int m_waitTimeInMs;
+    private final int m_bedTimeInMs;
 }
