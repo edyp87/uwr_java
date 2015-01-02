@@ -31,7 +31,7 @@ public class Painter
     public void render(BufferStrategy p_bufferStrategy, int p_width, int p_height)
     {
         m_background.renderBackground(m_screen);
-        m_board.renderAll(m_screen);
+        m_board.renderAll(m_screen, SpriteContainer.s_tileSize);
         
         for (int i = 0; i < m_screen.getNumberOfPixels(); ++i)
         {
@@ -44,9 +44,9 @@ public class Painter
         p_bufferStrategy.show();
     }
     
-    private Screen            m_screen;
-    private EntitiesPositions m_board;
-    private Level             m_background;
-    public  BufferedImage     m_bufferedImage;
-    private final int[]       m_bufferedImagePixels;
+    private final Screen            m_screen;
+    private final EntitiesPositions m_board;
+    private final Level             m_background;
+    public  BufferedImage           m_bufferedImage;
+    private final int[]             m_bufferedImagePixels;
 }

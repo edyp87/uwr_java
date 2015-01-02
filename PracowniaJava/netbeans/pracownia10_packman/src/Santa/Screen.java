@@ -61,7 +61,7 @@ public class Screen
         }
     }
     
-    private int[]     m_pixelMap;
-    final private int m_pixHeight;
-    final private int m_pixWidth;
+    private final int[] m_pixelMap;
+    final private int   m_pixHeight;
+    final private int   m_pixWidth;
 }

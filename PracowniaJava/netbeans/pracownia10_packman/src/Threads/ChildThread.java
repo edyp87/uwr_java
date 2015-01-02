@@ -40,7 +40,6 @@ public class ChildThread implements Runnable
                     m_child.moveLeft();
                     break;
                 case 4:
-                    System.out.println("SLEEP");
                     m_child.napTime();
                     waitInMilisec(m_bedTimeInMs);
             }

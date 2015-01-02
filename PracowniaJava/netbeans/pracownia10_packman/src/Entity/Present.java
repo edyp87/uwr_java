@@ -17,9 +17,9 @@ public class Present extends Entity
     }
     
     @Override
-    public void render(Screen p_screen)
+    public void render(Screen p_screen, int p_tileSize)
     {
         Sprite l_present = SpriteContainer.s_present;
-        p_screen.applySprite(m_posX, m_posY, l_present);
+        p_screen.applySprite(m_posX * p_tileSize, m_posY * p_tileSize, l_present);
     }
 }

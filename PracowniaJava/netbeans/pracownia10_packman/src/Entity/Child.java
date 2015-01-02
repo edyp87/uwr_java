@@ -11,27 +11,26 @@ public class Child extends Entity
 {
     public Child(Game p_gameInstance, EntitiesPositions p_board)
     {
-        m_gameInstance = p_gameInstance;
         m_board = p_board;
         randomlyPutChild();
     }
     
     @Override
-    public void render(Screen p_screen)
+    public void render(Screen p_screen, int p_tileSize)
     {
         Sprite l_child;
         if(m_childIsSleeping)
             l_child = SpriteContainer.s_childSleeping;
         else
             l_child = SpriteContainer.s_child;
-        p_screen.applySprite(m_posX, m_posY, l_child);
+        p_screen.applySprite(m_posX * p_tileSize, m_posY * p_tileSize, l_child);
     }
     
     private void randomlyPutChild()
     {
         Random l_random = new Random();
-        setPosition((1 + l_random.nextInt(Game.s_gameWidth-2)) * (SpriteContainer.s_tileSize),
-                    (1 + l_random.nextInt(Game.s_gameHeight-2)) * (SpriteContainer.s_tileSize));
+        setPosition(1 + l_random.nextInt(Game.s_gameWidth-2),
+                    1 + l_random.nextInt(Game.s_gameHeight-2));
     }
     
     public void napTime()
@@ -43,11 +42,6 @@ public class Child extends Entity
     {
         m_childIsSleeping = false;
     }
-    
-//    public int iSeeSanta()
-//    {
-//        return m_board.isSantaInRadius(m_posX, m_posX, this);
-//    }
     
     private boolean m_childIsSleeping = false;
 }

@@ -33,13 +33,13 @@ public class EntitiesPositions
         return false;
     }
     
-    public void renderAll(Screen p_screen)
+    public void renderAll(Screen p_screen, int p_tileSize)
     {
         for(Present p_entity : m_presents)
         {
             if(p_entity != null)
             {
-                p_entity.render(p_screen);
+                p_entity.render(p_screen, p_tileSize);
             }
         }
                 
@@ -47,7 +47,7 @@ public class EntitiesPositions
         {
             if(p_entity != null)
             {
-                p_entity.render(p_screen);
+                p_entity.render(p_screen, p_tileSize);
             }
         }
     }
@@ -57,9 +57,8 @@ public class EntitiesPositions
         m_board[m_width * p_y + p_x] = null;
     }
     
-    
-    
-    private int m_width, m_height;
-    private Entity[] m_board;
-    private Present[] m_presents;
+    private final int       m_height;
+    private final int       m_width;
+    private final Entity[]  m_board;
+    private final Present[] m_presents;
 }
