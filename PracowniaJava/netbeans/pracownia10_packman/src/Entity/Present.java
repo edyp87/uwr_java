@@ -21,4 +21,16 @@ public class Present extends Entity
         Sprite l_present = SpriteContainer.s_present;
         p_screen.applySprite(m_posX * p_tileSize, m_posY * p_tileSize, l_present);
     }
+    
+    public boolean presentHasOwner()
+    {
+        return m_owned;
+    }
+    
+    public void setOwned()
+    {
+        m_owned = true;
+    }
+    
+    private boolean m_owned = false;
 }

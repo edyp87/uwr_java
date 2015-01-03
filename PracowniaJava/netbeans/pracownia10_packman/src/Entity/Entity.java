@@ -63,7 +63,7 @@ public abstract class Entity
     
     public boolean setPosition(int p_x, int p_y)
     {
-        if(m_board.setPosition(p_x, p_y, this) && !m_board.isPresentOnPosition(p_x, p_y))
+        if(m_board.setPosition(p_x, p_y, this) && !m_board.isLonelyPresentOnPosition(p_x, p_y))
         {
             m_board.unsetPosition(m_posX, m_posY);
             m_posX = p_x;
@@ -71,6 +71,12 @@ public abstract class Entity
             return true;
         }
         return false;
+    }
+    
+    public void forceSetPosition(int p_x, int p_y)
+    {
+            m_posX = p_x;
+            m_posY = p_y;  
     }
     
     protected EntitiesPositions m_board;

@@ -20,10 +20,8 @@ public class ChildThread implements Runnable
     @Override
     public void run()
     {
-        while(true)
-        {
-            m_child.playTime();
-            
+        while(m_child.isChildSeekingForPresents())
+        {   
             switch(selectBehavior())
             {
                 case 0:
@@ -42,19 +40,25 @@ public class ChildThread implements Runnable
                     m_child.napTime();
                     waitInMilisec(m_bedTimeInMs);
             }
-            
-            waitInMilisec(m_waitTimeInMs);
+            if(m_child.isChildSleeping())
+            {
+                m_child.wakeUp();
+            }
+            else
+            {
+                waitInMilisec(m_waitTimeInMs);
+            }
         }
     }
     
     private int selectBehavior()
     {
+        
         Random l_random = new Random();
         int l_behavior = l_random.nextInt(50);
 
         if(m_child.isSantaInRadius() && l_behavior < 40)
         {
-            System.out.println(m_child.moveTowardSanta());
             return m_child.moveTowardSanta();
         }
         

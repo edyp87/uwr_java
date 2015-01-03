@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable
         m_player.tick();
     }
     
-    private synchronized void render()
+    private void render()
     {
         if(getBufferStrategy() == null)
         {
@@ -145,10 +145,10 @@ public class Game extends Canvas implements Runnable
         l_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    public static final int       s_gameWidth        = 15;
+    public static final int       s_gameWidth        = 20;
     public static final int       s_gameHeight       = 15;
     public static final int       s_scale            = 1;
-    public static final int       s_numberOfChildren = 20;
+    public static final int       s_numberOfChildren = 12;
     public static final String    s_gameName         = "Santa - v0.1";
     public static final Dimension s_gameDimension    
         = new Dimension(s_gameWidth  * SpriteContainer.s_tileSize * s_scale,
