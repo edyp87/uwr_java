@@ -79,6 +79,6 @@ public abstract class Entity
             m_posY = p_y;  
     }
     
-    protected EntitiesPositions m_board;
+    public  EntitiesPositions m_board;
     public int m_posX, m_posY;
 }

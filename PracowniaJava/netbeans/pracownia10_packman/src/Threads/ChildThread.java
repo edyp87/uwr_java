@@ -14,32 +14,39 @@ public class ChildThread implements Runnable
         Random l_random = new Random();
         
         m_waitTimeInMs = 500 + l_random.nextInt(1500);
-        m_bedTimeInMs = 2000 + l_random.nextInt(3000);
+        m_bedTimeInMs = 2000 + l_random.nextInt(1000);
     }
     
     @Override
     public void run()
     {
+        
         while(m_child.isChildSeekingForPresents())
         {   
-            switch(selectBehavior())
+            boolean l_bed = false;
+            synchronized(m_child.m_board)
             {
-                case 0:
-                    m_child.moveUp();
-                    break;
-                case 1:
-                    m_child.moveRight();
-                    break;
-                case 2:
-                    m_child.moveDown();
-                    break;
-                case 3:
-                    m_child.moveLeft();
-                    break;
-                case 4:
-                    m_child.napTime();
-                    waitInMilisec(m_bedTimeInMs);
+                switch(selectBehavior())
+                {
+                    case 0:
+                        m_child.moveUp();
+                        break;
+                    case 1:
+                        m_child.moveRight();
+                        break;
+                    case 2:
+                        m_child.moveDown();
+                        break;
+                    case 3:
+                        m_child.moveLeft();
+                        break;
+                    case 4:
+                        m_child.napTime();
+                        l_bed = true;
+                }
             }
+            if(l_bed)
+                waitInMilisec(m_bedTimeInMs);
             if(m_child.isChildSleeping())
             {
                 m_child.wakeUp();
@@ -50,7 +57,6 @@ public class ChildThread implements Runnable
             }
         }
     }
-    
     private int selectBehavior()
     {
         

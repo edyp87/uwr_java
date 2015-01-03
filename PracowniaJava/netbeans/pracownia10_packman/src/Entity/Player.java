@@ -76,15 +76,17 @@ public class Player extends Entity implements Runnable
 
     @Override
     public void run()
-    {
+    {   
         while(true)
-        {
-            tick();
-            try {
-                TimeUnit.MILLISECONDS.sleep(50);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        {   
+            synchronized(m_board)
+            {
+                tick();}
+                try {
+                    TimeUnit.MILLISECONDS.sleep(50);
+                } catch (InterruptedException ex) {
+                }
+            
         }
     }
 }

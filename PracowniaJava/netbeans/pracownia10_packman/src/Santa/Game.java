@@ -37,8 +37,9 @@ public class Game extends Canvas implements Runnable
         
         while(m_gameIsRunning)
         {
+            synchronized(m_player.m_board){
             tick();
-            render();
+            render();}
             waitInMilisec(50);
         }
     }
@@ -104,7 +105,7 @@ public class Game extends Canvas implements Runnable
     private void createAllChildThreads()
     {
         m_childList.stream().forEach((Child l_child) -> {
-            new Thread(new ChildThread(l_child)).start();
+            new Thread(new ChildThread(l_child), "Dziecko").start();
         });
         new Thread(m_player).start();
     }

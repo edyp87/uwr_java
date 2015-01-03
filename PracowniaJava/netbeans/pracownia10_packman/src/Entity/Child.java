@@ -117,16 +117,8 @@ public class Child extends Entity
 
     public void wakeUp()
     {
-//        if( m_board.isLonelyPresentNearby(m_posX, m_posY))
-//        {
-//            if(m_board.isLonelyPresentOnPosition(m_posX-1, m_posY  )) {System.out.println(m_posX + " PREZENT!"); m_board.setPresentOwner(m_posX-1, m_posY  ); moveLeft(); }
-//            if(m_board.isLonelyPresentOnPosition(m_posX+1, m_posY  )) {System.out.println(m_posX + " PREZENT!");m_board.setPresentOwner(m_posX+1, m_posY  ); moveRight();}
-//            if(m_board.isLonelyPresentOnPosition(m_posX  , m_posY-1)) {System.out.println(m_posX + " PREZENT!");m_board.setPresentOwner(m_posX,   m_posY-1); moveUp();   }
-//            if(m_board.isLonelyPresentOnPosition(m_posX  , m_posY+1)) {System.out.println(m_posX + " PREZENT!");m_board.setPresentOwner(m_posX,   m_posY+1); moveDown(); }
-//            foundThePresent();
-//        }
-        if(m_board.grabThePresent(m_posX, m_posY, this)) foundThePresent();
-        playTime();
+        if(!m_board.grabThePresent(m_posX, m_posY, this)) 
+            playTime();
     }
     
     public boolean isChildSeekingForPresents()
@@ -134,10 +126,10 @@ public class Child extends Entity
         return !m_childIsHappy;
     }
     
-    private void foundThePresent()
+    public void foundThePresent()
     {
-        System.out.println("ZNALAZLEM!");
         m_childIsHappy = true;
+        m_childIsSleeping = false;
     }
     
     private boolean m_childIsSleeping = false;
