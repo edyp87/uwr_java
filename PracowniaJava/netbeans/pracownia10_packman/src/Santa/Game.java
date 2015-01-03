@@ -68,7 +68,7 @@ public class Game extends Canvas implements Runnable
     
     private void tick()
     {
-        m_player.tick();
+        //m_player.tick();
     }
     
     private void render()
@@ -106,6 +106,7 @@ public class Game extends Canvas implements Runnable
         m_childList.stream().forEach((Child l_child) -> {
             new Thread(new ChildThread(l_child)).start();
         });
+        new Thread(m_player).start();
     }
     
     private void createTrippleBuffer()

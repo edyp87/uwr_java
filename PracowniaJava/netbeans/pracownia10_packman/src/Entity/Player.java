@@ -6,8 +6,11 @@ import Santa.Game;
 import Santa.InputHandler;
 import Santa.Screen;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Player extends Entity
+public class Player extends Entity implements Runnable
 {
     public Player(EntitiesPositions p_board, InputHandler p_inputHandler)
     {
@@ -70,4 +73,18 @@ public class Player extends Entity
     private static final int leftBoarderSize  = 1, upperBorderSize  = 1;
     private static final int rightBoarderSize = 2, lowerBoarderSize = 2;
     private final InputHandler m_inputHandler;
+
+    @Override
+    public void run()
+    {
+        while(true)
+        {
+            tick();
+            try {
+                TimeUnit.MILLISECONDS.sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
