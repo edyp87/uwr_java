@@ -5,17 +5,17 @@ import Sprites.SpriteContainer;
 import Santa.Game;
 import Santa.InputHandler;
 import Santa.Screen;
+import Threads.SynchroClass;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Player extends Entity implements Runnable
 {
-    public Player(EntitiesPositions p_board, InputHandler p_inputHandler)
+    public Player(EntitiesPositions p_board, InputHandler p_inputHandler, SynchroClass p_synchroClass)
     {
         m_inputHandler = p_inputHandler;
         m_board = p_board;
+        m_synchroClass = p_synchroClass;
         randomlyPutPlayer();
     }
     
@@ -30,7 +30,10 @@ public class Player extends Entity implements Runnable
     @Override
     public void tick()
     {
-        movePlayer();   
+       // synchronized(m_synchroClass)
+        {
+            m_synchroClass.handlePlayer(this, m_inputHandler);
+        }
     }
     
     private void randomlyPutPlayer()
@@ -39,17 +42,7 @@ public class Player extends Entity implements Runnable
         setPosition(randomWidth(), randomHeight());
     }
     
-    private void movePlayer()
-    {
-        if(m_inputHandler.m_up)          moveUp();
-        if(m_inputHandler.m_down)        moveDown();
-        if(m_inputHandler.m_left)        moveLeft();
-        if(m_inputHandler.m_right)       moveRight();
-        if(m_inputHandler.m_dropPresent) dropPresent();
-        m_inputHandler.signalReceived();
-    }
-    
-    private void dropPresent()
+    public void dropPresent()
     {
         m_board.dropPresent(m_posX,
                             m_posY,
@@ -73,15 +66,14 @@ public class Player extends Entity implements Runnable
     private static final int leftBoarderSize  = 1, upperBorderSize  = 1;
     private static final int rightBoarderSize = 2, lowerBoarderSize = 2;
     private final InputHandler m_inputHandler;
+    private final SynchroClass m_synchroClass;
 
     @Override
     public void run()
     {   
         while(true)
         {   
-            synchronized(m_board)
-            {
-                tick();}
+                tick();
                 try {
                     TimeUnit.MILLISECONDS.sleep(50);
                 } catch (InterruptedException ex) {

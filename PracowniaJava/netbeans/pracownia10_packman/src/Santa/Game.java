@@ -5,6 +5,7 @@ import Entity.Player;
 import Level.Level;
 import Sprites.SpriteContainer;
 import Threads.ChildThread;
+import Threads.SynchroClass;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 
 public class Game extends Canvas implements Runnable
 {    
+    private SynchroClass m_synchroClass;
     public Game() {}
     
     public static void main(String[] args)
@@ -37,9 +39,8 @@ public class Game extends Canvas implements Runnable
         
         while(m_gameIsRunning)
         {
-            synchronized(m_player.m_board){
             tick();
-            render();}
+            render();
             waitInMilisec(50);
         }
     }
@@ -55,6 +56,7 @@ public class Game extends Canvas implements Runnable
     {
         EntitiesPositions l_board 
             = new EntitiesPositions(s_gameWidth, s_gameHeight);
+        m_synchroClass = new SynchroClass();
         initializeEntities(l_board);
         initializePainter(l_board);
     }
@@ -85,7 +87,7 @@ public class Game extends Canvas implements Runnable
     
     private void initializeEntities(EntitiesPositions p_board)
     {
-        m_player    = new Player(p_board, new InputHandler(this));
+        m_player    = new Player(p_board, new InputHandler(this), m_synchroClass);
         m_childList = new ArrayList<>();
         for (int i = 0; i < s_numberOfChildren; ++i)
         {
@@ -105,9 +107,9 @@ public class Game extends Canvas implements Runnable
     private void createAllChildThreads()
     {
         m_childList.stream().forEach((Child l_child) -> {
-            new Thread(new ChildThread(l_child), "Dziecko").start();
+            new Thread(new ChildThread(l_child, m_synchroClass), "Child").start();
         });
-        new Thread(m_player).start();
+        new Thread(m_player, "Player").start();
     }
     
     private void createTrippleBuffer()
