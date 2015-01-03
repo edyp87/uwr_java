@@ -9,7 +9,11 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-
+/**
+ * Handle rendering particular entities on screen. 
+ * Then copy screen on desired buffered image.
+ * @author Marek
+ */
 public class Painter
 {
     public Painter(Screen p_screen, EntitiesPositions p_board, Level p_background)
@@ -30,14 +34,29 @@ public class Painter
     
     public void render(BufferStrategy p_bufferStrategy, int p_width, int p_height)
     {
+        renderEntitiesOnScreen();
+        
+        copyScreenToBufferedImage();
+        
+        drawImageOnBuffer(p_bufferStrategy, p_width, p_height);
+    }
+    
+    private void renderEntitiesOnScreen()
+    {
         m_background.renderBackground(m_screen);
         m_board.renderAll(m_screen, SpriteContainer.s_tileSize);
-        
-        for (int i = 0; i < m_screen.getNumberOfPixels(); ++i)
+    }
+    
+    private void copyScreenToBufferedImage()
+    {
+        for (int l_pixelNumber = 0; l_pixelNumber < m_screen.getNumberOfPixels(); ++l_pixelNumber)
         {
-            m_bufferedImagePixels[i] = m_screen.getPixel(i);
+            m_bufferedImagePixels[l_pixelNumber] = m_screen.getPixel(l_pixelNumber);
         }
-        
+    }
+    
+    private void drawImageOnBuffer(BufferStrategy p_bufferStrategy, int p_width, int p_height)
+    {
         Graphics l_graphics = p_bufferStrategy.getDrawGraphics();
         l_graphics.drawImage(m_bufferedImage, 0, 0, p_width, p_height, null);
         l_graphics.dispose();

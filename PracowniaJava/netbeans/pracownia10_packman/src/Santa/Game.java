@@ -30,12 +30,17 @@ public class Game extends Canvas implements Runnable
         l_game.start();
     }
     
-    private void init()
+    @Override
+    public void run()
     {
-        EntitiesPositions l_board 
-            = new EntitiesPositions(s_gameWidth, s_gameHeight);
-        initializeEntities(l_board);
-        initializePainter(l_board);
+        createAllChildThreads();
+        
+        while(m_gameIsRunning)
+        {
+            tick();
+            render();
+            waitInMilisec(50);
+        }
     }
     
     private void start()
@@ -43,6 +48,14 @@ public class Game extends Canvas implements Runnable
         init();
         m_gameIsRunning = true;
         new Thread(this).start();
+    }
+    
+    private void init()
+    {
+        EntitiesPositions l_board 
+            = new EntitiesPositions(s_gameWidth, s_gameHeight);
+        initializeEntities(l_board);
+        initializePainter(l_board);
     }
     
     private void stop()
@@ -69,26 +82,10 @@ public class Game extends Canvas implements Runnable
         drawCanvas(getBufferStrategy());
     }
     
-    @Override
-    public void run()
-    {
-        for (Child l_child : m_childList)
-        {
-            new Thread(new ChildThread(l_child)).start();
-        }
-        
-        while(m_gameIsRunning)
-        {
-            tick();
-            render();
-            waitInMilisec(50);
-        }
-    }
-    
     private void initializeEntities(EntitiesPositions p_board)
     {
-        m_player    = new Player(this, p_board, new InputHandler(this));
-        m_childList = new ArrayList<Child>();
+        m_player    = new Player(p_board, new InputHandler(this));
+        m_childList = new ArrayList<>();
         for (int i = 0; i < s_numberOfChildren; ++i)
         {
             m_childList.add(new Child(this, p_board));
@@ -102,6 +99,13 @@ public class Game extends Canvas implements Runnable
                    s_gameHeight * SpriteContainer.s_tileSize),
                    p_board,
                    new Level(s_gameWidth, s_gameHeight));
+    }
+    
+    private void createAllChildThreads()
+    {
+        m_childList.stream().forEach((Child l_child) -> {
+            new Thread(new ChildThread(l_child)).start();
+        });
     }
     
     private void createTrippleBuffer()
@@ -141,7 +145,7 @@ public class Game extends Canvas implements Runnable
         l_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    public static final int       s_gameWidth        = 25;
+    public static final int       s_gameWidth        = 15;
     public static final int       s_gameHeight       = 15;
     public static final int       s_scale            = 1;
     public static final int       s_numberOfChildren = 20;

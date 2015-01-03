@@ -2,6 +2,12 @@ package Santa;
 
 import Sprites.Sprite;
 
+/**
+ * Screen is only an array of stashed pixels
+ * which are going to be draw on bufferred image.
+ * Client can apply new sprites to this image, can also get pixels.
+ * @author Marek
+ */
 public class Screen
 {
     
@@ -13,7 +19,7 @@ public class Screen
         m_pixelMap = new int[m_pixWidth * m_pixHeight];
     }
     
-    public void applySprite(int p_spritePosX, int p_spritePosY, Sprite p_sprite)
+    public void applySprite(int p_spritePosX, int p_spritePosY, final Sprite p_sprite)
     {
         int l_height       = p_sprite.m_height;
         int l_width        = p_sprite.m_width;

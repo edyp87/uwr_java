@@ -1,9 +1,15 @@
 package Santa;
 
+import Entity.Child;
 import Entity.Entity;
 import Entity.Player;
 import Entity.Present;
 
+/**
+ * EntitiesPosition handle all entities position on game board.
+ * It is also a proxy class when painter want to paint all entities.
+ * @author Marek
+ */
 public class EntitiesPositions
 {
     public EntitiesPositions(int p_width, int p_height)
@@ -26,7 +32,7 @@ public class EntitiesPositions
     
     public synchronized boolean dropPresent(int p_x, int p_y, Present p_entity)
     {
-        if(m_presents[m_width * p_y + p_x] == null)
+        if(m_presents[m_width * p_y + p_x] == null && isNeighboringChildSleeping(p_x, p_y))
         {
             m_presents[m_width * p_y + p_x] = p_entity;
             return true;
@@ -68,6 +74,28 @@ public class EntitiesPositions
             }
         }
         return -1; //unreachable
+    }
+
+    public boolean isNeighboringChildSleeping(int p_posX, int p_posY)
+    {
+        return isChildSleeping(p_posX-1, p_posY  )
+            || isChildSleeping(p_posX+1, p_posY  )
+            || isChildSleeping(p_posX,   p_posY-1)
+            || isChildSleeping(p_posX,   p_posY+1);
+        
+    }
+    
+    private boolean isChildSleeping(int p_posX, int p_posY)
+    {
+        return m_width * p_posY + p_posX < m_board.length
+                && m_board[m_width * p_posY + p_posX] != null 
+                && m_board[m_width * p_posY + p_posX] instanceof Child 
+                && ((Child)m_board[m_width * p_posY + p_posX]).isChildSleeping();
+    }
+    
+    public boolean isPresentOnPosition(int p_x, int p_y)
+    {
+        return m_presents[m_width * p_y + p_x] != null;
     }
     
     private final int       m_height;

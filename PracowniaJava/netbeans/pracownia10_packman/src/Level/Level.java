@@ -3,6 +3,11 @@ package Level;
 import Tiles.Tile;
 import Santa.Screen;
 
+/**
+ * Level hold information about game board background.
+ * It is also a proxy class for painter to paint background.
+ * @author Marek
+ */
 public class Level
 {
     int m_width, m_height;

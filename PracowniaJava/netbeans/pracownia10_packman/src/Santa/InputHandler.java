@@ -3,6 +3,10 @@ package Santa;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Key listener get input from the user and connect it with game class.
+ * @author Marek
+ */
 public class InputHandler implements KeyListener
 {
     public InputHandler(Game p_game)
@@ -30,7 +34,7 @@ public class InputHandler implements KeyListener
     
     public void signalReceived()
     {
-         m_up = m_down = m_right = m_left = false;
+         m_up = m_down = m_right = m_left = m_dropPresent = false;
     }
     
     private void toggleWsad(KeyEvent p_event, boolean p_pressed)

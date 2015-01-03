@@ -54,6 +54,11 @@ public class Child extends Entity
         return Math.abs(l_santaX - m_posX) <= 10 && Math.abs(l_santaY - m_posY) <= 10;
     }
     
+    public boolean isChildSleeping()
+    {
+        return m_childIsSleeping;
+    }
+    
     public int moveTowardSanta()
     {
         int l_santaPosition = m_board.getSantaPosition();
