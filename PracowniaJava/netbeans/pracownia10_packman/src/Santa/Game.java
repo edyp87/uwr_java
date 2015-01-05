@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Game extends Canvas implements Runnable
 {    
@@ -39,10 +40,14 @@ public class Game extends Canvas implements Runnable
         
         while(m_gameIsRunning)
         {
+            if (m_board.victory() || m_board.lost())
+                stop();
             tick();
             render();
             waitInMilisec(50);
         }
+        
+        showEndingMessage();
     }
     
     private void start()
@@ -54,19 +59,16 @@ public class Game extends Canvas implements Runnable
     
     private void init()
     {
-        EntitiesPositions l_board 
-            = new EntitiesPositions(s_gameWidth, s_gameHeight);
+        m_board = new EntitiesPositions(s_gameWidth, s_gameHeight);
         m_synchroClass = new SynchroClass();
-        initializeEntities(l_board);
-        initializePainter(l_board);
+        initializeEntities(m_board);
+        initializePainter(m_board);
     }
     
     private void stop()
     {
-        if(m_gameIsRunning)
-        {
-            m_gameIsRunning = false;
-        }
+        m_gameIsRunning = false;
+
     }
     
     private void tick()
@@ -87,12 +89,13 @@ public class Game extends Canvas implements Runnable
     
     private void initializeEntities(EntitiesPositions p_board)
     {
-        m_player    = new Player(p_board, new InputHandler(this), m_synchroClass);
         m_childList = new ArrayList<>();
         for (int i = 0; i < s_numberOfChildren; ++i)
         {
             m_childList.add(new Child(this, p_board));
         }
+        
+        m_player    = new Player(p_board, new InputHandler(this), m_synchroClass);
     }
     
     private void initializePainter(EntitiesPositions p_board)
@@ -137,6 +140,16 @@ public class Game extends Canvas implements Runnable
         }
     }
     
+    private void showEndingMessage()
+    {
+        String l_message;
+        if (m_board.lost())
+            l_message = "Mikołaj został przyłapany przez dziecko :(";
+        else
+            l_message = "Mikołaj rozdał wszystkie prezenty! :)";
+        JOptionPane.showMessageDialog(null, l_message, "Koniec gry", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
     private static void createMainFrame(Game p_game)
     {
         JFrame l_frame = new JFrame(s_gameName);
@@ -152,13 +165,13 @@ public class Game extends Canvas implements Runnable
     public static final int       s_gameWidth        = 20;
     public static final int       s_gameHeight       = 15;
     public static final int       s_scale            = 1;
-    public static final int       s_numberOfChildren = 12;
+    public static final int       s_numberOfChildren = 3;
     public static final String    s_gameName         = "Santa - v0.1";
     public static final Dimension s_gameDimension    
         = new Dimension(s_gameWidth  * SpriteContainer.s_tileSize * s_scale,
                         s_gameHeight * SpriteContainer.s_tileSize * s_scale);
     
-    
+    private EntitiesPositions     m_board;
     private Player                m_player;
     private ArrayList<Child>      m_childList;
     private Painter               m_painter;

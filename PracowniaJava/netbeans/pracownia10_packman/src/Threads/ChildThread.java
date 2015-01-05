@@ -15,8 +15,8 @@ public class ChildThread implements Runnable
         m_child = p_child;
         m_synchroClass = p_synchroClass;
                 Random l_random = new Random();
-        m_waitTimeInMs = 500 + l_random.nextInt(1500);
-        m_bedTimeInMs = 2000 + l_random.nextInt(1000);
+        m_waitTimeInMs = 1000 + l_random.nextInt(1500);
+        m_bedTimeInMs = 3000 + l_random.nextInt(1000);
     }
     
     @Override
@@ -31,11 +31,13 @@ public class ChildThread implements Runnable
                 {
                     waitInMilisec(m_bedTimeInMs);
                 }
-                Thread.yield();
+            }
+            //synchronized(m_synchroClass)
+            {
                 if(!m_synchroClass.wakeChildUpIfSleeping(m_child))
                 {
                     waitInMilisec(m_waitTimeInMs);
-                }Thread.yield();
+                }
             }
         }
     }

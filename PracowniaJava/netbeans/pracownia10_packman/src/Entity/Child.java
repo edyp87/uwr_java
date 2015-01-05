@@ -28,6 +28,7 @@ public class Child extends Entity
     
     private void randomlyPutChild()
     {
+        System.out.println("Randomly py child");
         Random l_random = new Random();
         setPosition(1 + l_random.nextInt(Game.s_gameWidth-2),
                     1 + l_random.nextInt(Game.s_gameHeight-2));
@@ -49,7 +50,8 @@ public class Child extends Entity
         int l_santaX = l_santaPosition % Game.s_gameWidth;
         int l_santaY = l_santaPosition / Game.s_gameWidth;
         
-        return Math.abs(l_santaX - m_posX) <= 10 && Math.abs(l_santaY - m_posY) <= 10;
+        return Math.abs(l_santaX - m_posX) <= m_childScope 
+            && Math.abs(l_santaY - m_posY) <= m_childScope;
     }
     
     public boolean isChildSleeping()
@@ -134,4 +136,5 @@ public class Child extends Entity
     
     private boolean m_childIsSleeping = false;
     private boolean m_childIsHappy = false;
+    private int m_childScope = 5;
 }

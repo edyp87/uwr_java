@@ -12,6 +12,7 @@ import Entity.Present;
  */
 public class EntitiesPositions
 {
+    private boolean m_playerLost = false;
     public EntitiesPositions(int p_width, int p_height)
     {
         m_width = p_width;
@@ -25,9 +26,23 @@ public class EntitiesPositions
         if(m_board[m_width * p_y + p_x] == null)
         {
             m_board[m_width * p_y + p_x] = p_entity;
-            if(p_entity instanceof Child && !((Child)p_entity).isChildSeekingForPresents()) {}
-               // System.out.println("setPosition: " + p_x  + " " + p_y);
-            if(allHavePresents()) System.out.println("VICTORY!");
+            if(p_entity instanceof Player && isPlayingChildNearby(p_x, p_y))
+            {
+                System.out.println("LOST!");
+                m_playerLost = true;
+            }
+            
+            if(p_entity instanceof Child && isSantaNearby(p_x, p_y))
+            {
+                System.out.println("LOST!");
+                m_playerLost = true;
+            }
+            
+            if(allHavePresents())
+            {
+                System.out.println("VICTORY!");
+                m_allChildHasPresents = true;
+            }
             return true;
         }
         return false;
@@ -88,6 +103,47 @@ public class EntitiesPositions
         
     }
     
+    public boolean isChildNearby(int p_posX, int p_posY)
+    {
+        return isChildOnThisTile(p_posX-1, p_posY  )
+            || isChildOnThisTile(p_posX+1, p_posY  )
+            || isChildOnThisTile(p_posX,   p_posY-1)
+            || isChildOnThisTile(p_posX,   p_posY+1);
+        
+    }
+    
+    
+        public boolean isSantaNearby(int p_posX, int p_posY)
+    {
+        return isSantaOnThisTile(p_posX-1, p_posY  )
+            || isSantaOnThisTile(p_posX+1, p_posY  )
+            || isSantaOnThisTile(p_posX,   p_posY-1)
+            || isSantaOnThisTile(p_posX,   p_posY+1);
+        
+    }
+    
+    private boolean isChildOnThisTile(int p_posX, int p_posY)
+    {
+        return m_width * p_posY + p_posX < m_board.length
+                && m_width * p_posY + p_posX > 0
+                && m_board[m_width * p_posY + p_posX] != null 
+                && m_board[m_width * p_posY + p_posX] instanceof Child;
+    }
+    
+    private boolean isPlayingChildOnThisTile(int p_posX, int p_posY)
+    {
+        return isChildOnThisTile(p_posX, p_posY)
+        && !((Child)m_board[m_width * p_posY + p_posX]).isChildSleeping();
+    }
+    
+    private boolean isSantaOnThisTile(int p_posX, int p_posY)
+    {
+        return m_width * p_posY + p_posX < m_board.length
+                && m_width * p_posY + p_posX > 0
+                && m_board[m_width * p_posY + p_posX] != null 
+                && m_board[m_width * p_posY + p_posX] instanceof Player;
+    }
+    
     public boolean isLonelyPresentNearby(int p_posX, int p_posY)
     {
         return isLonelyPresentOnPosition(p_posX-1, p_posY  )
@@ -98,9 +154,7 @@ public class EntitiesPositions
     
     private boolean isChildSleeping(int p_posX, int p_posY)
     {
-        return m_width * p_posY + p_posX < m_board.length
-                && m_board[m_width * p_posY + p_posX] != null 
-                && m_board[m_width * p_posY + p_posX] instanceof Child 
+        return isChildOnThisTile(p_posX, p_posY)
                 && ((Child)m_board[m_width * p_posY + p_posX]).isChildSleeping();
     }
     
@@ -124,6 +178,7 @@ public class EntitiesPositions
             if(isLonelyPresentOnPosition(m_posX  , m_posY-1)) { setPresentOwner(m_posX,   m_posY-1); setPosition(m_posX, m_posY-1, p_child); unsetPosition(m_posX, m_posY); p_child.forceSetPosition(m_posX, m_posY-1); }
             if(isLonelyPresentOnPosition(m_posX  , m_posY+1)) { setPresentOwner(m_posX,   m_posY+1); setPosition(m_posX, m_posY+1, p_child); unsetPosition(m_posX, m_posY);p_child.forceSetPosition(m_posX, m_posY+1);}
             p_child.foundThePresent();
+            if(allHavePresents()) m_allChildHasPresents = true;
             return true;
         }
         return false;
@@ -133,12 +188,35 @@ public class EntitiesPositions
     private final int       m_width;
     private final Entity[]  m_board;
     private final Present[] m_presents;
-
+    private boolean m_allChildHasPresents = false;
+    
     private boolean allHavePresents()
     {
+        int l_childNumber = 0;
         for(Entity l_entity : m_board)
-            if(l_entity instanceof Child && ((Child)l_entity).isChildSeekingForPresents())
-                return false;
-        return true;
+            if(l_entity instanceof Child)
+            {
+                ++l_childNumber;  
+                if(((Child)l_entity).isChildSeekingForPresents())
+                    return false;
+            }
+        return l_childNumber != 0;
+    }
+
+    public boolean victory()
+    {
+        return m_allChildHasPresents;
+    }
+    
+    public boolean lost()
+    {
+        return m_playerLost;
+    }
+
+    private boolean isPlayingChildNearby(int p_posX, int p_posY) {
+        return isPlayingChildOnThisTile(p_posX-1, p_posY  )
+            || isPlayingChildOnThisTile(p_posX+1, p_posY  )
+            || isPlayingChildOnThisTile(p_posX,   p_posY-1)
+            || isPlayingChildOnThisTile(p_posX,   p_posY+1);
     }
 }

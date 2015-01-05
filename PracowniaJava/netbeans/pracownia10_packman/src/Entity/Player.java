@@ -30,16 +30,25 @@ public class Player extends Entity implements Runnable
     @Override
     public void tick()
     {
-       // synchronized(m_synchroClass)
+        synchronized(m_synchroClass)
         {
             m_synchroClass.handlePlayer(this, m_inputHandler);
         }
     }
     
     private void randomlyPutPlayer()
-    {
-        
-        setPosition(randomWidth(), randomHeight());
+    {System.out.println("Randomly py player");
+        while(true)
+        {
+            int l_randomWidth  = randomWidth();
+            int l_randomHeight = randomHeight();
+            if (!m_board.isChildNearby(l_randomWidth, l_randomHeight))
+            {
+                setPosition(l_randomWidth, l_randomHeight);
+                break;
+            }
+            
+        }
     }
     
     public void dropPresent()
