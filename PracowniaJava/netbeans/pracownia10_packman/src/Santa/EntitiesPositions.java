@@ -51,8 +51,9 @@ public class EntitiesPositions
     public boolean dropPresent(int p_x, int p_y, Present p_entity)
     {
         if(m_presents[m_width * p_y + p_x] == null && isNeighboringChildSleeping(p_x, p_y))
-        {
+        { 
             m_presents[m_width * p_y + p_x] = p_entity;
+                
             return true;
         }
         return false;
@@ -121,7 +122,7 @@ public class EntitiesPositions
             || isSantaOnThisTile(p_posX,   p_posY+1);
         
     }
-    
+        
     private boolean isChildOnThisTile(int p_posX, int p_posY)
     {
         return m_width * p_posY + p_posX < m_board.length
@@ -133,7 +134,7 @@ public class EntitiesPositions
     private boolean isPlayingChildOnThisTile(int p_posX, int p_posY)
     {
         return isChildOnThisTile(p_posX, p_posY)
-        && !((Child)m_board[m_width * p_posY + p_posX]).isChildSleeping();
+        && !((Child)m_board[m_width * p_posY + p_posX]).isSleeping();
     }
     
     private boolean isSantaOnThisTile(int p_posX, int p_posY)
@@ -155,13 +156,13 @@ public class EntitiesPositions
     private boolean isChildSleeping(int p_posX, int p_posY)
     {
         return isChildOnThisTile(p_posX, p_posY)
-                && ((Child)m_board[m_width * p_posY + p_posX]).isChildSleeping();
+                && ((Child)m_board[m_width * p_posY + p_posX]).isSleeping();
     }
     
     public boolean isLonelyPresentOnPosition(int p_x, int p_y)
     {
         
-        return p_x >= 0 && p_y >= 0 && m_width * p_x + p_y < m_presents.length && m_presents[m_width * p_y + p_x] != null && !m_presents[m_width * p_y + p_x].presentHasOwner();
+        return p_x >= 0 && p_y >= 0 && m_width * p_y + p_x < m_presents.length && m_presents[m_width * p_y + p_x] != null && !m_presents[m_width * p_y + p_x].presentHasOwner();
     }
     
     public void setPresentOwner(int p_x, int p_y)
@@ -173,10 +174,10 @@ public class EntitiesPositions
     {
         if( isLonelyPresentNearby(m_posX, m_posY))
         {
-            if(isLonelyPresentOnPosition(m_posX-1, m_posY  )) { setPresentOwner(m_posX-1, m_posY  ); setPosition(m_posX-1, m_posY, p_child); unsetPosition(m_posX, m_posY); p_child.forceSetPosition(m_posX-1, m_posY);}
-            if(isLonelyPresentOnPosition(m_posX+1, m_posY  )) { setPresentOwner(m_posX+1, m_posY  ); setPosition(m_posX+1, m_posY, p_child);unsetPosition(m_posX, m_posY);p_child.forceSetPosition(m_posX+1, m_posY);}
-            if(isLonelyPresentOnPosition(m_posX  , m_posY-1)) { setPresentOwner(m_posX,   m_posY-1); setPosition(m_posX, m_posY-1, p_child); unsetPosition(m_posX, m_posY); p_child.forceSetPosition(m_posX, m_posY-1); }
-            if(isLonelyPresentOnPosition(m_posX  , m_posY+1)) { setPresentOwner(m_posX,   m_posY+1); setPosition(m_posX, m_posY+1, p_child); unsetPosition(m_posX, m_posY);p_child.forceSetPosition(m_posX, m_posY+1);}
+            if(isLonelyPresentOnPosition(m_posX-1, m_posY  )) { setPresentOwner(m_posX-1, m_posY  ); setPosition(m_posX-1, m_posY,   p_child); unsetPosition(m_posX, m_posY); p_child.forceSetPosition(m_posX-1, m_posY  );}
+            if(isLonelyPresentOnPosition(m_posX+1, m_posY  )) { setPresentOwner(m_posX+1, m_posY  ); setPosition(m_posX+1, m_posY,   p_child); unsetPosition(m_posX, m_posY); p_child.forceSetPosition(m_posX+1, m_posY  );}
+            if(isLonelyPresentOnPosition(m_posX  , m_posY-1)) { setPresentOwner(m_posX,   m_posY-1); setPosition(m_posX,   m_posY-1, p_child); unsetPosition(m_posX, m_posY); p_child.forceSetPosition(m_posX,   m_posY-1); }
+            if(isLonelyPresentOnPosition(m_posX  , m_posY+1)) { setPresentOwner(m_posX,   m_posY+1); setPosition(m_posX,   m_posY+1, p_child); unsetPosition(m_posX, m_posY); p_child.forceSetPosition(m_posX,   m_posY+1);}
             p_child.foundThePresent();
             if(allHavePresents()) m_allChildHasPresents = true;
             return true;

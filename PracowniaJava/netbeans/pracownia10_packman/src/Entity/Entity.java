@@ -21,46 +21,6 @@ public abstract class Entity
         
     }
     
-    public boolean moveUp()
-    {
-        if(m_posY > 1)
-            return setPosition(m_posX, m_posY - 1);
-        else
-        {
-            return setPosition(m_posX, Game.s_gameHeight - 2);
-        }
-    }
-    
-    public boolean moveDown()
-    {
-        if(m_posY < Game.s_gameHeight - 2)
-            return setPosition(m_posX, m_posY + 1);
-        else
-        {
-            return setPosition(m_posX, 1);
-        }
-    }
-        
-    public boolean moveLeft()
-    {
-        if(m_posX > 1)
-            return setPosition(m_posX - 1, m_posY);
-        else
-        {
-            return setPosition( Game.s_gameWidth - 2, m_posY);
-        }
-    }
-            
-    public boolean moveRight()
-    {
-        if(m_posX < Game.s_gameWidth - 2)
-            return setPosition(m_posX + 1, m_posY);
-        else
-        {
-            return setPosition(1, m_posY);
-        }
-    }
-    
     public boolean setPosition(int p_x, int p_y)
     {
         if(m_board.setPosition(p_x, p_y, this) && !m_board.isLonelyPresentOnPosition(p_x, p_y))
@@ -81,4 +41,9 @@ public abstract class Entity
     
     public  EntitiesPositions m_board;
     public int m_posX, m_posY;
+    
+    public enum Moves
+    {
+        up, down, left, right, end;
+    }
 }

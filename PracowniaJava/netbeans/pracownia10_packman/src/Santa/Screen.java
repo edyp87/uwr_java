@@ -1,6 +1,7 @@
 package Santa;
 
 import Sprites.Sprite;
+import Sprites.SpriteContainer;
 
 /**
  * Screen is only an array of stashed pixels
@@ -23,8 +24,8 @@ public class Screen
     {
         int l_height       = p_sprite.m_height;
         int l_width        = p_sprite.m_width;
-        int l_spritePosX   = p_spritePosX;
-        int l_spritePosY   = p_spritePosY;
+        int l_spritePosX   = SpriteContainer.tileToPix(p_spritePosX, SpriteContainer.s_tileSize);
+        int l_spritePosY   = SpriteContainer.tileToPix(p_spritePosY, SpriteContainer.s_tileSize);
         
         for (int l_pixPosY = 0; l_pixPosY < l_height; ++l_pixPosY)
         {

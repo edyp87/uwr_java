@@ -7,7 +7,7 @@ import Sprites.Sprite;
 import Sprites.SpriteContainer;
 import java.util.Random;
 
-public class Child extends Entity
+public class Child extends Movable
 {
     public Child(Game p_gameInstance, EntitiesPositions p_board)
     {
@@ -18,20 +18,27 @@ public class Child extends Entity
     @Override
     public void render(Screen p_screen, int p_tileSize)
     {
-        Sprite l_child;
-        if(isChildSleeping())
-            l_child = SpriteContainer.s_childSleeping;
+        p_screen.applySprite(m_posX, m_posY, selectChildImage());
+    }
+    
+    private Sprite selectChildImage()
+    {
+        if (isSleeping())
+            return SpriteContainer.s_childSleeping;
         else
-            l_child = SpriteContainer.s_child;
-        p_screen.applySprite(m_posX * p_tileSize, m_posY * p_tileSize, l_child);
+            return SpriteContainer.s_child;
     }
     
     private void randomlyPutChild()
     {
-        System.out.println("Randomly py child");
         Random l_random = new Random();
-        setPosition(1 + l_random.nextInt(Game.s_gameWidth-2),
-                    1 + l_random.nextInt(Game.s_gameHeight-2));
+        while(true)
+        {
+            Boolean l_setStatus = setPosition(
+                1 + l_random.nextInt(Game.s_gameWidth -2),
+                1 + l_random.nextInt(Game.s_gameHeight-2));
+            if(l_setStatus) break;
+        }
     }
     
     public void napTime()
@@ -54,12 +61,12 @@ public class Child extends Entity
             && Math.abs(l_santaY - m_posY) <= m_childScope;
     }
     
-    public boolean isChildSleeping()
+    public boolean isSleeping()
     {
         return m_childIsSleeping;
     }
     
-    public int moveTowardSanta()
+    public Moves moveTowardSanta()
     {
         int l_santaPosition = m_board.getSantaPosition();
         int l_santaX = l_santaPosition % Game.s_gameWidth;
@@ -71,22 +78,22 @@ public class Child extends Entity
             {
                 if(Math.abs(m_posX - l_santaX) < Math.abs(m_posY - l_santaY))
                 {
-                    return 0;
+                    return Moves.up;
                 }
                 else
                 {
-                    return 3;
+                    return Moves.left;
                 }
             }
             else
             {
                 if(Math.abs(m_posX - l_santaX) < Math.abs(m_posY - l_santaY))
                 {
-                    return 2;
+                    return Moves.down;
                 }
                 else
                 {
-                    return 3;
+                    return Moves.left;
                 }
             }
         }        
@@ -96,22 +103,22 @@ public class Child extends Entity
             {
                 if(Math.abs(m_posX - l_santaX) < Math.abs(m_posY - l_santaY))
                 {
-                    return 0;
+                    return Moves.up;
                 }
                 else
                 {
-                    return 1;
+                    return Moves.right;
                 }
             }
             else
             {
                 if(Math.abs(m_posX - l_santaX) < Math.abs(m_posY - l_santaY))
                 {
-                    return 2;
+                    return Moves.down;
                 }
                 else
                 {
-                    return 1;
+                    return Moves.right;
                 }
             }
         }   
@@ -131,10 +138,10 @@ public class Child extends Entity
     public void foundThePresent()
     {
         m_childIsHappy = true;
-        m_childIsSleeping = false;
+        //m_childIsSleeping = false;
     }
     
     private boolean m_childIsSleeping = false;
     private boolean m_childIsHappy = false;
-    private int m_childScope = 5;
+    private final int m_childScope = 5;
 }

@@ -1,26 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Threads;
 
 import Entity.Child;
+import Entity.Entity.Moves;
 import Entity.Player;
-import Santa.Game;
+import static Entity.Entity.Moves.*;
 import Santa.InputHandler;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
-/**
- *
- * @author Marek
- */
 public class SynchroClass
 {
-    private final int m_waitTimeInMs;
-    private final int m_bedTimeInMs;
     public SynchroClass()
     {
         
@@ -31,32 +19,32 @@ public class SynchroClass
     
     public synchronized boolean handleChild(Child m_child)
     {
-            boolean l_bed = false;
+            boolean l_bedTime = false;
                 switch(selectBehavior(m_child))
                 {
-                    case 0:
+                    case up:
                         m_child.moveUp();
                         break;
-                    case 1:
+                    case right:
                         m_child.moveRight();
                         break;
-                    case 2:
+                    case down:
                         m_child.moveDown();
                         break;
-                    case 3:
+                    case left:
                         m_child.moveLeft();
                         break;
-                    case 4:
+                    case end:
                         m_child.napTime();
-                        l_bed = true;
+                        l_bedTime = true;
                 }
-            return l_bed;
+            return l_bedTime;
 
     }
 
     public synchronized boolean wakeChildUpIfSleeping(Child m_child)
     {
-        if(m_child.isChildSleeping())
+        if(m_child.isSleeping())
         {
             m_child.wakeUp();
             return true;
@@ -76,10 +64,8 @@ public class SynchroClass
         if(p_inputHandler.m_dropPresent) p_player.dropPresent();
         p_inputHandler.signalReceived();
     }
-    
-    public void handlePainter() {}
 
-    private int selectBehavior(Child m_child)
+    private Moves selectBehavior(Child m_child)
     {
         Random l_random = new Random();
         int l_behavior = l_random.nextInt(50);
@@ -90,14 +76,17 @@ public class SynchroClass
         }
         
         if(l_behavior < 10)
-            return 0;
+            return up;
         else if(l_behavior < 20)
-            return 1;
+            return right;
         else if(l_behavior < 30)
-            return 2;
+            return down;
         else if(l_behavior < 40)
-            return 3;
+            return left;
         else
-            return 4;
+            return end;
     }
+    
+    private final int m_waitTimeInMs;
+    private final int m_bedTimeInMs;
 }

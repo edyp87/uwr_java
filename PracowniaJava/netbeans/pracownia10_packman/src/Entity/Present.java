@@ -19,7 +19,7 @@ public class Present extends Entity
     public void render(Screen p_screen, int p_tileSize)
     {
         Sprite l_present = SpriteContainer.s_present;
-        p_screen.applySprite(m_posX * p_tileSize, m_posY * p_tileSize, l_present);
+        p_screen.applySprite(m_posX, m_posY, l_present);
     }
     
     public boolean presentHasOwner()
@@ -30,6 +30,11 @@ public class Present extends Entity
     public void setOwned()
     {
         m_owned = true;
+    }
+    
+    public boolean isOwned()
+    {
+        return m_owned;
     }
     
     private boolean m_owned = false;

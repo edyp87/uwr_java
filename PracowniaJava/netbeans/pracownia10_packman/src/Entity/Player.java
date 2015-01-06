@@ -9,7 +9,7 @@ import Threads.SynchroClass;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class Player extends Entity implements Runnable
+public class Player extends Movable implements Runnable
 {
     public Player(EntitiesPositions p_board, InputHandler p_inputHandler, SynchroClass p_synchroClass)
     {
@@ -22,8 +22,8 @@ public class Player extends Entity implements Runnable
     @Override
     public void render(Screen p_screen, int p_tileSize)
     {
-        p_screen.applySprite(SpriteContainer.tileToPix(m_posX, p_tileSize), 
-                             SpriteContainer.tileToPix(m_posY, p_tileSize),
+        p_screen.applySprite(m_posX,
+                             m_posY,
                              SpriteContainer.s_player);
     }
     
@@ -42,7 +42,14 @@ public class Player extends Entity implements Runnable
         {
             int l_randomWidth  = randomWidth();
             int l_randomHeight = randomHeight();
-            if (!m_board.isChildNearby(l_randomWidth, l_randomHeight))
+            boolean isChildInRadius 
+                =  m_board.isChildNearby(l_randomWidth,   l_randomHeight)
+                || m_board.isChildNearby(l_randomWidth-3, l_randomHeight)
+                || m_board.isChildNearby(l_randomWidth+3, l_randomHeight)
+                || m_board.isChildNearby(l_randomWidth,   l_randomHeight-3)
+                || m_board.isChildNearby(l_randomWidth,   l_randomHeight+3);    
+            
+            if (!isChildInRadius)
             {
                 setPosition(l_randomWidth, l_randomHeight);
                 break;
