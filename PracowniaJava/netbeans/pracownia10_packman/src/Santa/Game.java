@@ -187,8 +187,8 @@ public class Game extends Canvas implements Runnable
         l_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    public static final int       s_gameWidth        = 25;
-    public static final int       s_gameHeight       = 20;
+    public static final int       s_gameWidth        = 24;
+    public static final int       s_gameHeight       = 19;
     public static final int       s_scale            = 1;
     public static final int       s_numberOfChildren = 21;
     public static final String    s_gameName         = "Santa - v0.1";

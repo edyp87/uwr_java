@@ -213,7 +213,12 @@ public class EntitiesPositions
     {
         return m_playerLost;
     }
-
+    
+    public int shortestDistanceX(int p_xSource, int p_xDest)
+    {
+        return Math.abs(p_xSource - p_xDest);
+    }
+    
     private boolean isPlayingChildNearby(int p_posX, int p_posY) {
         return isPlayingChildOnThisTile(p_posX-1, p_posY  )
             || isPlayingChildOnThisTile(p_posX+1, p_posY  )
